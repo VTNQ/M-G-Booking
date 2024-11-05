@@ -37,8 +37,8 @@
                         </a>
                     </li>
                     <li class="list-inline-item">
+                        <i class="fa-brands fa-twitter" style="font-size: 14px"></i>
                         <a class="btn btn-xs btn-icon text-center inline-block align-middle btn-pill btn-soft-dark  transition-3d-hover  cursor-pointer border-transparent relative leading-none p-0" style="color: #3b444f;transition: all 0.2s ease-in-out;border-radius: 6.1875rem;font-weight: 400;border: 1px solid transparent">
-                            <i class="fa-brands fa-twitter" style="font-size: 14px"></i>
                         </a>
                     </li>
                     <li class="list-inline-item">
@@ -150,6 +150,10 @@
 </header>
 <th:block th:replace="${content} ?: _"></th:block>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:src="@{/user/Register.js}"></script>
+
+
 <script>
     document.querySelectorAll('.dropdown-item').forEach(item=>{
         item.addEventListener('click',function (){

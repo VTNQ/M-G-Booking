@@ -5,7 +5,27 @@
     color: #297cbb !important;
     background-color: transparent !important;
 }
+.btn-icon.btn-medium {
+    font-size: 1rem;
+    width: 2.188rem;
+    height: 2.188rem;
+}
+.btn-icon {
+    position: relative;
+    line-height: 0;
+    font-size: 1rem;
+    width: 3.125rem;
+    height: 3.125rem;
+    padding: 0;
+}
 
+.rounded-circle {
+    border-radius: 50% !important;
+}
+.btn-outline-secondary {
+    color: #77838f;
+    border-color: #77838f;
+}
 .btn-text-secondary {
     color: #77838f;
     background: transparent;

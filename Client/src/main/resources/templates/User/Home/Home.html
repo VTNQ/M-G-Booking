@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/User/layout/layoutHome :: mainContent('Home',~{this::#content})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main id="content" class="relative block">
+    <div class="bg-img-hero-bottom text-center relative gradient-overlay-half-black-gradient"
+         style="z-index: 2; background-image: url('https://transvelo.github.io/mytravel-html/assets/img/1920x800/img1.jpg');">
+        <div class="container space-2 space-top-xl-9" style="padding-top: 19rem">
+            <div class="row justify-content-center " style="padding-bottom: 3.5rem">
+                <div class="py-8 pb-5" style="padding-bottom: 4.5rem">
+                    <h1 class="text-white font-bold" style="font-size: 3.75rem">Let's The World Together!</h1>
+                    <p class="text-white" style="font-size: 1.5rem;font-weight: 400;line-height: 1.7">Find awesome
+                        hotel, tour, car and activities in London</p>
+                </div>
+            </div>
+            <div style="margin-bottom: -8rem !important">
+                <ul class="nav tab-nav-rounded flex-nowrap pb-2 pb-md-4 tab-nav">
+                    <li class="nav-item" style="margin-right: 0.25rem">
+                        <a class="nav-link active" style="font-weight: 500;padding-left: 2rem">
+                            <div class="d-flex flex-column flex-md-row relative text-white align-items-center">
+                                <figure class="ie-height-40 d-md-block mr-md-3">
+                                    <i class="fa-solid fa-hotel icon" style="font-size: 2rem"></i>
+                                </figure>
+                                <span class="tabtext mt-2 mt-md-0 "
+                                      style="font-weight: 500;font-size: 19px;margin-top: -0.5rem">Hotel</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 0.25rem">
+                        <a class="nav-link active" style="font-weight: 500;padding-left: 2rem">
+                            <div class="d-flex flex-column flex-md-row relative text-white align-items-center">
+                                <figure class="ie-height-40 d-md-block mr-md-3">
+                                    <i class="fa-solid fa-globe icon" style="font-size: 2rem"></i>
+                                </figure>
+                                <span class="tabtext mt-2 mt-md-0 "
+                                      style="font-weight: 500;font-size: 19px;margin-top: -0.5rem">Tours</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 0.25rem">
+                        <a class="nav-link active" style="font-weight: 500;padding-left: 2rem">
+                            <div class="d-flex flex-column flex-md-row relative text-white align-items-center">
+                                <figure class="ie-height-40 d-md-block mr-md-3">
+                                    <i class="fas fa-running fa-globe icon" style="font-size: 2rem"></i>
+                                </figure>
+                                <span class="tabtext mt-2 mt-md-0 "
+                                      style="font-weight: 500;font-size: 19px;margin-top: -0.5rem">Activity</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 0.25rem">
+                        <a class="nav-link active" style="font-weight: 500;padding-left: 2rem">
+                            <div class="d-flex flex-column flex-md-row relative text-white align-items-center">
+                                <figure class="ie-height-40 d-md-block mr-md-3">
+                                    <i class="icon fa-solid fa-building-user" style="font-size: 2rem"></i>
+                                </figure>
+                                <span class="tabtext mt-2 mt-md-0 "
+                                      style="font-weight: 500;font-size: 19px;margin-top: -0.5rem">Rental</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 0.25rem">
+                        <a class="nav-link active" style="font-weight: 500;padding-left: 2rem">
+                            <div class="d-flex flex-column flex-md-row relative text-white align-items-center">
+                                <figure class="ie-height-40 d-md-block mr-md-3">
+                                    <i class="fa-solid fa-sailboat icon" style="font-size: 2rem"></i>
+
+                                </figure>
+                                <span class="tabtext mt-2 mt-md-0 "
+                                      style="font-weight: 500;font-size: 19px;margin-top: -0.5rem">Yacht</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 0.25rem">
+                        <a class="nav-link active" style="font-weight: 500;padding-left: 2rem">
+                            <div class="d-flex flex-column flex-md-row relative text-white align-items-center">
+                                <figure class="ie-height-40 d-md-block mr-md-3">
+                                    <i class="fa fa-plane icon" style="font-size: 2rem"></i>
+                                </figure>
+                                <span class="tabtext mt-2 mt-md-0 "
+                                      style="font-weight: 500;font-size: 19px;margin-top: -0.5rem">Flights</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content hero-tab-pane">
+                    <div class="tab-pane fade active show">
+                        <div class="card border-0 tab-shadow">
+                            <div class="card-body">
+                                <form class="js-validate">
+                                    <div class="row d-block nav-select d-lg-flex mb-lg-3 px-2 px-lg-3 align-items-end">
+                                        <div class="col-sm-3 ">
+                                            <span class="d-block text-gray mb-0"
+                                                  style="color: #67747c !important;font-weight: 400;text-align: left;font-size: 1.2rem">Destination or Hotel Name</span>
+                                            <div class="dropdown bootstrap-select js-select dropdown-select tab-dropdown col-12 pl-0 flaticon-pin-1 d-flex align-items-center text-primary font-weight-semi-bold">
+                                                <i class="fa-solid fa-location-dot"
+                                                   style="color: #297cbb !important"></i>
+                                                <button type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false"
+                                                        class="btn dropdown-toggle bs-placeholder relative z-10 text-right whitespace-nowrap"
+                                                        title="Where are you going?"
+                                                        style="cursor:pointer;color: #3b444f;width:100%;background-color: #fff;border: none;font-weight: 500;padding-bottom: 14px">
+                                                    <div class="filter-option">
+                                                        <div class="filter-option-inner">
+                                                            <div class="overflow-hidden" style="font-size: 18px">Where
+                                                                are you going?
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <div class="dropdown-menu select" aria-labelledby="dropdownMenuButton"
+                                                     style="max-height: 476.8px;overflow: hidden;min-height: 251px;position: absolute;will-change:transform;min-width: 336px;top: 0px;left: 0px;transform: translate3d(16px, 52px, 0px)">
+                                                    <div class="bs-searchbox input-group-sm mb-2">
+                                                        <input type="text" class="form-control" autocomplete="off"
+                                                               style="margin-bottom: .5rem;height: calc(1.5em + 1.25rem + 4px)">
+                                                    </div>
+                                                    <div class="inner show"
+                                                         style="max-height: 374.8px;overflow: auto;min-height: 149px">
+                                                        <ul class="dropdown-menu inner show min-w-full">
+                                                            <li style="margin: 0 2rem;border-bottom: 1px solid #e7eaf3 !important;padding-bottom: 13px"
+                                                                class="relative mb-4">
+                                                                <a class="cursor-pointer  w-full"
+                                                                   style="color: #67747c !important;padding: 0.8rem 0;border-color: #eaeaea !important;font-size: 0.875rem">
+                                                                    <span class="text inline-block">
+                                                                        <span class="d-flex align-items-center">
+                                                                            <span class="" style="font-size: 1rem">London, United Kingdom</span>
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                            <li style="margin: 0 2rem;border-bottom: 1px solid #e7eaf3 !important;padding-bottom: 13px"
+                                                                class="relative">
+                                                                <a class="cursor-pointer  w-full"
+                                                                   style="color: #67747c !important;padding: 0.8rem 0;border-color: #eaeaea !important;font-size: 0.875rem">
+                                                                    <span class="text inline-block">
+                                                                        <span class="d-flex align-items-center">
+                                                                            <span class="" style="font-size: 1rem">London, United Kingdom</span>
+                                                                        </span>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 col-lg-3dot6 col-xl-3gdot5 mb-4 mb-lg-0">
+                                            <span class="d-block text-gray mb-0"
+                                                  style="color: #67747c !important;font-weight: 400;text-align: left;font-size: 1.2rem">Check In - Out</span>
+                                            <div class="text-left d-block"
+                                                 style="border-width: 2px;border-color: #eaeaea !important;border-bottom: 1px solid #e7eaf3 !important;border: none">
+                                                <div id="datepickerWrapperFromOne"
+                                                     class="u-datepicker input-group relative">
+                                                    <div class="input-group-prepend">
+                                                <span class="d-flex align-items-center mr-2">
+                                                    <i class="fa-solid fa-calendar"
+                                                       style="color: #297cbb !important;font-weight: 500;font-style: normal"></i>
+                                                </span>
+                                                    </div>
+                                                    <input id="datePickerInput"
+                                                           class="js-range-datepicker font-size-16 shadow-none font-weight-medium form-control hero-form bg-transparent border-0 flatpickr-input"
+                                                           style="font-weight: 500;font-size: 1rem;box-shadow: none;width: 217.5px;height: 54px"
+                                                           data-rp-default-date="[&quot;Jul 7 / 2020&quot;, &quot;Aug 25 / 2020&quot;]"/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-sm-2 col-xl-3 mb-4 mb-lg-0 dropdown-custom">
+                                            <span class="text-left d-block"
+                                                  style="color: #67747c !important;font-weight: 400;font-size: 1.2rem;text-align: left">Rooms and Guests</span>
+                                            <a id="basicDropdownClickInvoker"
+                                               class="dropdown-nav-link dropdown-toggle text-decoration-none d-flex pt-4 pb-2">
+                                                <i class="fa-solid fa-user-plus d-flex align-items-center mr-md-3 "
+                                                   style="font-size: 1.125rem;color: #297cbb !important"></i>
+                                                <span class="text-black "
+                                                      style="font-size: 1rem;font-weight: 500;color: black">2 Rooms - 3 Guests</span>
+                                            </a>
+                                            <div id="basicDropdownClick"
+                                                 class="dropdown-menu  dropdown-unfold col-11 m-0 u-unfold--css-animation slideInUp "
+                                                 style="max-width: 22%">
+                                                <div class="w-100 py-2 px-3 mb-3">
+                                                    <div class="js-quantity mx-3 d-grid align-items-center justify-content-between"
+                                                         style="grid-template-columns: 1fr 1fr">
+                                                        <span class="block"
+                                                              style="font-weight: 500;color: #77838f !important;font-size: 1rem;">Rooms</span>
+                                                        <div class="d-flex">
+                                                            <a class="js-minus btn btn-icon btn-medium btn-outline-secondary rounded-circle"
+                                                               style="color: #77838f;padding: 0.5rem 0.8rem">
+                                                                <i class="fa-solid fa-minus" style="color: black"></i>
+                                                            </a>
+                                                            <input class="js-result form-control h-auto border-0 rounded p-0 max-width-6 text-center"
+                                                                   value="1" style="color: #3b444f">
+                                                            <a class="js-plus btn btn-icon btn-medium btn-outline-secondary rounded-circle"
+                                                               style="color: #77838f;padding: 0.5rem 0.8rem">
+                                                                <i class="fa-solid fa-plus" style="color: black"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-100 py-2 px-3 mb-3">
+                                                    <div class="js-quantity mx-3 d-grid align-items-center justify-content-between"
+                                                         style="grid-template-columns: 1fr 1fr">
+                                                        <span class="block"
+                                                              style="font-weight: 500;color: #77838f !important;font-size: 1rem;">Adults</span>
+                                                        <div class="d-flex">
+                                                            <a class="js-minus btn btn-icon btn-medium btn-outline-secondary rounded-circle"
+                                                               style="color: #77838f;padding: 0.5rem 0.8rem">
+                                                                <i class="fa-solid fa-minus" style="color: black"></i>
+                                                            </a>
+                                                            <input class="js-result form-control h-auto border-0 rounded p-0 max-width-6 text-center"
+                                                                   value="1" style="color: #3b444f">
+                                                            <a class="js-plus btn btn-icon btn-medium btn-outline-secondary rounded-circle"
+                                                               style="color: #77838f;padding: 0.5rem 0.8rem">
+                                                                <i class="fa-solid fa-plus" style="color: black"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="w-100 py-2 px-3 mb-3">
+                                                    <div class="js-quantity mx-3 d-grid align-items-center justify-content-between"
+                                                         style="grid-template-columns: 1fr 1fr">
+                                                        <span class="block"
+                                                              style="font-weight: 500;color: #77838f !important;font-size: 1rem;">Child</span>
+                                                        <div class="d-flex">
+                                                            <a class="js-minus btn btn-icon btn-medium btn-outline-secondary rounded-circle"
+                                                               style="color: #77838f;padding: 0.5rem 0.8rem">
+                                                                <i class="fa-solid fa-minus" style="color: black"></i>
+                                                            </a>
+                                                            <input class="js-result form-control h-auto border-0 rounded p-0 max-width-6 text-center"
+                                                                   value="1" style="color: #3b444f">
+                                                            <a class="js-plus btn btn-icon btn-medium btn-outline-secondary rounded-circle"
+                                                               style="color: #77838f;padding: 0.5rem 0.8rem">
+                                                                <i class="fa-solid fa-plus" style="color: black"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2 col-xl-2 align-self-lg-end  text-right">
+                                            <button type="submit" class="btn btn-primary w-100 mb-xl-0 mb-lg-1 transition-3d-hover" style="border-radius: 3px;transition: all 0.2s ease-in-out;background-color: #297cbb;border-color: #297cbb">
+                                                <i class="fa-solid fa-magnifying-glass mr-2" style="font-size: 1.25rem;"></i>
+                                                Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="" style="border-color: #ebf0f7 !important;border-bottom: 1px solid #e7eaf3 !important">
+        <div class="container space-bottom-1 space-top-lg-3">
+            <div class="w-md-80 w-lg-50 text-center mx-md-auto mb-5 mt-4">
+                <h2 class="section-title mb-0" style="font-size: 1.875rem;color: #3b444f;font-weight: 500">
+                    Top Destination
+                </h2>
+            </div>
+            <div class="row mb-1">
+                <div class="col-md-6 mb-3 mb-md-4">
+                    <div class="min-height-350 bg-img-hero rounded-border p-5 gradient-overlay-half-bg-gradient transition-3d-hover shadow-hover-2 border-0 dropdown" style="background-image: url('https://transvelo.github.io/mytravel-html/assets/img/630x350/img1.jpg')">
+                        <div class="w-100 d-flex justify-content-between mb-2">
+                            <div class="relative">
+                                <a class="destination text-decoration-none pb-3 mb-3 d-block" style="line-height: 1;font-weight: 500;font-size: 1.313rem;position:relative;color: white">
+                                    United Kingdom
+                                </a>
+                                <div class="destination-dropdown v1">
+                                    <a class="dropdown-item text-decoration-none" style="font-size: 18px">30 Hotel</a>
+                                    <a class="dropdown-item text-decoration-none" style="font-size: 18px">48 Tour</a>
+                                    <a class="dropdown-item text-decoration-none" style="font-size: 18px">46 Activity</a>
+                                    <a class="dropdown-item text-decoration-none" style="font-size: 18px">32 Yacht</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>
