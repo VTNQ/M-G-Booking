@@ -1,12 +1,69 @@
 a{
     color: white !important;
+    cursor: pointer;
 }
-i{
-    color: white !important;
+.brand {
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin-left: .5rem;
+}
+.bootstrap-select>select {
+    position: absolute !important;
+    bottom: 0;
+    left: 50%;
+    display: block !important;
+    width: .5px !important;
+    height: 100% !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    border: none;
+}
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+.border-color-8 {
+    border-color: #ebf0f7 !important;
+}
+.footer .list-group-item-action{
+    color: #67747c !important;
+
+}
+.footer .list-group-item-action:hover {
+    color: #297cbb !important;
+    text-decoration: underline !important;
 }
 .gradient-overlay-half-black-gradient::before {
     background-color: #18181a;
     opacity: 0.5;
+}
+@media (min-width: 992px) {
+    .ml-lg-0, .mx-lg-0 {
+        margin-left: 0 !important;
+    }
+}
+@media (min-width: 992px) {
+    .ml-lg-0, .mx-lg-0 {
+        margin-left: 0 !important;
+    }
+}
+@media (min-width: 768px) {
+    .ml-md-6, .mx-md-6 {
+        margin-left: 2.5rem !important;
+    }
+}
+@media (min-width: 1200px) {
+    .col-xl-3dot1 {
+        -ms-flex: 0 0 25.83333%;
+        flex: 0 0 25.83333%;
+        max-width: 25.83333%;
+    }
 }
 .bootstrap-select .dropdown-toggle .filter-option {
     position: absolute;
@@ -19,6 +76,22 @@ i{
     height: 100%;
     width: 100%;
     text-align: left;
+}
+.social:hover i{
+    color: #ffffff !important;
+}
+.social:hover{
+    color: #fff;
+    background: #297cbb;
+    border-color: #297cbb;
+}
+.btn-social {
+    color: #67747c !important;
+    border-color: #ebf0f7;
+    border-width: 2px;
+    border-radius: 6.1875rem;
+    height: 2.5rem !important;
+    width: 2.5rem !important;
 }
 .input-group-prepend {
     margin-right: -2px;
@@ -90,6 +163,11 @@ i{
     background-color: #1d508d;
     border-radius: 20px;
 }
+.space-1, .space-top-1 {
+    padding-top: 2rem !important;
+}
+
+
 .section-title::after {
     display: block;
     width: 2.5rem;
