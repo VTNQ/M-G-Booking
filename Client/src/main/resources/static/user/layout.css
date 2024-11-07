@@ -1,0 +1,168 @@
+#languageDropdown {
+    display: none; /* Hide the dropdown by default */
+}
+.dropdown-item.active {
+    color: #297cbb !important;
+    background-color: transparent !important;
+}
+.btn-icon.btn-medium {
+    font-size: 1rem;
+    width: 2.188rem;
+    height: 2.188rem;
+}
+.btn-icon {
+    position: relative;
+    line-height: 0;
+    font-size: 1rem;
+    width: 3.125rem;
+    height: 3.125rem;
+    padding: 0;
+}
+
+.rounded-circle {
+    border-radius: 50% !important;
+}
+.btn-outline-secondary {
+    color: #77838f;
+    border-color: #77838f;
+}
+.btn-text-secondary {
+    color: #77838f;
+    background: transparent;
+}
+.form-input input:focus, .form-input textarea:focus {
+    border: 2px solid #051036 !important;
+}
+.-dark:hover{
+    border-color: #051036;
+    background-color: #051036 !important;
+    color: #fff !important;
+}
+.button.-outline-red-1 {
+    border-color:#d93025;
+}
+.form-checkbox__mark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #051036;
+    border-radius: 4px;
+}
+.form-checkbox input {
+    cursor: pointer;
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}
+.form-checkbox {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+}
+.text-red-1 {
+    color: #d93025;
+}
+.button.-outline-blue-1:hover {
+    background-color: #3554d1;
+    border-color: transparent;
+    color: #fff !important;
+}
+.button.-outline-red-1:hover {
+    background-color:  #d93025;
+    border-color: transparent;
+    color: #fff !important;
+}
+
+.text-blue-1{
+    color: #3554d1;
+}
+.button.-outline-blue-1 {
+    border-color: #3554d1;
+}
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 1;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.2;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition: all .3s cubic-bezier(.165,.84,.44,1);
+}
+.form-input input:focus~label{
+    transform: translateY(-10px);
+}
+.form-input label {
+    position: absolute;
+    top: 0;
+    top: 26px;
+    padding: 0 15px;
+    pointer-events: none;
+    font-size: 14px;
+}
+.form-input, .form-input label {
+    transition: all .2s cubic-bezier(.165,.84,.44,1);
+}
+.transition-3d-hover {
+    transition: all 0.2s ease-in-out;
+}
+.rounded-xs {
+    border-radius: 0.188rem;
+}
+.btn-wide {
+    min-width: 13.75rem;
+}
+/* Dropdown initially hidden */
+#languageDropdown {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Show dropdown on hover and apply animation */
+.dropdown:hover #languageDropdown {
+    display: block !important;
+    opacity: 1;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.hs-has-sub-menu {
+    overflow: hidden;
+    position: relative;
+}
+
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+.dr

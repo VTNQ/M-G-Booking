@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller()
 @RequestMapping({"","/"})
-public class AuthController {
-@GetMapping("Login")
-    public String Home() {
-return "User/login/login";
-}
+public class RegisterController {
+    @GetMapping("Register")
+    public String Register(){
+        return "User/Register/Register";
+    }
 }
