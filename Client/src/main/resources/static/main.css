@@ -173,6 +173,7 @@ body {
   margin: 0;
   /* 1 */
   line-height: inherit;
+  font-size: 1rem;
   /* 2 */
 }
 
@@ -591,7 +592,11 @@ video {
 .relative {
   position: relative;
 }
-
+@media (min-width: 768px) {
+  .mr-md-3, .mx-md-3 {
+    margin-right: 1rem !important;
+  }
+}
 .left-0 {
   left: 0px;
 }
