@@ -1,4 +1,4 @@
-package com.mgbooking.server.Controller;
+package com.mgbooking.server.Controllers;
 
 import com.mgbooking.server.Entities.Country;
 import com.mgbooking.server.Services.CountryService;
