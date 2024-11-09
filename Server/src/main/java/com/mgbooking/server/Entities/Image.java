@@ -25,8 +25,14 @@ public class Image {
     @Column(name = "room_id")
     private Integer roomId;
 
-    @Column(name = "image_url", nullable = false, length = 200)
-    private String imageUrl;
+    @Column(name = "image_url_1", length = 200)
+    private String imageUrl1;
+
+    @Column(name = "image_url_2", length = 200)
+    private String imageUrl2;
+
+    @Column(name = "user_id")
+    private Integer userId;
 
     public Integer getId() {
         return id;
@@ -76,12 +82,28 @@ public class Image {
         this.roomId = roomId;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageUrl1() {
+        return imageUrl1;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageUrl1(String imageUrl1) {
+        this.imageUrl1 = imageUrl1;
+    }
+
+    public String getImageUrl2() {
+        return imageUrl2;
+    }
+
+    public void setImageUrl2(String imageUrl2) {
+        this.imageUrl2 = imageUrl2;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
 }
