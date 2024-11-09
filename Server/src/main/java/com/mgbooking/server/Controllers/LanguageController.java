@@ -1,4 +1,4 @@
-package com.mgbooking.server.Controller;
+package com.mgbooking.server.Controllers;
 
 import com.mgbooking.server.DTOS.LanguageManager;
 import org.springframework.http.ResponseEntity;

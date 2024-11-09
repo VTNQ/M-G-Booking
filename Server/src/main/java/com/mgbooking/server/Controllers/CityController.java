@@ -1,4 +1,4 @@
-package com.mgbooking.server.Controller;
+package com.mgbooking.server.Controllers;
 
 import com.mgbooking.server.Entities.City;
 import com.mgbooking.server.Services.CityService;
