@@ -1,6 +1,7 @@
 package com.mgbooking.server.Entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 
@@ -24,6 +25,10 @@ public class Room {
 
     @Column(name = "occupancy", nullable = false)
     private Integer occupancy;
+
+    @ColumnDefault("b'1'")
+    @Column(name = "status", nullable = false)
+    private Boolean status = false;
 
     public Integer getId() {
         return id;
@@ -63,6 +68,14 @@ public class Room {
 
     public void setOccupancy(Integer occupancy) {
         this.occupancy = occupancy;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
 }
