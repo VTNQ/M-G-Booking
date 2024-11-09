@@ -1,9 +1,11 @@
 package com.mgbooking.server.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "country")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
