@@ -29,8 +29,8 @@ public class Account {
     @Column(name = "city_id", nullable = false)
     private Integer cityId;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "security_code_id", nullable = true)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "security_code_id")
     private SecurityCode securityCode;
 
     @Column(name = "OTP", length = 20)
