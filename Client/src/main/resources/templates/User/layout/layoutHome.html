@@ -67,12 +67,20 @@
 
                     </ul>
                     <div class="relative px-3 u-header-Login-Form">
-                        <a class="d-flex align-items-center text-dark text-decoration-none bg-transparent">
-                            <i class="fa-regular fa-user mr-2 ml-1" style="font-size: 23px;color: white"></i>
-                            <span class="d-inline-block mr-1" style="font-size: 18px;font-weight: 400;color: white"
-                                  data-translate-key="SignRegister">Sign in or Register</span>
-                        </a>
+                        <div class="dropdown">
+                            <a class="d-flex align-items-center text-dark text-decoration-none bg-transparent dropdown-toggle" onclick="toggleDropdown(event)"
+                               id="loginDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa-regular fa-user mr-2 ml-1" style="font-size: 23px; color: white;"></i>
+                                <span class="d-inline-block mr-1" style="font-size: 18px; font-weight: 400; color: white;"
+                                      data-translate-key="SignRegister">Sign in or Register</span>
+                            </a>
+                            <div class="dropdown-menu" id="loginDropdownMenu" style="top: 45px;width: 23vh">
+                                <a class="dropdown-item" style="color: black!important;text-decoration: none" href="#" > Owner</a>
+                                <a class="dropdown-item" style="color: black!important;text-decoration: none" href="#" > User</a>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="relative pl-3 u-header-language">
                         <div class="dropdown ">
                             <a class="dropdown-nav-link ml-1 d-flex align-items-center cursor-pointer dropdown-toggle text-decoration-none"
@@ -344,6 +352,20 @@
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script th:src="@{/user/Register.js}"></script>
+<script>
+    function toggleDropdown(event) {
+        event.preventDefault();
+        var dropdownMenu = document.getElementById("loginDropdownMenu");
+
+        // Check if the dropdown is currently hidden
+        if (dropdownMenu.style.display === "block") {
+            dropdownMenu.style.display = "none";
+        } else {
+            dropdownMenu.style.display = "block";
+        }
+    }
+</script>
+
 
 
 <div th:insert="~{'/User/Home/Home' :: customScripts}"></div>
