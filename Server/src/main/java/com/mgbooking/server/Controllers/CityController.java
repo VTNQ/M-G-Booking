@@ -1,6 +1,5 @@
 package com.mgbooking.server.Controllers;
 
-import com.mgbooking.server.Entities.City;
 import com.mgbooking.server.Services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

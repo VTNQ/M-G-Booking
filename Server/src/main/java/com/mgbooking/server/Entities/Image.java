@@ -1,12 +1,14 @@
 package com.mgbooking.server.Entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "images")
 public class Image {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -33,6 +35,9 @@ public class Image {
 
     @Column(name = "user_id")
     private Integer userId;
+
+    @Column(name = "image_url", nullable = false, length = 200)
+    private String imageUrl;
 
     public Integer getId() {
         return id;
@@ -104,6 +109,14 @@ public class Image {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
 }

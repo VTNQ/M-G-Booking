@@ -1,6 +1,5 @@
 package com.mgbooking.server.Services;
 
-import com.mgbooking.server.Entities.City;
 import com.mgbooking.server.Repositories.CityRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
