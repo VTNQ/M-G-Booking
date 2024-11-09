@@ -13,12 +13,13 @@
     <!-- Example button to change message -->
     <button @click="updateMessage">Change Message</button>
 </div>
+<div id="contents"></div>
 
 <script>
     // Initialize Vue app
     const { createApp } = Vue;
-
     createApp({
+        data
         data() {
             return {
                 message: 'Hello, Vue!'
