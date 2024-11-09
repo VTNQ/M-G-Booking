@@ -1,6 +1,7 @@
 package com.mgbooking.server.Services;
 
 import com.mgbooking.server.DTOS.RegisterOwnerDto;
+import com.mgbooking.server.Entities.Owner;
 import com.mgbooking.server.Repositories.OwnerRepository;
 import org.modelmapper.ModelMapper;
 import org.mindrot.jbcrypt.BCrypt;

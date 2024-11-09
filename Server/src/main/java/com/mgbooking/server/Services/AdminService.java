@@ -1,6 +1,5 @@
 package com.mgbooking.server.Services;
 
-import
 import com.mgbooking.server.Entities.Admin;
 import com.mgbooking.server.Repositories.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;

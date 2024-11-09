@@ -2,6 +2,7 @@ package com.mgbooking.server.Configurations;
 
 import com.mgbooking.server.Services.AccountService;
 import com.mgbooking.server.Services.AdminService;
+import com.mgbooking.server.Services.OwnerServiceDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,8 @@ public class SecurityConfiguration extends WebSecurityConfiguration {
     private AccountService accountService;
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private OwnerServiceDetail ownerServiceDetail;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -43,9 +46,18 @@ public class SecurityConfiguration extends WebSecurityConfiguration {
         return authProvider;
     }
 
+    @Bean
+    public DaoAuthenticationProvider ownerAuthenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(ownerServiceDetail);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(accountAuthenticationProvider());
         auth.authenticationProvider(adminAuthenticationProvider());
+        auth.authenticationProvider(ownerAuthenticationProvider());
     }
 
     protected void configure(HttpSecurity http) throws Exception {
@@ -53,6 +65,7 @@ public class SecurityConfiguration extends WebSecurityConfiguration {
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/super_admin/**").hasRole("SUPADMIN")
                 .requestMatchers("/user/**").hasRole("USER")
+                .requestMatchers("/owner/**").hasRole("OWNER")
                 .anyRequest().authenticated();
     }
 }

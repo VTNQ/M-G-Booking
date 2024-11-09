@@ -1,7 +1,9 @@
 package com.mgbooking.server.Services;
 
 import com.mgbooking.server.DTOS.RegisterUser;
-import com.mgbooking.server.Repositories.UserRepository;
+import com.mgbooking.server.Entities.Account;
+import com.mgbooking.server.Entities.Level;
+import com.mgbooking.server.Repositories.AccountRepository;
 import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import java.util.Random;
 @Service
 public class UserServiceImplement implements UserService {
     @Autowired
-    private UserRepository userRepository;
+    private AccountRepository userRepository;
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
