@@ -9,7 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
     <link th:href="@{/user/layout.css}" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 </head>
 <style>
     .dropdown-item:hover{
@@ -220,6 +226,22 @@
             });
     }
 </script>
+<script type="text/javascript">
+    toastr.options = {
+        "closeButton": true,   // Thêm nút đóng
+        "debug": false,
+        "newestOnTop": true,   // Hiển thị thông báo mới nhất ở trên cùng
+        "progressBar": true,   // Hiển thị thanh tiến trình
+        "positionClass": "toast-top-right",  // Vị trí thông báo
+        "preventDuplicates": true,   // Ngừng hiển thị thông báo trùng
+        "onclick": null,   // Xử lý sự kiện khi nhấp vào thông báo
+    };
+
+    // Hiển thị thông báo sau khi cấu hình
+    toastr.success('Thông báo cấu hình thành công!', 'Tiêu đề');
+
+</script>
+
 <div th:insert="~{'/User/Register/RegisterUser' :: customScripts}"></div>
 </body>
 </html>
