@@ -7,13 +7,13 @@ public class RegisterOwnerDto {
     private String fullname;
 
     @JsonProperty("Email")
-    private String email;
+    private String Email;
 
     @JsonProperty("Password")
-    private String password;
+    private String Password;
 
     @JsonProperty("ConfirmPassword")
-    private String confirmPassword;
+    private String ConfirmPassword;
 
     // Getters and setters
     public String getFullName() {
@@ -25,26 +25,26 @@ public class RegisterOwnerDto {
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.Email = email;
     }
 
     public String getPassword() {
-        return password;
+        return Password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.Password = password;
     }
 
     public String getConfirmPassword() {
-        return confirmPassword;
+        return ConfirmPassword;
     }
 
     public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+        this.ConfirmPassword = confirmPassword;
     }
 }
