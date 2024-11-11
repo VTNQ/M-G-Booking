@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping({"","/"})
-@CrossOrigin(origins = "http://localhost:8386")
 public class OwnerController {
     @Autowired
     private AccountServiceImplement accountService;

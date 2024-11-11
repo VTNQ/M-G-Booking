@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/User/layout/layoutHome :: mainContent('About Us',~{this::#content})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main id="content" class="relative block">
+    <div class="bg-img-hero-bottom text-center relative gradient-overlay-half-black-gradient"
+         style="z-index: 2; background-image: url('https://transvelo.github.io/mytravel-html/assets/img/1920x400/img3.jpg');margin-bottom: 3.5rem">
+        <div class="container space-2 space-top-xl-9" style="padding-top: 19rem">
+            <div class="row justify-content-center " style="padding-bottom: 3.5rem">
+                <div class="py-8 pb-5" style="padding-bottom: 4.5rem">
+                    <h1 class="text-white font-bold" style="font-size: 3.75rem">About Us</h1>
+                    <nav style="display: block">
+                        <ol style="padding: 0;margin-bottom: 0;display: flex;flex-wrap: wrap;background-color: transparent;border-radius: 0.3125rem;list-style: none;margin-top: 0;justify-content: center">
+                            <li class="breadcrumb-item font-size-14" style="font-size: 0.875rem;color: #67747c">
+                                <a style="color: white">Home</a>
+                            </li>
+                            <li class="breadcrumb-item custom-breadcrumb-item font-size-14 text-white active"
+                                style="padding-left: 0.5rem;font-size: 0.875rem;color: white">
+                                Contact Us
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="slider border-bottom border-color-3"
+         style="border-color: #ebf0f7;border-bottom: 1px solid #e7eaf3 !important">
+        <div class="container space-1">
+            <div class="w-md-80 w-lg-70 text-center mx-md-auto mb-5 mt-3">
+                <h2 class="section-title text-black mb-0"
+                    style="font-size: 1.875rem;color: #3b444f;font-weight: 500;line-height: 1.5">
+                    We’re truely dedicated to make your travel experience as much simple and fun as possible!
+                </h2>
+            </div>
+        </div>
+        <section class="w-lg-80 mx-auto mb-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="text-left" style="font-size: 1.313rem;font-weight: 500">Our Story</h2>
+                    <p style="color: #67747c !important;line-height: 1.7;font-size: 23px">
+                        Bringing you a modern, comfortable, and connected travel experience is one of our highest
+                        priorities and that’s why we continuously try to improve your experience when you book anything
+                        with us.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="text-left" style="font-size: 1.313rem;font-weight: 500">Our Mission</h2>
+                    <p style="color: #67747c !important;line-height: 1.7;font-size: 23px">
+                        We really appreciate and welcome any of suggstions you might have for us, so feel free drop us
+                        line anytime.Air conditioning, heating, desk, alarm clock, iPod docking station can be found in
+                        selected guestrooms.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="slideshow-container">
+
+                <div class="mySlides ">
+                    <img src="https://transvelo.github.io/mytravel-html/assets/img/slider/img4.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides ">
+                    <img src="https://transvelo.github.io/mytravel-html/assets/img/slider/img3.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides ">
+                    <img src="https://transvelo.github.io/mytravel-html/assets/img/slider/img2.jpg" style="width:100%">
+                </div>
+                <div class="mySlides ">
+                    <img src="https://transvelo.github.io/mytravel-html/assets/img/slider/img1.jpg" style="width:100%">
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                <a class="next" onclick="plusSlides(1)">❯</a>
+
+            </div>
+            <br>
+
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center space-1">
+        <div class="w-md-80 w-lg-50 text-center mx-md-auto pb-1" style="margin-bottom: 20px">
+            <h2 class="section-title text-black"
+                style="font-size: 1.875rem;color: #3b444f;font-weight: 500;line-height: 1.5">Why Choose</h2>
+        </div>
+        <div class="mb-2">
+            <div class="row">
+                <div class="col-md-4">
+                    <i class="fa-solid fa-hand-holding-dollar mb-3"
+                       style="color: #297cbb !important;font-size: 5rem"></i>
+                    <h5 class="mb-2" style="font-size: 1.063rem;color: #3b444f !important;font-weight: 500">
+                        <a style="color: #3b444f !important;">Competitive Pricing</a>
+                    </h5>
+                    <p class="px-xl-2 px-uw-7" style="color: #67747c !important;line-height: 1.8;font-size: 1.1rem">
+                        With 500+ suppliers and the purchasing power of 300 million members, mytravel.com can save
+                        you more!
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fa-solid fa-award mb-3" style="color: #297cbb !important;font-size: 5rem"></i>
+                    <h5 class="mb-2" style="font-size: 1.063rem;color: #3b444f !important;font-weight: 500">
+                        <a style="color: #3b444f !important;">Competitive Pricing</a>
+                    </h5>
+                    <p class="px-xl-2 px-uw-7" style="color: #67747c !important;line-height: 1.8;font-size: 1.1rem">
+                        Travel worry-free knowing that we're here if you needus, 24 hours a day
+                    </p>
+                </div>
+                <div class="col-md-4 " style="margin-top: -6px">
+                    <i class="fa-solid fa-globe " style="color: #297cbb !important;font-size: 5rem"></i>
+                    <h5 class="mb-2 mt-3" style="font-size: 1.063rem;color: #3b444f !important;font-weight: 500">
+                        <a style="color: #3b444f !important;">Worldwide Coverage</a>
+                    </h5>
+                    <p class="px-xl-2 px-uw-7" style="color: #67747c !important;line-height: 1.8;font-size: 1.1rem">
+                        Over 1,200,000 hotels in more than 200 countries and regions & flights to over 5,000 cities
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="gradient-overlay-half-bg-grayish-blue bg-img-hero space-3 space-top-lg-4 space-bottom-lg-3"
+         style="background-image: url('https://transvelo.github.io/mytravel-html/assets/img/1920x500/img5.jpg')">
+        <div class="text-center mt-xl-2">
+            <h5 class="text-white mb-2" style="font-size: 2.563rem;font-weight: 500;line-height: 1.5">Travelling
+                Highlights</h5>
+            <h6 class="text-white mb-3 mb-lg-5" style="font-size: 1.313rem;font-weight: 500;opacity: .7">Your New
+                Travelling Idea</h6>
+        </div>
+    </div>
+    <div class="team border-bottom " style="border-color: #ebf0f7;border-bottom: 1px solid #e7eaf3 !important">
+        <div class="container space-top-1">
+            <div class="w-md-80 w-lg-70 text-center mx-md-auto mb-5 mt-3">
+                <h2 class="section-title text-black font-size-30 font-weight-bold mb-0"
+                    style="font-weight: 500;color: #3b444f">
+                    Deticated Team
+                </h2>
+            </div>
+            <div class="row text-center pb-2">
+                <div class="col-lg-4 col-md-6 inner-right inner-bottom-sm inner-left">
+                    <div class="pb-3">
+                        <figure class="d-inline-block u-avatar-image rounded-circle overflow-hidden">
+                            <div class="u-avatar-image-overlay">
+                                <ul class="u-avatar-image-social list-unstyled m-0 w-100 h-100">
+                                    <li style="position:absolute;top: 77px;left: 43px">
+                                        <a class="btn btn-icon btn-medium btn-soft-white btn-bg-transparent transition-3d-hover rounded-circle">
+                                            <i class="btn-icon__inner fab fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li style="position:absolute;top: 77px;left: 73px">
+                                        <a class="btn btn-icon btn-medium btn-soft-white btn-bg-transparent transition-3d-hover rounded-circle">
+                                            <i class="btn-icon__inner fab fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li style="position: absolute;top: 75px;left: 110px">
+                                        <a class="btn btn-icon btn-medium btn-soft-white btn-bg-transparent transition-3d-hover rounded-circle">
+                                            <i class="btn-icon__inner fab fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <img src="https://transvelo.github.io/mytravel-html/assets/img/200x200/img1.jpg">
+                        </figure>
+                    </div>
+                    <h6 class="mb-0"
+                        style="font-size: 1.163rem;color: #484848 !important;font-weight: 500 !important;line-height: 1.5">
+                        David Robets</h6>
+                    <span style="color: #5392f9;font-size: 1.2rem">Founder & Director</span>
+                </div>
+                <div class="col-lg-4 col-md-6 inner-right inner-bottom-sm inner-left">
+                    <div class="pb-3">
+                        <figure class="d-inline-block u-avatar-image rounded-circle overflow-hidden">
+                            <div class="u-avatar-image-overlay">
+                                <ul class="u-avatar-image-social list-unstyled m-0 w-100 h-100">
+                                    <li style="position:absolute;top: 77px;left: 43px">
+                                        <a class="btn btn-icon btn-medium btn-soft-white btn-bg-transparent transition-3d-hover rounded-circle">
+                                            <i class="btn-icon__inner fab fa-facebook-f"></i>
+                                        </a>
+                                    </li>
+                                    <li style="position:absolute;top: 77px;left: 73px">
+                                        <a class="btn btn-icon btn-medium btn-soft-white btn-bg-transparent transition-3d-hover rounded-circle">
+                                            <i class="btn-icon__inner fab fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li style="position: absolute;top: 75px;left: 110px">
+                                        <a class="btn btn-icon btn-medium btn-soft-white btn-bg-transparent transition-3d-hover rounded-circle">
+                                            <i class="btn-icon__inner fab fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <img src="https://transvelo.github.io/mytravel-html/assets/img/200x200/img1.jpg">
+                        </figure>
+                    </div>
+                    <h6 class="mb-0"
+                        style="font-size: 1.163rem;color: #484848 !important;font-weight: 500 !important;line-height: 1.5">
+                        David Robets</h6>
+                    <span style="color: #5392f9;font-size: 1.2rem">Founder & Director</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script th:fragment="customScripts">
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+        let currentSlide = document.getElementsByClassName("mySlides")[slideIndex - 1];
+        currentSlide.classList.add("animating");
+
+
+        currentSlide.addEventListener("animationend", function () {
+            this.classList.remove("animating");
+        });
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+        let currentSlide = document.getElementsByClassName("mySlides")[slideIndex - 1];
+        currentSlide.classList.add("animating");
+
+
+        currentSlide.addEventListener("animationend", function () {
+            this.classList.remove("animating");
+        });
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+
+        let dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+    }
+
+    //Dropdown select
+
+</script>
+</body>
+</html>
