@@ -1,62 +1,36 @@
-package com.mgbooking.server.Entities;
+package com.mgbooking.server.DTOs;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "account")
-public class Account {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
-
-    @Column(name = "username", nullable = false, length = 100)
+/**
+ * DTO for {@link com.mgbooking.server.Entities.Account}
+ */
+public class AccountDto implements Serializable {
     private String username;
-
-    @Column(name = "full_name", nullable = false, length = 100)
     private String fullName;
-
-    @Column(name = "email", nullable = false, length = 100)
     private String email;
-
-    @Column(name = "phone", nullable = false, length = 20)
     private String phone;
-
-    @Column(name = "address", nullable = false, length = 200)
     private String address;
-
-    @Column(name = "city_id", nullable = false)
     private Integer cityId;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "security_code_id")
-    private SecurityCode securityCode;
-
-    @Column(name = "OTP", length = 20)
     private String otp;
-
-    @Column(name = "avatar", length = 200)
     private String avatar;
-
-    @Column(name = "password", length = 200)
     private String password;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @ColumnDefault("1")
-    @JoinColumn(name = "level_id", nullable = false)
-    private Level level;
-
-    @ColumnDefault("'ROLE_USER'")
-    @Column(name = "account_type", nullable = false, length = 100)
     private String accountType;
 
-    public Integer getId() {
-        return id;
+    public AccountDto() {
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public AccountDto(String username, String fullName, String email, String phone, String address, Integer cityId, String otp, String avatar, String password, String accountType) {
+        this.username = username;
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.cityId = cityId;
+        this.otp = otp;
+        this.avatar = avatar;
+        this.password = password;
+        this.accountType = accountType;
     }
 
     public String getUsername() {
@@ -107,14 +81,6 @@ public class Account {
         this.cityId = cityId;
     }
 
-    public SecurityCode getSecurityCode() {
-        return securityCode;
-    }
-
-    public void setSecurityCode(SecurityCode securityCode) {
-        this.securityCode = securityCode;
-    }
-
     public String getOtp() {
         return otp;
     }
@@ -139,14 +105,6 @@ public class Account {
         this.password = password;
     }
 
-    public Level getLevel() {
-        return level;
-    }
-
-    public void setLevel(Level level) {
-        this.level = level;
-    }
-
     public String getAccountType() {
         return accountType;
     }
@@ -154,5 +112,4 @@ public class Account {
     public void setAccountType(String accountType) {
         this.accountType = accountType;
     }
-
 }

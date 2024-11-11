@@ -1,9 +1,6 @@
 package com.mgbooking.server.Entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -11,6 +8,7 @@ import java.time.LocalDate;
 @Table(name = "security_code")
 public class SecurityCode {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -29,8 +27,11 @@ public class SecurityCode {
     @Column(name = "dob", nullable = false)
     private LocalDate dob;
 
-    @Column(name = "value", nullable = false, length = 100)
-    private String value;
+    @Column(name = "front_security_code", nullable = false, length = 200)
+    private String frontSecurityCode;
+
+    @Column(name = "back_security_code", nullable = false, length = 100)
+    private String backSecurityCode;
 
     public Integer getId() {
         return id;
@@ -80,12 +81,20 @@ public class SecurityCode {
         this.dob = dob;
     }
 
-    public String getValue() {
-        return value;
+    public String getFrontSecurityCode() {
+        return frontSecurityCode;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setFrontSecurityCode(String frontSecurityCode) {
+        this.frontSecurityCode = frontSecurityCode;
+    }
+
+    public String getBackSecurityCode() {
+        return backSecurityCode;
+    }
+
+    public void setBackSecurityCode(String backSecurityCode) {
+        this.backSecurityCode = backSecurityCode;
     }
 
 }

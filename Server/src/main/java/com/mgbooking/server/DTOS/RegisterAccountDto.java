@@ -1,8 +1,8 @@
-package com.mgbooking.server.DTOS;
+package com.mgbooking.server.DTOs;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class RegisterOwnerDto {
+public class RegisterAccountDto {
     @JsonProperty("fullname")
     private String fullname;
 

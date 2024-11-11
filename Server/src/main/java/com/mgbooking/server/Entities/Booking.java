@@ -7,6 +7,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "bookings")
 public class Booking {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 

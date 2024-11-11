@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "hotels_owner")
 public class HotelsOwner {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -15,7 +16,7 @@ public class HotelsOwner {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "owner_id", nullable = false)
-    private Owner owner;
+    private Account owner;
 
     public Integer getId() {
         return id;
@@ -33,11 +34,11 @@ public class HotelsOwner {
         this.hotel = hotel;
     }
 
-    public Owner getOwner() {
+    public Account getOwner() {
         return owner;
     }
 
-    public void setOwner(Owner owner) {
+    public void setOwner(Account owner) {
         this.owner = owner;
     }
 
