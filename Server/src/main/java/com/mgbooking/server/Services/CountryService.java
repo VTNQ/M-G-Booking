@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CountryService {
 public List<Country>findAll();
+public boolean CreateCountry(Country country);
 }

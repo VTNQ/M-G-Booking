@@ -1,10 +1,12 @@
 package com.mgbooking.server.Controllers;
 
+import com.mgbooking.server.DTOS.CityDTO;
 import com.mgbooking.server.Entities.City;
 import com.mgbooking.server.Services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +25,17 @@ public class CityController
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<List<City>>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @PostMapping(value = "CreateCity",produces = MimeTypeUtils.APPLICATION_JSON_VALUE,consumes = MimeTypeUtils.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object>CreateCity(@RequestBody CityDTO city){
+        try {
+            return new ResponseEntity<>(new Object(){
+                public boolean result=cityService.AddCity(city);
+            },HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 }

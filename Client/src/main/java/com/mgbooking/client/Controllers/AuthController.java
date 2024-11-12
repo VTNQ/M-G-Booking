@@ -23,6 +23,25 @@ public class AuthController {
         modelMap.put("login", new LoginDTO());
         return "User/login/login";
     }
+    @GetMapping("LoginAdmin")
+    public String LoginAdmin(ModelMap modelMap) {
+        modelMap.put("login", new LoginDTO());
+        return "SuperAdmin/Login/login";
+    }
+    @PostMapping("LoginAdmin")
+    public String LoginAdmin(@ModelAttribute("login")LoginDTO login,HttpSession session, ModelMap modelMap) {
+        try {
+            String redirectUrl=authService.login(login,session);
+            if(session!=null){
+                return  redirectUrl;
+            }else{
+                return "redirect:/LoginAdmin";
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @PostMapping("Login")
     public String Login(@ModelAttribute("login") LoginDTO loginDTO, ModelMap modelMap, HttpServletRequest request, HttpSession session) {
