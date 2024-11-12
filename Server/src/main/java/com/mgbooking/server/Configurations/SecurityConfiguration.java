@@ -48,7 +48,8 @@ public class SecurityConfiguration {
 
                 .csrf(cs -> cs.disable())
                 .authorizeRequests()
-                .requestMatchers("/api/auth/login").permitAll() // Sửa đường dẫn
+                .requestMatchers("/api/auth/login").permitAll()
+                .requestMatchers("/Country").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement(session -> session

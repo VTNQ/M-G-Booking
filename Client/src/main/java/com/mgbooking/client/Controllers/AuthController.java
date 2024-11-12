@@ -1,14 +1,44 @@
 package com.mgbooking.client.Controllers;
 
+import com.mgbooking.client.DTO.LoginDTO;
+import com.mgbooking.client.Services.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller()
-@RequestMapping({"","/"})
+@RequestMapping({"", "/"})
 public class AuthController {
-@GetMapping("Login")
-    public String Home() {
-return "User/login/login";
-}
+    @Autowired
+    private AuthService authService;
+
+    @GetMapping("Login")
+    public String Home(ModelMap modelMap) {
+        modelMap.put("login", new LoginDTO());
+        return "User/login/login";
+    }
+
+    @PostMapping("Login")
+    public String Login(@ModelAttribute("login") LoginDTO loginDTO, ModelMap modelMap, HttpServletRequest request, HttpSession session) {
+        try {
+            String redirectUrl = authService.login(loginDTO,session);
+            if (redirectUrl != null) {
+                return redirectUrl;
+            } else {
+                String referer = request.getHeader("Referer");
+                return "redirect:" + referer;
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 }
