@@ -36,7 +36,7 @@ public class AuthController {
 
 
 
-  public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginDTO authenticationRequest) throws Exception {
+  public ResponseEntity<Map<String,String>> createAuthenticationToken(@RequestBody LoginDTO authenticationRequest) throws Exception {
       try {
           authenticationManager.authenticate(
                   new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword())

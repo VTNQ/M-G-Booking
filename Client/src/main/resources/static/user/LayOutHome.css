@@ -7,6 +7,13 @@ a{
     font-weight: 500;
     margin-left: .5rem;
 }
+@media (min-width: 1200px) {
+    .col-xl-3dot5 {
+        -ms-flex: 0 0 29.16667%;
+        flex: 0 0 29.16667%;
+        max-width: 29.16667%;
+    }
+}
 .bootstrap-select>select {
     position: absolute !important;
     bottom: 0;
