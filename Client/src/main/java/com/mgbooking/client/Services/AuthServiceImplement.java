@@ -26,8 +26,10 @@ public class AuthServiceImplement  implements  AuthService{
                     return "redirect:/admin";
                 }else if(jwtUtil.extractRoles(token).contains("ROLE_USER")){
                     return "redirect:/Home";
+                }else if(jwtUtil.extractRoles(token).contains("ROLE_SUPERADMIN")){
+                    return "redirect:/SuperAdmin/Home";
                 }else{
-                    return "redirect:/login";
+                    return  null;
                 }
             }else{
                 throw new RuntimeException("Token không hợp lệ.");

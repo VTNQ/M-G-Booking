@@ -49,7 +49,8 @@ public class SecurityConfiguration {
                 .csrf(cs -> cs.disable())
                 .authorizeRequests()
                 .requestMatchers("/api/auth/login").permitAll()
-                .requestMatchers("/Country").hasRole("USER")
+                .requestMatchers("/Country","/Country/CreateCountry").hasRole("SUPERADMIN")
+                .requestMatchers("City/CreateCity").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement(session -> session

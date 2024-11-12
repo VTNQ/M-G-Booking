@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class CountryServiceImplement implements CountryService{
+public class CountryServiceImplement implements CountryService {
     @Autowired
     private CountryRepository countryRepository;
     @Autowired
@@ -17,5 +17,15 @@ public class CountryServiceImplement implements CountryService{
     @Override
     public List<Country> findAll() {
         return modelMapper.map(countryRepository.findAll(),new TypeToken<List<Country>>(){}.getType());
+    }
+
+    @Override
+    public boolean CreateCountry(Country country) {
+        try {
+           Country saveCountry= countryRepository.save(country);
+            return saveCountry!=null && saveCountry.getId()>0   ;
+        }catch (Exception e){
+            return false;
+        }
     }
 }
