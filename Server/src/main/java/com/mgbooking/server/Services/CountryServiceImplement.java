@@ -5,6 +5,8 @@ import com.mgbooking.server.Repositories.CountryRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +19,11 @@ public class CountryServiceImplement implements CountryService {
     @Override
     public List<Country> findAll() {
         return modelMapper.map(countryRepository.findAll(),new TypeToken<List<Country>>(){}.getType());
+    }
+
+    @Override
+    public Page<Country> findByPage(Pageable pageable) {
+        return modelMapper.map(countryRepository.findAll(pageable),new TypeToken<Page<Country>>(){}.getType());
     }
 
     @Override

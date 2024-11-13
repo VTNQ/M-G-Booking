@@ -1,7 +1,7 @@
 package com.mgbooking.client.DTO;
 
 public class Country {
-    private int id;
+    private Integer id;
     private String name;
 
     public int getId() {

@@ -16,10 +16,7 @@ public class HomeController {
     public String Home(HttpServletRequest Request) {
         String token=(String) Request.getSession().getAttribute("accessToken");
 
-        if(token!=null && jwtUtil.extractRoles(token).contains("ROLE_ADMIN")){
-            return "User/Home/Home";
-        }
-        
-        return "redirect:/404" ;
+
+        return "User/Home/Home";
     }
 }
