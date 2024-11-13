@@ -57,7 +57,7 @@ public class SecurityConfiguration {
                 .cors(cs->cs.configurationSource(corsConfigurationSource()))
                 .authorizeRequests()
                 .requestMatchers("/api/auth/login").permitAll()
-                .requestMatchers("/Country", "/Country/CreateCountry", "/Country/GetAllCountries/**").hasRole("SUPERADMIN")
+                .requestMatchers("/Country", "/Country/CreateCountry","Country/UpdateCountry","Country/DeleteCountry/**", "/Country/GetAllCountries/**").hasRole("SUPERADMIN")
                 .requestMatchers("City/CreateCity").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()

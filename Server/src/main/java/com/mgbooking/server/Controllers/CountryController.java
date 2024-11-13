@@ -34,6 +34,28 @@ public class CountryController {
             return new ResponseEntity<List<Country>>(HttpStatus.BAD_REQUEST);
         }
     }
+    @DeleteMapping(value = "DeleteCountry/{id}",produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object>DeleteCountry(@PathVariable("id") int id){
+    try {
+        return new ResponseEntity<Object>(new Object() {
+            public boolean result = CountryService.DeleteCountry(id);
+        }, HttpStatus.OK);
+    }catch (Exception e){
+        e.printStackTrace();
+        return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+    }
+    }
+    @PutMapping(value = "UpdateCountry",produces = MimeTypeUtils.APPLICATION_JSON_VALUE,consumes = MimeTypeUtils.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object>UpdateCountry(@RequestBody Country Country){
+        try {
+            return new ResponseEntity<>(new Object(){
+                public boolean result=CountryService.CreateCountry(Country);
+            },HttpStatus.OK);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
     @GetMapping("GetAllCountries")
     @CrossOrigin(origins = "http://localhost:8386")
     public ResponseEntity<Page<Country>>GetAllCountries(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "10")int size){
