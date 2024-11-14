@@ -34,6 +34,15 @@ public class CountryController {
             return new ResponseEntity<List<Country>>(HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping("FindByCountry/{id}")
+    public ResponseEntity<Country>FindByCountryId(@PathVariable int id){
+        try {
+            return new ResponseEntity<Country>(CountryService.findById(id),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<Country>(HttpStatus.BAD_REQUEST);
+        }
+    }
     @DeleteMapping(value = "DeleteCountry/{id}",produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object>DeleteCountry(@PathVariable("id") int id){
     try {

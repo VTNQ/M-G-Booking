@@ -12,4 +12,5 @@ public List<Country>findAll();
 public Page<Country> findByPage(Pageable pageable);
 public boolean CreateCountry(Country country);
 public boolean DeleteCountry(int id);
+public Country findById(int id);
 }

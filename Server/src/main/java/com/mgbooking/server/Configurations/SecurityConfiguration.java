@@ -14,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -57,17 +58,35 @@ public class SecurityConfiguration {
                 .cors(cs->cs.configurationSource(corsConfigurationSource()))
                 .authorizeRequests()
                 .requestMatchers("/api/auth/login").permitAll()
-                .requestMatchers("/Country", "/Country/CreateCountry","Country/UpdateCountry","Country/DeleteCountry/**", "/Country/GetAllCountries/**").hasRole("SUPERADMIN")
-                .requestMatchers("City/CreateCity").hasRole("ADMIN")
+                .requestMatchers(
+                        "/Country/CreateCountry",
+                        "Country/UpdateCountry",
+                        "Country/DeleteCountry/**",
+                        "/Country/GetAllCountries/**",
+                        "/Country/FindByCountry/**").hasRole("SUPERADMIN")
+                .requestMatchers("City/CreateCity","/City/**").hasRole("ADMIN")
+                .requestMatchers("/Country").hasAnyRole("ADMIN", "SUPERADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
+                ) .exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler()))
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
 
         return http.build();
+    }
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            String previousUrl = (String) request.getSession().getAttribute("previousUrl");
+            if (previousUrl != null) {
+                response.sendRedirect(previousUrl);
+            } else {
+
+                response.sendRedirect("/default-page");
+            }
+        };
     }
 
     // Define CORS configuration in WebMvcConfigurer

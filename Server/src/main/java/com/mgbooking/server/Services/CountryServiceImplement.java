@@ -46,4 +46,9 @@ public class CountryServiceImplement implements CountryService {
                 return false;
         }
     }
+
+    @Override
+    public Country findById(int id) {
+        return modelMapper.map(countryRepository.findById(id),new TypeToken<Country>(){}.getType());
+    }
 }
