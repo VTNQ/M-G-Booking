@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/SuperAdmin/layout :: mainContent('Country',~{this::.content-wrapper})}">
+      th:replace="~{/Admin/layout :: mainContent('Country',~{this::.content-wrapper})}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -18,16 +18,23 @@
 
             <!-- Input Sizing -->
             <div class="col-md-12">
-                <form th:action="@{/SuperAdmin/Country}" method="post">
+                <form th:action="@{/Admin/City}" method="post">
                     <div class="card">
 
                         <div class="card-body">
                             <h5>Country</h5>
                             <div class="mt-2 mb-4">
-                                <label for="largeInput" class="form-label">Name</label>
-                                <input
+                                <label class="form-label">City</label>
+                                <select class="form-control" th:field="${City.country_id}">
+                                    <th:block th:each="countryList : ${Country}">
+                                        <option th:value="${countryList.id}" th:text="${countryList.name}"></option>
+                                    </th:block>
+                                </select>
+                            </div>
+                            <div class="mt-2 mb-4">
+                                <label class="form-label">Name</label>
+                                <input th:field="${City.name}"
                                         id="largeInput"
-                                        th:field="${Country.name}"
                                         class="form-control form-control-lg"
                                         type="text"
                                         placeholder="Name"/>
@@ -49,46 +56,7 @@
         </div>
 
     </div>
-    <div class="container-xxl flex-grow-1 container-p-y">
-        <div class="row">
-            <div class="card">
-                <h5 class="card-header">Danh sach Country</h5>
-                <div class="table-responsive text-nowrap">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0" id="countryTableBody">
 
-                        </tbody>
-                    </table>
-                    <div id="paginationControls">
-                        <ul class="pagination">
-                            <!-- Previous Button -->
-                            <li class="page-item">
-                                <button id="prevPage" class="page-link" disabled>Previous</button>
-                            </li>
-
-                            <!-- Page Number Buttons (Dynamic) -->
-                            <li class="page-item">
-                                <span id="pageNumbers" class="page-link">1</span>
-                            </li>
-
-                            <!-- Next Button -->
-                            <li class="page-item">
-                                <button id="nextPage" class="page-link">Next</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="token" style="display: none" th:text="${token}"></div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- / Content -->
 
     <!-- Footer -->
@@ -129,6 +97,6 @@
 
     <div class="content-backdrop fade"></div>
 </div>
-<script th:fragment="customScripts" th:src="@{/SuperAdmin/Country/CountryTable.js}"></script>
+
 </body>
 </html>

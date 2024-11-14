@@ -22192,20 +22192,8 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
   display: flex;
 }
 
-.menu-toggle::after {
-  position: absolute;
-  top: 53%;
-  display: block;
-  font-family: "remixicon";
-  font-size: 1.375rem;
-  color: #433c50;
-  transform: translateY(-49%);
-  content: "\ea6e";
-}
-.menu:not(.menu-no-animation) .menu-toggle::after {
-  transition-duration: 0.3s;
-  transition-property: -webkit-transform, transform;
-}
+
+
 
 .menu-divider {
   width: 100%;
@@ -22272,12 +22260,7 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
 .menu-vertical .menu-item .menu-toggle {
   padding-right: calc(1.45rem + 1.3475em);
 }
-.menu-vertical .menu-item .menu-toggle::after {
-  right: calc(1.45rem - 0.4rem);
-}
-.menu-vertical .menu-item.open:not(.menu-item-closing) > .menu-link:after {
-  transform: translateY(-50%) rotate(90deg);
-}
+
 .menu-vertical .menu-divider {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;

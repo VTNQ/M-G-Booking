@@ -1,10 +1,12 @@
 package com.mgbooking.client.Controllers;
 
+import com.mgbooking.client.Configuration.GetToken;
 import com.mgbooking.client.DTO.RegisterOwnerDto;
 import com.mgbooking.client.DTO.RegisterUser;
 import com.mgbooking.client.Services.CountryService;
 import com.mgbooking.client.Services.OwnerService;
 import com.mgbooking.client.Services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,11 +24,13 @@ public class RegisterController {
     @Autowired
     private UserService userService;
     @Autowired
+    private GetToken getToken;
+    @Autowired
     private OwnerService ownerService;
     @GetMapping("RegisterUser")
-    public String Register(ModelMap model){
-
-        model.put("country",countryService.GetCountry());
+    public String Register(ModelMap model, HttpServletRequest request){
+        String token=getToken.getTokenFromCookies(request);
+        model.put("country",countryService.GetCountry(token));
         model.put("RegisterUser",new RegisterUser());
         return "User/Register/RegisterUser";
     }

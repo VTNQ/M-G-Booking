@@ -3,6 +3,7 @@ package com.mgbooking.client.Controllers;
 import com.mgbooking.client.DTO.LoginDTO;
 import com.mgbooking.client.Services.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,7 @@ public class AuthController {
         return "SuperAdmin/Login/login";
     }
     @PostMapping("LoginAdmin")
-    public String LoginAdmin(@ModelAttribute("login")LoginDTO login,HttpSession session, ModelMap modelMap) {
+    public String LoginAdmin(@ModelAttribute("login")LoginDTO login, HttpServletResponse session, ModelMap modelMap) {
         try {
             String redirectUrl=authService.login(login,session);
             if(session!=null){
@@ -44,7 +45,7 @@ public class AuthController {
     }
 
     @PostMapping("Login")
-    public String Login(@ModelAttribute("login") LoginDTO loginDTO, ModelMap modelMap, HttpServletRequest request, HttpSession session) {
+    public String Login(@ModelAttribute("login") LoginDTO loginDTO, ModelMap modelMap, HttpServletRequest request, HttpServletResponse session) {
         try {
             String redirectUrl = authService.login(loginDTO,session);
             if (redirectUrl != null) {

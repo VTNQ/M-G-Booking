@@ -41,12 +41,20 @@ function fetchCountries(page, size) {
 
             const countries = response.content;
             const totalCount = response.totalPages;
-            console.log('Countries:', countries);
-            console.log('Total Count:', totalCount);
+
             updatePaginationControls(totalCount)
             $('#countryTableBody').empty();
             countries.forEach((country, index) => {
-                $('#countryTableBody').append(`<tr><td>${index + 1}</td><td>${country.name}</td></tr>`);
+                $('#countryTableBody').append(`<tr>
+                    <td>${index + 1}</td>
+                    <td>${country.name}</td>
+                    <td>
+                    <a href="/SuperAdmin/EditCountry/${country.id}" style="background-color: #4299e1;border-color: #4299e1" class="btn btn-info"><i style="color: white" class="fa fa-pencil"></i></a>
+                    <a href="/SuperAdmin/DeleteCountry/${country.id}" class="btn btn-danger">
+                    <i style="color: white" class="fa fa-trash"></i>
+</a>
+                    </td>
+</tr>`);
             });
             // You can further process and display the countries as needed
 
