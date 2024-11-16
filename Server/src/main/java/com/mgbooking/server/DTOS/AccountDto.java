@@ -14,6 +14,15 @@ public class AccountDto {
     private int security_code_id;
     private Integer cityId;
     private String otp;
+    private int countryId;
+
+    public int getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
+    }
 
     public int getSecurity_code_id() {
         return security_code_id;

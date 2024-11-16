@@ -5,6 +5,16 @@ public class AccountDto {
     private String username;
     private String fullName;
     private String email;
+    private int countryId;
+
+    public int getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
+    }
+
     private String phone;
     private String address;
     private int security_code_id;

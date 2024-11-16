@@ -4,6 +4,9 @@ import com.mgbooking.server.DTOS.CityDTO;
 import com.mgbooking.server.Entities.City;
 import com.mgbooking.server.Services.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
@@ -18,6 +21,16 @@ public class CityController
 {
     @Autowired
     private CityService cityService;
+    @GetMapping({"FindCityPage/{id}"})
+    public ResponseEntity<Page<City>>FindCityPage(@PathVariable("id")int id, @RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "10")int size){
+        try {
+            Pageable pageable= PageRequest.of(page,size);
+            return new ResponseEntity<Page<City>>(cityService.findCity(id,pageable),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<Page<City>>(HttpStatus.BAD_REQUEST);
+        }
+    }
     @GetMapping({"{id}"})
     public ResponseEntity<List<City>>GetCity(@PathVariable("id") int id){
         try {

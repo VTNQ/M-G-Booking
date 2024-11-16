@@ -1,6 +1,7 @@
 package com.mgbooking.server.Services;
 
 import com.mgbooking.server.DTOS.RegisterUser;
+import com.mgbooking.server.Entities.Account;
 import com.mgbooking.server.Entities.Level;
 import com.mgbooking.server.Repositories.AccountRepository;
 import org.mindrot.jbcrypt.BCrypt;
