@@ -17,7 +17,6 @@ import java.util.List;
 
 @Component
 public class JWTTokenFilter extends OncePerRequestFilter {
-
     private String secretKey = "sRbgDVJHhto1l0DxFi09N/5phc9FEEWfN4MQIzWKBEs="; // Replace with your secret key
 
     @Override
@@ -29,10 +28,7 @@ public class JWTTokenFilter extends OncePerRequestFilter {
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);  // Extract the token after "Bearer "
             try {
-                Claims claims = Jwts.parser()
-                        .setSigningKey(secretKey)
-                        .parseClaimsJws(token)
-                        .getBody();
+                Claims claims = extractAllClaims(token);
 
                 // Extract roles from claims (assuming it's a list of roles)
                 List<String> roles = claims.get("roles", List.class); // roles should be stored as a list of strings
@@ -55,5 +51,8 @@ public class JWTTokenFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
+    }
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
     }
 }
