@@ -1,7 +1,9 @@
 package com.mgbooking.client.Controllers.Admin;
 
 import com.mgbooking.client.Configuration.GetToken;
+import com.mgbooking.client.DTO.AccountDto;
 import com.mgbooking.client.DTO.CityDTO;
+import com.mgbooking.client.Services.AuthService;
 import com.mgbooking.client.Services.CityService;
 import com.mgbooking.client.Services.CountryService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,11 +24,15 @@ public class CityController {
     @Autowired
     private CityService cityService;
     @Autowired
+    private AuthService authService;
+    @Autowired
     private GetToken tokenService;
     @GetMapping("City")
     public String City(ModelMap model, HttpServletRequest request ){
         String token=tokenService.getTokenFromCookies(request);
+        AccountDto account=authService.FindByAccount(token);
         model.put("Country",countryService.GetCountry(token));
+        
         model.put("City",new CityDTO());
         return "/Admin/City/City";
     }

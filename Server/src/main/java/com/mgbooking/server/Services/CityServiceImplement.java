@@ -1,7 +1,6 @@
 package com.mgbooking.server.Services;
 
 import com.mgbooking.server.DTOS.CityDTO;
-import com.mgbooking.server.Entities.Account;
 import com.mgbooking.server.Entities.City;
 import com.mgbooking.server.Entities.Country;
 import com.mgbooking.server.Repositories.CityRepository;

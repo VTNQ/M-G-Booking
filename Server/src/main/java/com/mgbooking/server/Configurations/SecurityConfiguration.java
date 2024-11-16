@@ -57,7 +57,7 @@ public class SecurityConfiguration {
                 .csrf(cs -> cs.disable())
                 .cors(cs->cs.configurationSource(corsConfigurationSource()))
                 .authorizeRequests()
-                .requestMatchers("/api/auth/login").permitAll()
+                .requestMatchers("/auth/login").permitAll()
                 .requestMatchers(
                         "/Country/CreateCountry",
                         "Country/UpdateCountry",
@@ -66,6 +66,7 @@ public class SecurityConfiguration {
                         "/Country/FindByCountry/**").hasRole("SUPERADMIN")
                 .requestMatchers("City/CreateCity","/City/**").hasRole("ADMIN")
                 .requestMatchers("/Country").hasAnyRole("ADMIN", "SUPERADMIN")
+                .requestMatchers("/auth/").hasAnyRole("ADMIN", "SUPERADMIN","USER")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement(session -> session

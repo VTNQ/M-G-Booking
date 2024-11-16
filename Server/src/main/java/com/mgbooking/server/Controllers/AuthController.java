@@ -1,12 +1,13 @@
 package com.mgbooking.server.Controllers;
 
 import com.mgbooking.server.Configurations.JwtUtil;
+import com.mgbooking.server.DTOS.AccountDto;
 import com.mgbooking.server.DTOS.AuthenticationResponse;
 import com.mgbooking.server.DTOS.LoginDTO;
-import com.mgbooking.server.Services.AccountServiceDetail;
+import com.mgbooking.server.Services.AccountService;
 
-import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,11 +21,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     private JwtUtil jwtTokenUtil;
@@ -32,6 +35,16 @@ public class AuthController {
     @Autowired
     private UserDetailsService userDetailsService;
     private final String jwtSecretKey="ThisIsSecretSecurity";
+    @GetMapping({"","/"})
+    public ResponseEntity<AccountDto>GetAccount(@RequestHeader(value =  "Authorization",required = true)String authorizationHeader){
+
+        try {
+            return new ResponseEntity<AccountDto>(accountService.GetAccount(authorizationHeader), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<AccountDto>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
   @PostMapping("login")
 
 

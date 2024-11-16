@@ -1,10 +1,6 @@
-package com.mgbooking.server.DTOS;
+package com.mgbooking.client.DTO;
 
-import java.io.Serializable;
 
-/**
- * DTO for {@link com.mgbooking.server.Entities.Account}
- */
 public class AccountDto {
     private String username;
     private String fullName;
