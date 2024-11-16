@@ -23,14 +23,7 @@
 
                         <div class="card-body">
                             <h5>Country</h5>
-                            <div class="mt-2 mb-4">
-                                <label class="form-label">City</label>
-                                <select class="form-control" th:field="${City.country_id}">
-                                    <th:block th:each="countryList : ${Country}">
-                                        <option th:value="${countryList.id}" th:text="${countryList.name}"></option>
-                                    </th:block>
-                                </select>
-                            </div>
+
                             <div class="mt-2 mb-4">
                                 <label class="form-label">Name</label>
                                 <input th:field="${City.name}"
@@ -45,6 +38,7 @@
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-outline-primary">Save</button>
+                            <input type="hidden" th:field="${City.country_id}">
                         </div>
                     </div>
                 </form>

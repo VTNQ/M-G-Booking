@@ -31,9 +31,9 @@ public class CityController {
     public String City(ModelMap model, HttpServletRequest request ){
         String token=tokenService.getTokenFromCookies(request);
         AccountDto account=authService.FindByAccount(token);
-        model.put("Country",countryService.GetCountry(token));
-        
-        model.put("City",new CityDTO());
+        CityDTO cityDTO=new CityDTO();
+        cityDTO.setCountry_id(account.getCountryId());
+        model.put("City",cityDTO);
         return "/Admin/City/City";
     }
     @PostMapping("City")

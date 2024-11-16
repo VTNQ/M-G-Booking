@@ -1,5 +1,6 @@
 package com.mgbooking.server.Services;
 
+import com.mgbooking.server.Entities.Account;
 import com.mgbooking.server.Repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

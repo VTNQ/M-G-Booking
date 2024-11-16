@@ -1,6 +1,7 @@
 package com.mgbooking.server.Configurations;
 
 import com.mgbooking.server.DTOS.RegisterUser;
+import com.mgbooking.server.Entities.Account;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

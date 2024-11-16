@@ -8,6 +8,8 @@ import com.mgbooking.server.Repositories.CountryRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,5 +38,10 @@ public class CityServiceImplement implements CityService{
         }catch (Exception e){
             return false;
         }
+    }
+
+    @Override
+    public Page<City> findCity(int id,Pageable pageable) {
+        return modelMapper.map(cityRepository.findCitiesByCountryId(id,pageable),new TypeToken<Page<City>>(){}.getType());
     }
 }

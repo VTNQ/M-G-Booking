@@ -1,6 +1,6 @@
 package com.mgbooking.server.Services;
 
-import com.mgbooking.server.DTOs.AccountDto;
+import com.mgbooking.server.DTOS.AccountDto;
 import com.mgbooking.server.DTOs.RegisterAccountDto;
 import com.mgbooking.server.Entities.Account;
 

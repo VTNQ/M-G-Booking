@@ -48,6 +48,8 @@ public class JWTTokenFilter extends OncePerRequestFilter {
                 // Handle token parsing errors here
                 e.printStackTrace();
             }
+        }else{
+
         }
 
         filterChain.doFilter(request, response);
