@@ -11,4 +11,6 @@ public interface CityService {
     public List<City>GetAllCities(int id);
     public boolean AddCity(CityDTO city);
     public Page<City>findCity(int id,Pageable pageable);
+    public CityDTO FindCity(int id);
+    public boolean DeleteCity(int id);
 }

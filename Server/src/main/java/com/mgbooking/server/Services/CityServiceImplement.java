@@ -44,4 +44,20 @@ public class CityServiceImplement implements CityService{
     public Page<City> findCity(int id,Pageable pageable) {
         return modelMapper.map(cityRepository.findCitiesByCountryId(id,pageable),new TypeToken<Page<City>>(){}.getType());
     }
+
+    @Override
+    public CityDTO FindCity(int id) {
+        return modelMapper.map(cityRepository.findById(id),new TypeToken<CityDTO>(){}.getType());
+    }
+
+    @Override
+    public boolean DeleteCity(int id) {
+        try {
+            cityRepository.deleteById(id);
+            return true;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }

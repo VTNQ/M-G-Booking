@@ -64,7 +64,7 @@ public class SecurityConfiguration {
                         "Country/DeleteCountry/**",
                         "/Country/GetAllCountries/**",
                         "/Country/FindByCountry/**").hasRole("SUPERADMIN")
-                .requestMatchers("City/CreateCity","/City/{id}","/City/FindCityPage/**").hasRole("ADMIN")
+                .requestMatchers("City/CreateCity","/City/{id}","/City/FindCityPage/**","/City/FindCity/**","/City/DeleteCity/**").hasRole("ADMIN")
                 .requestMatchers("/Country").hasAnyRole("ADMIN", "SUPERADMIN")
                 .requestMatchers("/auth/").hasAnyRole("ADMIN", "SUPERADMIN","USER")
                 .anyRequest().authenticated()

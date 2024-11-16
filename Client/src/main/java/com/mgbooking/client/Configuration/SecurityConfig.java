@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers("/Login","/css/**","/js/**","/user/**","/SuperAdmin/assets/**","/images/**","/LoginAdmin","/Profile").permitAll()
                 .requestMatchers("/SuperAdmin/Home","/SuperAdmin/Country","/SuperAdmin/EditCountry/**","/SuperAdmin/UpdateCountry","/SuperAdmin/DeleteCountry/**").hasAnyRole("SUPERADMIN")
-                .requestMatchers("/Admin/Home","/Admin/City").hasRole("ADMIN")// Allow anyone to access /Home
+                .requestMatchers("/Admin/Home","/Admin/City","/Admin/City/{id}","/Admin/UpdateCity","/Admin/DeleteCity/**").hasRole("ADMIN")// Allow anyone to access /Home
                 .anyRequest().authenticated() // Require authentication for other requests
                 .and()
 
