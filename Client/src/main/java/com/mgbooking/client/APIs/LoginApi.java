@@ -8,6 +8,6 @@ import retrofit2.http.POST;
 import java.util.Map;
 
 public interface LoginApi {
-    @POST("/api/auth/login")
+    @POST("/auth/login")
     Call<Map<String,String>>Login(@Body LoginDTO loginDTO);
 }

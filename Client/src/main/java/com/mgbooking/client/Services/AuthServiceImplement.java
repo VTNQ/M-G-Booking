@@ -2,16 +2,15 @@ package com.mgbooking.client.Services;
 
 import com.mgbooking.client.APIs.ApiClient;
 import com.mgbooking.client.APIs.LoginApi;
+import com.mgbooking.client.APIs.UserApi;
 import com.mgbooking.client.Configuration.JwtUtil;
+import com.mgbooking.client.DTO.AccountDto;
 import com.mgbooking.client.DTO.LoginDTO;
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import retrofit2.Response;
 
 @Service
 public class AuthServiceImplement  implements  AuthService{
@@ -42,6 +41,22 @@ public class AuthServiceImplement  implements  AuthService{
                 throw new RuntimeException("Token không hợp lệ.");
             }
         }catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public AccountDto FindByAccount(String token) {
+        try {
+            UserApi userApi= ApiClient.getRetrofit().create(UserApi.class);
+            Response<AccountDto>response=userApi.GetAccount("Bearer " + token).execute();
+            if(response.isSuccessful()){
+                return response.body();
+            }else{
+                return null;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
