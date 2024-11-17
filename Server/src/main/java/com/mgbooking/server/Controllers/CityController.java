@@ -31,6 +31,26 @@ public class CityController
             return new ResponseEntity<Page<City>>(HttpStatus.BAD_REQUEST);
         }
     }
+    @DeleteMapping({"DeleteCity/{id}"})
+    public ResponseEntity<Object>DeleteCity(@PathVariable("id")int id){
+        try {
+            return new ResponseEntity<>(new Object(){
+                public boolean result=cityService.DeleteCity(id);
+            },HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping({"FindCity/{id}"})
+    public ResponseEntity<CityDTO>FindCity(@PathVariable("id")int id){
+        try {
+            return new ResponseEntity<CityDTO>(cityService.FindCity(id),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<CityDTO>(HttpStatus.BAD_REQUEST);
+        }
+    }
     @GetMapping({"{id}"})
     public ResponseEntity<List<City>>GetCity(@PathVariable("id") int id){
         try {

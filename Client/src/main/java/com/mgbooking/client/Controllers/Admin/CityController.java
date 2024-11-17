@@ -10,10 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller("AdminCityController")
@@ -27,6 +24,39 @@ public class CityController {
     private AuthService authService;
     @Autowired
     private GetToken tokenService;
+    @GetMapping("City/{id}")
+    public String DetailCity(ModelMap model, @PathVariable int id, HttpServletRequest request) {
+        String token=tokenService.getTokenFromCookies(request);
+        CityDTO cityFindDTO=cityService.FindCityById(token,id);
+        model.put("city", cityFindDTO);
+        return "Admin/City/Detail";
+    }
+    @GetMapping("DeleteCity/{id}")
+    public String DeleteCity(ModelMap model, @PathVariable int id, HttpServletRequest request,RedirectAttributes redirectAttributes) {
+        String token=tokenService.getTokenFromCookies(request);
+        boolean success=cityService.DeleteCity(token,id);
+        if(success){
+            redirectAttributes.addFlashAttribute("message","Delete City successfully");
+            redirectAttributes.addFlashAttribute("messageType","success");
+        }else{
+            redirectAttributes.addFlashAttribute("message","Failed to Delete City");
+            redirectAttributes.addFlashAttribute("messageType","error");
+        }
+        return "redirect:/Admin/City";
+    }
+    @PostMapping("UpdateCity")
+    public String UpdateCity(@ModelAttribute("City")CityDTO cityDTO, ModelMap model, HttpServletRequest request, RedirectAttributes redirectAttributes){
+        String token=tokenService.getTokenFromCookies(request);
+        boolean success=cityService.UpdateCity(token,cityDTO);
+        if(success){
+            redirectAttributes.addFlashAttribute("message","Update City successfully");
+            redirectAttributes.addFlashAttribute("messageType","success");
+        }else{
+            redirectAttributes.addFlashAttribute("message","Failed to Update City");
+            redirectAttributes.addFlashAttribute("messageType","error");
+        }
+        return "redirect:/Admin/City/"+cityDTO.getId();
+    }
     @GetMapping("City")
     public String City(ModelMap model, HttpServletRequest request ){
         String token=tokenService.getTokenFromCookies(request);
@@ -34,6 +64,7 @@ public class CityController {
         CityDTO cityDTO=new CityDTO();
         cityDTO.setCountry_id(account.getCountryId());
         model.put("City",cityDTO);
+        model.put("token",token);
         return "/Admin/City/City";
     }
     @PostMapping("City")

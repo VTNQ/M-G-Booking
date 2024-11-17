@@ -1,12 +1,7 @@
-<!doctype html>
+
 
 <html
-        lang="en"
-        class="light-style layout-menu-fixed layout-compact"
-        dir="ltr"
-        data-theme="theme-default"
-        data-assets-path="../assets/"
-        data-template="vertical-menu-template-free"
+
         data-style="light" th:fragment="mainContent(title, content)">
 <head>
     <meta charset="utf-8"/>
@@ -150,7 +145,7 @@
 
                 </li>
                 <li class="menu-item active open">
-                    <a th:href="@{/Admin/City}" class="menu-link menu-toggle">
+                    <a th:href="@{/templates/Admin/City}" class="menu-link menu-toggle">
 
                         <div data-i18n="Dashboards">City</div>
 
@@ -321,7 +316,8 @@
 <script src="../assets/vendor/libs/node-waves/node-waves.js"></script>
 <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 <script src="../assets/vendor/js/menu.js"></script>
-<div th:if="${title=='Country'}" th:insert="~{'/SuperAdmin/Country/Country':: customScripts}"></div>
+
+
 
 <!-- endbuild -->
 
