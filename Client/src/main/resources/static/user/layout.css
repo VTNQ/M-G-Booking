@@ -20,6 +20,25 @@
 }
 .custom-checkbox .custom-control-label::before {
     border-radius: 0.3125rem;
+
+}
+.custom-checkbox .cus-control-label::before{
+    border-radius: 0.3125rem;
+    position: relative;
+    top: 18px;
+}
+.cus-control-label::after{
+    position: absolute;
+    top: 0.0935rem;
+    left: -1.813rem;
+    display: block;
+    width: 1.313rem;
+    height: 1.313rem;
+    content: "";
+    background: no-repeat 50% / 50% 50%;
+}
+.cus-control-label::before{
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .custom-control-label::before, .custom-file-label, .custom-select {
     transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -110,6 +129,91 @@
 .min-height-230 {
     min-height: 14.375rem;
 }
+@media (min-width: 1200px) {
+    .col-xl-2dot3 {
+        -ms-flex: 0 0 19.16667%;
+        flex: 0 0 19.16667%;
+        max-width: 19.16667%;
+    }
+}
+.bootstrap-select .dropdown-toggle:before {
+    content: '';
+    display: inline-block;
+}
+.nav-select-1 .bootstrap-select button {
+    background-color: transparent !important;
+}
+.btn-light:not(label.btn), .btn-light:not(label.btn):not([href]):not(:disabled):not(.disabled), .btn-light:not([href]), .btn-light:not([href]):not([href]):not(:disabled):not(.disabled) {
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+.bootstrap-select>.dropdown-toggle {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    text-align: right;
+    white-space: nowrap;
+}
+.bootstrap-select .dropdown-toggle .filter-option {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: inherit;
+    padding-right: inherit;
+    padding-bottom: inherit;
+    padding-left: inherit;
+    height: 100%;
+    width: 100%;
+    text-align: left;
+}
+@media (min-width: 768px) {
+    .btn-md {
+        min-width: 11.375rem;
+        height: 3.75rem;
+    }
+}
+@media (min-width: 1200px) {
+    .col-xl-1dot8 {
+        -ms-flex: 0 0 15%;
+        flex: 0 0 15%;
+        max-width: 15%;
+    }
+}
+.bootstrap-select .dropdown-toggle .filter-option-inner {
+    padding-right: inherit;
+}
+.bootstrap-select .dropdown-toggle .filter-option-inner-inner {
+    overflow: hidden;
+}
+.nav-select .bootstrap-select button {
+
+    border: none;
+    font-weight: 500;
+    padding-bottom: 14px;
+}
+.bootstrap-select>select {
+    position: absolute !important;
+    bottom: 0;
+    left: 50%;
+    display: block !important;
+    width: .5px !important;
+    height: 100% !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    border: none;
+}
+
+.border-bottom-1 {
+    border-bottom: 2px solid #c6cdd6 !important;
+}
+.tab-nav-1-inner .nav-link.active {
+    border: 1px solid #297cbb !important;
+    background-color: #297cbb !important;
+    border-radius: 3px;
+}
+.bg-gray-33 {
+    background-color: #ebf0f7 !important;
+}
 .badge-pill {
     padding-right: 0.6em;
     padding-left: 0.6em;
@@ -177,6 +281,18 @@
 .slider-container input[type="range"]:nth-child(1)::-webkit-slider-thumb {
     z-index: 3;
 }
+.cus-control-label::before{
+    position: absolute;
+    top: 0.0935rem;
+    left: -1.813rem;
+    display: block;
+    width: 1.2rem!important;
+    height: 1.2rem!important;
+    pointer-events: none;
+    content: "";
+    background-color: #fff;
+    border: #ebf0f7 solid 2px;
+}
 .custom-control-label::before {
     position: absolute;
     top: 0.0935rem;
@@ -190,7 +306,11 @@
     border: #ebf0f7 solid 2px;
 }
 
-
+.cus-control-label{
+    position: relative;
+    margin-bottom: 0;
+    vertical-align: top;
+}
 .custom-control-label {
     position: relative;
     margin-bottom: 0;
