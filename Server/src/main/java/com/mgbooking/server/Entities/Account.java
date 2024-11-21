@@ -140,7 +140,7 @@ public class Account {
     @Column(name = "address", nullable = false, length = 200)
     private String address;
 
-    @Column(name = "city_id", nullable = false)
+    @Column(name = "city_id", nullable = true)
     private Integer cityId;
 
     @OneToOne(fetch = FetchType.LAZY)

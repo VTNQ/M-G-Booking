@@ -4,7 +4,7 @@ import com.mgbooking.server.Configurations.JwtUtil;
 import com.mgbooking.server.DTOS.AccountDto;
 import com.mgbooking.server.DTOS.AuthenticationResponse;
 import com.mgbooking.server.DTOS.LoginDTO;
-import com.mgbooking.server.Services.AccountService;
+import com.mgbooking.server.Services.OwnerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +27,7 @@ public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private AccountService accountService;
+    private OwnerService accountService;
 
     @Autowired
     private JwtUtil jwtTokenUtil;
