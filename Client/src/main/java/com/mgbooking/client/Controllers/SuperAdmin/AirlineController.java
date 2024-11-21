@@ -26,12 +26,18 @@ public class AirlineController {
     @Autowired
     private CountryService countryService;
     @PostMapping("UpdateAirline")
-    public String UpdateAirLine(@ModelAttribute("Airline") UpdateFlightDTO flightDTO, HttpServletRequest request, ModelMap model, @RequestParam("imageForm")MultipartFile multipartFile) {
+    public String UpdateAirLine(@ModelAttribute("Airline") UpdateFlightDTO flightDTO, HttpServletRequest request, ModelMap model, @RequestParam("imageForm")MultipartFile multipartFile,RedirectAttributes redirectAttributes) {
         String token=getToken.getTokenFromCookies(request);
         if(airlineService.UpdateFlight(flightDTO,token,multipartFile)){
+            redirectAttributes.addFlashAttribute("message","Update Airline successfully");
+            redirectAttributes.addFlashAttribute("messageType","success");
             return "redirect:/SuperAdmin/UpdateAirline/"+flightDTO.getId();
+
         }else{
+            redirectAttributes.addFlashAttribute("message","Update Airline failed");
+            redirectAttributes.addFlashAttribute("messageType","error");
             return "redirect:/SuperAdmin/UpdateAirline/"+flightDTO.getId();
+
         }
     }
     @GetMapping("UpdateAirline/{id}")
