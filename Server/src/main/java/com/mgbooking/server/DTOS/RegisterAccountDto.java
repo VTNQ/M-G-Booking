@@ -1,8 +1,39 @@
-package com.mgbooking.server.DTOs;
+package com.mgbooking.server.DTOS;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
 
 public class RegisterAccountDto {
+    @JsonProperty("phone")
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @JsonProperty("address")
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
     @JsonProperty("fullname")
     private String fullname;
 

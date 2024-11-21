@@ -57,15 +57,15 @@ public class SecurityConfiguration {
                 .csrf(cs -> cs.disable())
                 .cors(cs->cs.configurationSource(corsConfigurationSource()))
                 .authorizeRequests()
-                .requestMatchers("/auth/login").permitAll()
+                .requestMatchers("/auth/login","/images/**", "/favicon.ico", "/css/**", "/js/**","/Country","/City/{id}","/registerUser","/registerOwner").permitAll()
                 .requestMatchers(
                         "/Country/CreateCountry",
                         "Country/UpdateCountry",
                         "Country/DeleteCountry/**",
                         "/Country/GetAllCountries/**",
-                        "/Country/FindByCountry/**").hasRole("SUPERADMIN")
+                        "/Country/FindByCountry/**","/Flight/AddFlight","/Flight/GetFlight","/Flight/UpdateFlight","/Flight/FindFlight/{id}").hasRole("SUPERADMIN")
                 .requestMatchers("City/CreateCity","/City/{id}","/City/FindCityPage/**","/City/FindCity/**","/City/DeleteCity/**").hasRole("ADMIN")
-                .requestMatchers("/Country").hasAnyRole("ADMIN", "SUPERADMIN")
+
                 .requestMatchers("/auth/").hasAnyRole("ADMIN", "SUPERADMIN","USER")
                 .anyRequest().authenticated()
                 .and()

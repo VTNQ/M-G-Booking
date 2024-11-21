@@ -39,7 +39,7 @@ public class UserServiceImplement implements UserService {
         return null;
     }
     @Override
-    public boolean CreateUser(RegisterUser user) {
+    public boolean RegisterUser(RegisterUser user) {
         try{
             Account account =modelMapper.map(user, Account.class);
 
@@ -48,6 +48,7 @@ public class UserServiceImplement implements UserService {
             Level level=new Level();
             level.setId(1);
             account.setLevel(level);
+            account.setAccountType("ROLE_USER");
             userRepository.save(account);
             SendConfirmationEmail(user.getEmail());
             return true;

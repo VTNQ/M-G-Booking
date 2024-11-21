@@ -20,7 +20,7 @@ public class UserController {
     public ResponseEntity<Object> registerUser(@RequestBody RegisterUser registerUser){
         try {
             return new ResponseEntity<>(new Object(){
-                public boolean result=userService.CreateUser(registerUser);
+                public boolean result=userService.RegisterUser(registerUser);
             },HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();

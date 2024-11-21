@@ -2,7 +2,7 @@ $(document).ready(function() {
     // Lắng nghe sự kiện thay đổi trên dropdown quốc gia
     $('#countrySelect').change(function() {
         var countryId = $(this).val(); // Lấy ID quốc gia được chọn
-
+        console.log(countryId)
         // Kiểm tra xem có quốc gia nào được chọn hay không
         if (countryId) {
             // Gửi yêu cầu GET để lấy danh sách thành phố từ API

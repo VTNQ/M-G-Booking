@@ -1,10 +1,13 @@
 package com.mgbooking.server.Services;
 
 import com.mgbooking.server.DTOS.AccountDto;
-import com.mgbooking.server.DTOs.RegisterAccountDto;
+import com.mgbooking.server.DTOS.RegisterAccountDto;
+import com.mgbooking.server.Entities.Account;
+import com.mgbooking.server.Entities.Level;
 import com.mgbooking.server.Repositories.AccountRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import org.mindrot.jbcrypt.BCrypt;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +15,10 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
+
 @Service
-public class AccountServiceImplement implements AccountService {
+public class OwnerServiceImplement implements OwnerService {
     @Autowired
     private AccountRepository accountRepository;
     @Autowired
@@ -33,23 +38,35 @@ public class AccountServiceImplement implements AccountService {
 
     @Override
     public boolean registerAccount(RegisterAccountDto registerAccountDto) {
-//        try{
-//            if (!accountDto.getPassword().equals(accountDto.getConfirmPassword())) {
-//
-//                return false;
-//            }
-//
-//            Account owner =modelMapper.map(registerOwnerDto, Account.class);
-//            owner.setPassword(BCrypt.hashpw(registerOwnerDto.getConfirmPassword(), BCrypt.gensalt()));
-//            accountRepository.save(owner);
-//            SendConfirmationEmail(registerOwnerDto.getEmail(),"Thank you for registering with MGBooking. Your account has been successfully created.\n Password:"+registerOwnerDto.getConfirmPassword());
-//            return true;
-//        }catch (Exception e){
-//            return false;
-//        }
-        return false;
-    }
+        try{
+            if (!registerAccountDto.getPassword().equals(registerAccountDto.getConfirmPassword())) {
 
+                return false;
+            }
+
+            Account owner =modelMapper.map(registerAccountDto, Account.class);
+            owner.setPassword(BCrypt.hashpw(registerAccountDto.getConfirmPassword(), BCrypt.gensalt()));
+            owner.setAccountType("ROLE_OWNER");
+            Level level=new Level();
+            level.setId(1);
+            owner.setLevel(level);
+            owner.setUsername(GeneateUsername(owner.getEmail()));
+            accountRepository.save(owner);
+            SendConfirmationEmail(registerAccountDto.getEmail(),"Thank you for registering with MGBooking. Your account has been successfully created.\n Password:"+registerAccountDto.getConfirmPassword());
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
+    }
+    private String GeneateUsername(String Email ){
+        if(Email!=null && Email.endsWith("@gmail.com")){
+            String baseName=Email.substring(0,Email.indexOf("@"));
+            int randomNumber=new Random().nextInt(1000);
+            return baseName+randomNumber;
+        }
+        return null;
+    }
     @Override
     public AccountDto GetAccount(String token) {
         try {

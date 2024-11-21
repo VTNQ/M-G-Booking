@@ -1,5 +1,5 @@
 const pageSize = 10;
-let CurrentPage = 1;
+let CurrentPage = 0;
 let totalPages = 10;
 
 function updatePaginationControls(totalCount) {
@@ -7,15 +7,16 @@ function updatePaginationControls(totalCount) {
     $('#prevPage').prop('disabled', CurrentPage);
     $('#nextPage').prop('disabled', CurrentPage === totalPages);
     let pageNumbersHtml = '';
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = 0; i < totalPages; i++) {
         pageNumbersHtml += `<li class="page-item ${i === CurrentPage ? 'active' : ''}">
-<span class="page-link" onclick="changePage(${i})">${i}</span>
+<span class="page-link" onclick="changePage(${i})">${i+1}</span>
 </li>`
     }
     $('#pageNumbers').html(pageNumbersHtml);
 }
 function changePage(page){
-    if (page >= 1 && page <= totalPages) {
+
+    if (page >= 0 && page <= totalPages) {
         CurrentPage = page;
         fetchCountries(CurrentPage, pageSize);  // Fetch countries for the selected page
     }
@@ -41,12 +42,14 @@ function fetchCountries(page, size) {
 
             const countries = response.content;
             const totalCount = response.totalPages;
-
+            const currentPage = response.number;
+            const pageSize = response.size;
             updatePaginationControls(totalCount)
             $('#countryTableBody').empty();
             countries.forEach((country, index) => {
+                const rowIndex = currentPage * pageSize + index + 1;
                 $('#countryTableBody').append(`<tr>
-                    <td>${index + 1}</td>
+                    <td>${rowIndex}</td>
                     <td>${country.name}</td>
                     <td>
                     <a href="/SuperAdmin/EditCountry/${country.id}" style="background-color: #4299e1;border-color: #4299e1" class="btn btn-info"><i style="color: white" class="fa fa-pencil"></i></a>

@@ -1,10 +1,9 @@
 package com.mgbooking.server.Services;
 
 import com.mgbooking.server.DTOS.AccountDto;
-import com.mgbooking.server.DTOs.RegisterAccountDto;
-import com.mgbooking.server.Entities.Account;
+import com.mgbooking.server.DTOS.RegisterAccountDto;
 
-public interface AccountService {
+public interface OwnerService {
     public boolean registerAccount(RegisterAccountDto registerAccountDto);
     public AccountDto GetAccount(String token);
 }
