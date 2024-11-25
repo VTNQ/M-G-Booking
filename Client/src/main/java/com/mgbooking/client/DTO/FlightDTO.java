@@ -1,37 +1,79 @@
 package com.mgbooking.client.DTO;
 
-import org.springframework.web.multipart.MultipartFile;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+
+import java.time.LocalTime;
+import java.util.List;
 
 public class FlightDTO {
+    private Integer id;
 
-    private String name;
+    @JsonProperty("airline_id")
+    private int airline_id;
 
-    private int country_id;
+    private int departure_airport;
 
-    private MultipartFile image;
+    private int arrival_airport;
 
-    public String getName() {
-        return name;
+    private String departureTime;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setName( String name) {
-        this.name = name;
+    public void setId( Integer id) {
+        this.id = id;
     }
 
-
-    public int getCountry_id() {
-        return country_id;
+    public int getAirline_id() {
+        return airline_id;
     }
 
-    public void setCountry_id( int country_id) {
-        this.country_id = country_id;
+    public void setAirline_id( int airline_id) {
+        this.airline_id = airline_id;
     }
 
-    public  MultipartFile getImage() {
-        return image;
+    public int getDeparture_airport() {
+        return departure_airport;
     }
 
-    public void setImage( MultipartFile image) {
-        this.image = image;
+    public void setDeparture_airport(int departure_airport) {
+        this.departure_airport = departure_airport;
+    }
+
+    public int getArrival_airport() {
+        return arrival_airport;
+    }
+
+    public void setArrival_airport(int arrival_airport) {
+        this.arrival_airport = arrival_airport;
+    }
+
+    public  String getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(  String departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public  String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime( String arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    private String arrivalTime;
+   private List<DetailFlight>detailFlights;
+
+    public List<DetailFlight> getDetailFlights() {
+        return detailFlights;
+    }
+
+    public void setDetailFlights(List<DetailFlight> detailFlights) {
+        this.detailFlights = detailFlights;
     }
 }

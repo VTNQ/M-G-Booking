@@ -1,16 +1,40 @@
 package com.mgbooking.server.Entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.time.LocalTime;
+import java.time.Instant;
 
 
 @Entity
 @Table(name = "flights")
 public class Flight {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "airline_id", nullable = false)
+    private Airline airline;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "departure_airport", nullable = false)
+    private Airport departureAirport;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "arrival_airport", nullable = false)
+    private Airport arrivalAirport;
+
+
+    @Column(name = "departure_time", nullable = false)
+    private Instant departureTime;
+
     public Integer getId() {
         return id;
     }
@@ -43,65 +67,23 @@ public class Flight {
         this.arrivalAirport = arrivalAirport;
     }
 
-    public LocalTime getDepartureTime() {
+    public Instant getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(LocalTime departureTime) {
+    public void setDepartureTime(Instant departureTime) {
         this.departureTime = departureTime;
     }
 
-    public LocalTime getArrivalTime() {
+    public Instant getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(LocalTime arrivalTime) {
+    public void setArrivalTime(Instant arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "airline_id", nullable = false)
-    private Airline airline;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "departure_airport", nullable = false)
-    private Airport departureAirport;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "arrival_airport", nullable = false)
-    private Airport arrivalAirport;
-
-    @Column(name = "departure_time", nullable = false)
-    private LocalTime departureTime;
-
     @Column(name = "arrival_time", nullable = false)
-    private LocalTime arrivalTime;
-
-    @Column(name = "type", nullable = false, length = 50)
-    private String type;
-
-    @Column(name = "price", nullable = false, precision = 10)
-    private BigDecimal price;
+    private Instant arrivalTime;
 
 }

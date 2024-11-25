@@ -1,152 +1,98 @@
 package com.mgbooking.server.Services;
 
+import com.mgbooking.server.DTOS.AirPortDTO;
+import com.mgbooking.server.DTOS.DetailFlightDTO;
 import com.mgbooking.server.DTOS.FlightDTO;
-import com.mgbooking.server.DTOS.ListFlightDto;
-import com.mgbooking.server.DTOS.UpdateFlightDTO;
+import com.mgbooking.server.DTOS.FlightListDto;
 import com.mgbooking.server.Entities.Airline;
-import com.mgbooking.server.Entities.Country;
-import com.mgbooking.server.Entities.Picture;
-import com.mgbooking.server.Helper.FileHelper;
+import com.mgbooking.server.Entities.Airport;
+import com.mgbooking.server.Entities.DetailFlight;
+import com.mgbooking.server.Entities.Flight;
 import com.mgbooking.server.Repositories.AirlineRepository;
-import com.mgbooking.server.Repositories.CountryRepository;
-import com.mgbooking.server.Repositories.ImageRepository;
+import com.mgbooking.server.Repositories.AirportRepository;
+import com.mgbooking.server.Repositories.DetailFlightRepository;
+import com.mgbooking.server.Repositories.FlightRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class FlightServiceImplement implements  FlightService{
-    @Autowired
-    private Environment environment;
-    @Autowired
-    private AirlineRepository AirlineRepository;
-    @Autowired
-    private ImageRepository imageRepository;
+public class FlightServiceImplement implements FlightService{
     @Autowired
     private ModelMapper modelMapper;
-
     @Autowired
-    private CountryRepository countryRepository;
+    private FlightRepository flightRepository;
+    @Autowired
+    private AirlineRepository airlineRepository;
+    @Autowired
+    private DetailFlightRepository flightDetailRepository;
+    @Autowired
+    private AirportRepository airportRepository;
+    @Autowired
+    private DetailFlightRepository detailFlightRepository;
+
     @Override
-    public boolean AddFlight(FlightDTO flightDTO) {
+    public boolean CreateFlight(FlightDTO flightDTO) {
         try {
-            Country country = countryRepository.findById(flightDTO.getCountry_id())
-                    .orElseThrow(() -> new RuntimeException("Country not found"));
-            Airline airline=modelMapper.map(flightDTO, Airline.class);
+            Airline airline = airlineRepository.findById(flightDTO.getAirline_id())
+                    .orElseThrow(() -> new RuntimeException("Airline not found"));
+            Airport departure_airport=airportRepository.findById(flightDTO.getDeparture_airport())
+                    .orElseThrow(() -> new RuntimeException("Departure Airport not found"));
+            Airport arrival_airport=airportRepository.findById(flightDTO.getArrival_airport())
+                    .orElseThrow(() -> new RuntimeException("Arrival Airport not found"));
 
-            airline.setCountry(country);
-            Airline savedAirline= AirlineRepository.save(airline);
-            int airlineId=savedAirline.getId();
-           MultipartFile multipartFile=flightDTO.getImage();
-           if(multipartFile!=null && !multipartFile.isEmpty()){
-               String uploadDir = System.getProperty("user.dir") + "/Server/src/main/resources/static/images/flight";
-               Path uploadPath = Paths.get(uploadDir);
-               if (!Files.exists(uploadPath)) {
-                   Files.createDirectories(uploadPath);
-               }
-               String filename = FileHelper.generateImageName(multipartFile.getOriginalFilename());
-               Path filePath = uploadPath.resolve(filename);
-               multipartFile.transferTo(filePath.toFile());
-               Picture image=new Picture();
-               image.setMain(true);
-               image.setAirlineId(airlineId);
-               image.setImageUrl(filename);
-               imageRepository.save(image);
-               return true;
-           }else{
-               return false;
-           }
-        }catch (Exception e){
-            e.printStackTrace();
-        return false;
-        }
+            Flight flight=modelMapper.map(flightDTO,Flight.class);
+            flight.setArrivalTime(flightDTO.getArrivalInstant());
+            flight.setDepartureTime(flightDTO.getDepartureInstant());
+            flight.setAirline(airline);
+            flight.setDepartureAirport(departure_airport);
+            flight.setArrivalAirport(arrival_airport);
+            Flight insertDto=flightRepository.save(flight);
+            DetailFlight detailFlight=new DetailFlight();
+            for (DetailFlightDTO detailflightarray : flightDTO.getDetailFlights()) {
+                try {
+                    detailFlight.setType(detailflightarray.getType());
+                    detailFlight.setIdFlight(insertDto);
+                    detailFlight.setPrice(detailflightarray.getPrice());
+                    detailFlight.setQuantity(detailflightarray.getQuantity());
+                    flightDetailRepository.save(detailFlight);
+                    detailFlight=new DetailFlight();
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
 
-
-    }
-
-    @Override
-    public Page<ListFlightDto> findAll(Pageable pageable) {
-        String flightUrl = environment.getProperty("FlightUrl");
-        Page<ListFlightDto>airlines=AirlineRepository.AllAirlineDto(pageable);
-        airlines.forEach(dto->dto.setImage(flightUrl+dto.getImage()));
-        return modelMapper.map(airlines,new TypeToken<Page<ListFlightDto>>(){}.getType());
-    }
-
-    @Override
-    public UpdateFlightDTO FindFlight(int id) {
-        try {
-            return modelMapper.map(AirlineRepository.FindById(id),new TypeToken<UpdateFlightDTO>(){}.getType());
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
-    public boolean UpdateFlight(UpdateFlightDTO flightDTO,MultipartFile file) {
-        try {
-            String imagecase = flightDTO.getImage() != null ? flightDTO.getImage() : "null";
-            Country country = countryRepository.findById(flightDTO.getIdCountry())
-                    .orElseThrow(() -> new RuntimeException("Country not found"));
-            Airline airline=modelMapper.map(flightDTO, Airline.class);
-            switch (imagecase){
-                case "null":
-
-
-                    airline.setCountry(country);
-                    airline.setCountry(country);
-                    AirlineRepository.save(airline);
-                    break;
-                default:
-                    UpdateFlightDTO FindID=AirlineRepository.FindById(flightDTO.getId());
-                    if (FindID == null) {
-                        throw new RuntimeException("Flight not found!");
-                    }
-                    String uploadDir = System.getProperty("user.dir") + "/Server/src/main/resources/static/images/flight";
-                    String oldFilename=FindID.getImage();
-                    File oldFile=new File(uploadDir,oldFilename);
-                    if(oldFile.exists() && oldFile.isFile()){
-                        oldFile.delete();
-                    }
-                   country = countryRepository.findById(flightDTO.getIdCountry())
-                            .orElseThrow(() -> new RuntimeException("Country not found"));
-                     airline=modelMapper.map(flightDTO, Airline.class);
-                    airline.setCountry(country);
-                    airline.setCountry(country);
-                    AirlineRepository.save(airline);
-                    MultipartFile multipartFile=file;
-
-                    Path uploadPath = Paths.get(uploadDir);
-                    if (!Files.exists(uploadPath)) {
-                        Files.createDirectories(uploadPath);
-                    }
-                    String filename=FileHelper.generateImageName(multipartFile.getOriginalFilename());
-                    Path filePath = uploadPath.resolve(filename);
-                    multipartFile.transferTo(filePath.toFile());
-                    Picture image= imageRepository.findByImageId(flightDTO.getId());
-                    image.setMain(true);
-                    image.setAirlineId(flightDTO.getId());
-                    image.setImageUrl(filename);
-                    imageRepository.save(image);
-                    break;
             }
 
-            return true;
-        }catch (Exception ex){
-            ex.printStackTrace();
+
+            return insertDto!=null && insertDto.getId()>0 ;
+        }catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public FlightListDto GetFlight(int id) {
+        Flight flight = flightRepository.findFlightWithDetails(id);
+        if (flight == null) {
+            throw new RuntimeException("Flight not found");
+        }
+
+        // Lấy các chi tiết chuyến bay
+        List<DetailFlightDTO> detailFlightDTOs = detailFlightRepository.findDetailFlightsByFlightId(id)
+                .stream()
+                .map(detailFlight -> modelMapper.map(detailFlight, DetailFlightDTO.class))
+                .collect(Collectors.toList());
+
+        // Ánh xạ Flight thành FlightListDto
+        FlightListDto flightListDto = modelMapper.map(flight, FlightListDto.class);
+        flightListDto.setDetailFlights(detailFlightDTOs);
+
+        return flightListDto;
     }
 }

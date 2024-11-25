@@ -27,7 +27,9 @@
 
     <!-- Menu waves for no-customizer fix -->
     <link rel="stylesheet" th:href="@{/SuperAdmin/assets/vendor/libs/node-waves/node-waves.css}"/>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- Core CSS -->
     <link rel="stylesheet" th:href="@{/SuperAdmin/assets/vendor/css/core.css}" class="template-customizer-core-css"/>
     <link rel="stylesheet" th:href="@{/SuperAdmin/assets/vendor/css/theme-default.css}"
@@ -329,6 +331,9 @@
 
 <!-- Page JS -->
 <script src="../assets/js/dashboards-analytics.js"></script>
+<div th:if="${title=='AirPort'}" th:insert="~{'/Admin/AirPort/AirPort':: customScripts}"></div>
+<div th:if="${title=='Flight'}" th:insert="~{'/Admin/Flight/Flight':: customScripts}"></div>
+
 
 <!-- Place this tag before closing body tag for github widget button. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
