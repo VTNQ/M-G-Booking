@@ -1,6 +1,6 @@
 package com.mgbooking.server.Services;
 
-import com.mgbooking.server.DTOS.FlightDTO;
+import com.mgbooking.server.DTOS.AirLineDTO;
 import com.mgbooking.server.DTOS.ListFlightDto;
 import com.mgbooking.server.DTOS.UpdateFlightDTO;
 import com.mgbooking.server.Entities.Airline;
@@ -23,6 +23,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Service
 public class AirlineServiceImplement implements AirlineService {
@@ -38,7 +39,7 @@ public class AirlineServiceImplement implements AirlineService {
     @Autowired
     private CountryRepository countryRepository;
     @Override
-    public boolean AddFlight(FlightDTO flightDTO) {
+    public boolean AddFlight(AirLineDTO flightDTO) {
         try {
             Country country = countryRepository.findById(flightDTO.getCountry_id())
                     .orElseThrow(() -> new RuntimeException("Country not found"));
@@ -146,5 +147,11 @@ public class AirlineServiceImplement implements AirlineService {
             ex.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<ListFlightDto> ShowAirlineDto(int id) {
+        List<ListFlightDto>airlines=AirlineRepository.ShowAirlineDto(id);
+        return modelMapper.map(airlines,new TypeToken<List<ListFlightDto>>(){}.getType());
     }
 }

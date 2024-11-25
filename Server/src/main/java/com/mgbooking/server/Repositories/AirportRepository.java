@@ -13,6 +13,9 @@ import java.util.List;
 public interface AirportRepository extends JpaRepository<Airport, Integer> {
     @Query("select new com.mgbooking.server.DTOS.AirPortList(t.id,t.name,t.city) from Airport t where t.city.country.id = :id")
     Page<Airport> findAll(@Param("id") int id, Pageable pageable);
+    @Query("select t from Airport t where t.city.country.id = :id")
+    List<Airport> findAllByCountryId(@Param("id") int id);
+
 
 }
 

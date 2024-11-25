@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AirPortServiceImplement implements  AirPortService{
     @Autowired
@@ -44,5 +46,10 @@ public class AirPortServiceImplement implements  AirPortService{
     @Override
     public AirPortDTO FindById(int id) {
         return modelMapper.map(airportRepository.findById(id),new TypeToken<AirPortDTO>(){}.getType());
+    }
+
+    @Override
+    public List<AirPortDTO> FindAirPortByCountry(int id) {
+        return  modelMapper.map(airportRepository.findAllByCountryId(id),new TypeToken<List<AirPortDTO>>(){}.getType());
     }
 }

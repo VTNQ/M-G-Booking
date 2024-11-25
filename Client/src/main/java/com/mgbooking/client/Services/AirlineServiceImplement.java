@@ -2,23 +2,20 @@ package com.mgbooking.client.Services;
 
 import com.mgbooking.client.APIs.AirlinesApi;
 import com.mgbooking.client.APIs.ApiClient;
-import com.mgbooking.client.APIs.LoginApi;
 import com.mgbooking.client.DTO.*;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import retrofit2.Response;
 
-import java.io.File;
 import java.util.List;
 
 @Service
 public class AirlineServiceImplement implements AirlineService{
     @Override
-    public Object CreateFlight(FlightDTO flightDTO, String token) {
+    public Object CreateFlight(AirlineDTO flightDTO, String token) {
         try {
             // Convert the fields to RequestBody
             RequestBody nameRequestBody = RequestBody.create(MediaType.parse("text/plain"), flightDTO.getName());
@@ -100,6 +97,22 @@ public class AirlineServiceImplement implements AirlineService{
         }catch (Exception e){
             e.printStackTrace();
             return false;
+        }
+    }
+
+    @Override
+    public List<ListFlightDto> FindAirlineByCountry(String token, int id) {
+        try {
+            AirlinesApi airlinesApi=ApiClient.getRetrofit().create(AirlinesApi.class);
+            Response<List<ListFlightDto>>response=airlinesApi.FindAirlineByCountry("Bearer " +token,id).execute();
+            if(response.isSuccessful()){
+                return response.body();
+            }else{
+                return null;
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
         }
     }
 }

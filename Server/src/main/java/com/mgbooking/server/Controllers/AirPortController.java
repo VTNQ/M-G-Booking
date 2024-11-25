@@ -25,6 +25,15 @@ public class AirPortController {
     private AirPortService airPortService;
     @Autowired
     private ValidationService validationService;
+    @GetMapping("/FindAllByCountry/{id}")
+    public ResponseEntity<List<AirPortDTO>>FindAllByCountry(@PathVariable int id){
+        try {
+            return new ResponseEntity<List<AirPortDTO>>(airPortService.FindAirPortByCountry(id),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
     @GetMapping("/FindById/{id}")
     public ResponseEntity<AirPortDTO>FindById(@PathVariable int id) {
         try {

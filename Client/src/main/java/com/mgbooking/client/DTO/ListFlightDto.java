@@ -6,12 +6,6 @@ public class ListFlightDto {
     private String imageUrl;
     private String Country;
 
-    public ListFlightDto(int id, String name, String imageUrl, String country) {
-        this.id = id;
-        this.name = name;
-        this.imageUrl = imageUrl;
-        Country = country;
-    }
 
     public String getCountry() {
         return Country;

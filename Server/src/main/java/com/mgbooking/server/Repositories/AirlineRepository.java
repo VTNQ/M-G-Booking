@@ -1,10 +1,8 @@
 package com.mgbooking.server.Repositories;
 
-import com.mgbooking.server.DTOS.FlightDTO;
 import com.mgbooking.server.DTOS.ListFlightDto;
 import com.mgbooking.server.DTOS.UpdateFlightDTO;
 import com.mgbooking.server.Entities.Airline;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,4 +23,8 @@ public interface AirlineRepository extends JpaRepository<Airline,Integer> {
             "join Picture i on a.id=i.airlineId "+
             "where a.id = :id")
     UpdateFlightDTO FindById(@Param("id") Integer id);
+    @Query("SELECT new com.mgbooking.server.DTOS.ListFlightDto(a.id, a.name,  i.imageUrl, a.country.name) " +
+            "FROM Airline a " +
+            "JOIN Picture i ON a.country.id = :id")
+    List<ListFlightDto> ShowAirlineDto(@Param("id") int id);
 }

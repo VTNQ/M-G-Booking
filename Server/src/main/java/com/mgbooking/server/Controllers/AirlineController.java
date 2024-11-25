@@ -1,6 +1,6 @@
 package com.mgbooking.server.Controllers;
 
-import com.mgbooking.server.DTOS.FlightDTO;
+import com.mgbooking.server.DTOS.AirLineDTO;
 
 import com.mgbooking.server.DTOS.ListFlightDto;
 import com.mgbooking.server.DTOS.UpdateFlightDTO;
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/Flight")
+@RequestMapping("/Airline")
 public class AirlineController {
     @Autowired
     private ValidationService validationService;
@@ -48,6 +48,15 @@ public class AirlineController {
             return new ResponseEntity<UpdateFlightDTO>(HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping(value = "FindAirline/{id}")
+    public ResponseEntity<List<ListFlightDto>>FindAirLine(@PathVariable int id){
+        try {
+            return new ResponseEntity<List<ListFlightDto>>(flightService.ShowAirlineDto(id),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<List<ListFlightDto>>(HttpStatus.BAD_REQUEST);
+        }
+    }
     @GetMapping(value = "/GetFlight")
     public ResponseEntity<Page<ListFlightDto>>GetFlight(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "10")int size){
         try {
@@ -59,7 +68,7 @@ public class AirlineController {
         }
     }
     @PostMapping(value = "/AddFlight")
-    public ResponseEntity<Object> AddFlight(@ModelAttribute @Valid FlightDTO flightDTO, BindingResult bindingResult) {
+    public ResponseEntity<Object> AddFlight(@ModelAttribute @Valid AirLineDTO flightDTO, BindingResult bindingResult) {
         List<String>errors=validationService.validate(flightDTO, bindingResult);
         if (errors != null && !errors.isEmpty()) {
             // Trả về lỗi validation dưới dạng ApiResponse

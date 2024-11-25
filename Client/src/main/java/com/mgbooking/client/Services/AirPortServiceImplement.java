@@ -6,6 +6,9 @@ import com.mgbooking.client.DTO.AirPortDTO;
 import com.mgbooking.client.DTO.ResultApi;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
+
+import java.util.List;
+
 @Service
 public class AirPortServiceImplement implements AirPortService {
     @Override
@@ -53,6 +56,22 @@ public class AirPortServiceImplement implements AirPortService {
             }
         }catch (Exception e) {
             e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<AirPortDTO> FindAllByCountry(String token, int id) {
+        try {
+        AirPortApi airPortApi=ApiClient.getRetrofit().create(AirPortApi.class);
+        Response<List<AirPortDTO>>response=airPortApi.FindAllByCountry("Bearer " +token,id).execute();
+        if(response.isSuccessful()){
+            return response.body();
+        }else{
+            return null;
+        }
+        }catch (Exception exception){
+            exception.printStackTrace();
             return null;
         }
     }
