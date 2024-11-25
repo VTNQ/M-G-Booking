@@ -2,10 +2,13 @@ package com.mgbooking.client.Services;
 
 import com.mgbooking.client.APIs.ApiClient;
 import com.mgbooking.client.APIs.CityApi;
+import com.mgbooking.client.DTO.City;
 import com.mgbooking.client.DTO.CityDTO;
 import com.mgbooking.client.DTO.ResultApi;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
+
+import java.util.List;
 
 @Service
 public class CityServiceImplement implements CityService{
@@ -72,5 +75,21 @@ public class CityServiceImplement implements CityService{
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<City> findAllCities(String token, int id) {
+      try {
+          CityApi cityApi= ApiClient.getRetrofit().create(CityApi.class);
+          Response<List<City>>response=cityApi.findAllCity("Bearer " +token,id).execute();
+          if(response.isSuccessful()){
+              return response.body();
+          }else{
+              return null;
+          }
+      }catch (Exception e){
+          e.printStackTrace();
+          return null;
+      }
     }
 }

@@ -4,7 +4,7 @@ import com.mgbooking.server.DTOS.FlightDTO;
 
 import com.mgbooking.server.DTOS.ListFlightDto;
 import com.mgbooking.server.DTOS.UpdateFlightDTO;
-import com.mgbooking.server.Services.FlightService;
+import com.mgbooking.server.Services.AirlineService;
 import com.mgbooking.server.Services.ValidationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,11 +23,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/Flight")
-public class FlightController {
+public class AirlineController {
     @Autowired
     private ValidationService validationService;
     @Autowired
-    private FlightService flightService;
+    private AirlineService flightService;
     @PostMapping(value = "/UpdateFlight")
     public ResponseEntity<Object>UpdateFlight(@ModelAttribute UpdateFlightDTO flightDTO,@RequestParam("imageForm")MultipartFile imageFile){
         try {
@@ -77,7 +76,7 @@ public class FlightController {
           response.put("message", "Create Flight Successfully");
             return  ResponseEntity.ok(response);
         }else{
-            response.put("status", 200);
+            response.put("status", 400);
             response.put("message", "Create Flight Failed");
             return ResponseEntity.badRequest().body(response);
         }

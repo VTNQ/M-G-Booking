@@ -13,7 +13,6 @@ import com.mgbooking.server.Repositories.ImageRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,10 +23,9 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 @Service
-public class FlightServiceImplement implements  FlightService{
+public class AirlineServiceImplement implements AirlineService {
     @Autowired
     private Environment environment;
     @Autowired

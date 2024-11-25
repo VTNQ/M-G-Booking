@@ -1,8 +1,8 @@
 package com.mgbooking.server.Configurations;
 
-import com.mgbooking.server.DTOS.CityDTO;
-import com.mgbooking.server.DTOS.RegisterUser;
+import com.mgbooking.server.DTOS.*;
 import com.mgbooking.server.Entities.Account;
+import com.mgbooking.server.Entities.Airport;
 import com.mgbooking.server.Entities.City;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -23,6 +23,19 @@ public class ModelMapConfiguration {
                 map().setCountry_id(source.getCountry().getId());
             }
         });
+        modelMapper.addMappings(new PropertyMap<Airport, AirPortList>() {
+            @Override
+            protected void configure() {
+                map().setCity(source.getCity());
+            }
+        });
+        modelMapper.addMappings(new PropertyMap<Airport, AirPortDTO>() {
+            @Override
+            protected void configure() {
+                map().setCity_id(source.getCity().getId());
+            }
+        });
+
         return modelMapper;
     }
 }
