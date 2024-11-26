@@ -1,13 +1,7 @@
 package com.mgbooking.server.Services;
 
-import com.mgbooking.server.DTOS.AirPortDTO;
-import com.mgbooking.server.DTOS.DetailFlightDTO;
-import com.mgbooking.server.DTOS.FlightDTO;
-import com.mgbooking.server.DTOS.FlightListDto;
-import com.mgbooking.server.Entities.Airline;
-import com.mgbooking.server.Entities.Airport;
-import com.mgbooking.server.Entities.DetailFlight;
-import com.mgbooking.server.Entities.Flight;
+import com.mgbooking.server.DTOS.*;
+import com.mgbooking.server.Entities.*;
 import com.mgbooking.server.Repositories.AirlineRepository;
 import com.mgbooking.server.Repositories.AirportRepository;
 import com.mgbooking.server.Repositories.DetailFlightRepository;
@@ -15,6 +9,8 @@ import com.mgbooking.server.Repositories.FlightRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -95,4 +91,34 @@ public class FlightServiceImplement implements FlightService{
 
         return flightListDto;
     }
+
+    @Override
+    public Page<FlightPaginateDTo> FindAllByCountry(Pageable pageable, int id) {
+        return modelMapper.map(flightRepository.FindAllFlights(pageable,id),new TypeToken<Page<FlightListDto>>(){}.getType());
+    }
+
+    @Override
+    public boolean UpdateInformationFlight(FlightListDto flightListDto) {
+        try {
+            Airline airline=airlineRepository.findById(flightListDto.getAirline_id())
+                    .orElseThrow(() -> new RuntimeException("Airline not found"));
+            Airport departure_airport=airportRepository.findById(flightListDto.getDeparture_airport())
+                    .orElseThrow(() -> new RuntimeException("Departure Airport not found"));
+            Airport arrival_airport=airportRepository.findById(flightListDto.getArrival_airport())
+                    .orElseThrow(() -> new RuntimeException("Arrival Airport not found"));
+            Flight flight=modelMapper.map(flightListDto,Flight.class);
+            flight.setArrivalTime(flightListDto.getArrivalInstant());
+            flight.setDepartureTime(flightListDto.getDepartureInstant());
+            flight.setAirline(airline);
+            flight.setDepartureAirport(departure_airport);
+            flight.setArrivalAirport(arrival_airport);
+            Flight updateDto=flightRepository.save(flight);
+            return updateDto!=null && updateDto.getId()>0;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

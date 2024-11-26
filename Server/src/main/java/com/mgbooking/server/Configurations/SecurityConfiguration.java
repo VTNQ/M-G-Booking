@@ -64,7 +64,7 @@ public class SecurityConfiguration {
                         "Country/DeleteCountry/**",
                         "/Country/GetAllCountries/**",
                         "/Country/FindByCountry/**","/Airline/AddFlight","/Airline/GetFlight","/Airline/UpdateFlight","/Airline/FindFlight/{id}").hasRole("SUPERADMIN")
-                .requestMatchers("City/CreateCity","/City/{id}","/City/FindCityPage/**","/City/FindCity/**","/City/DeleteCity/**","/AirPort/CreateAirPort","/AirPort/{id}","/AirPort/FindById/{id}","/AirPort/EditAirPort","/Flight/CreateFlight","/Airline/FindAirline/{id}","/AirPort/FindAllByCountry/{id}","/Flight/FindFlight/{id}").hasRole("ADMIN")
+                .requestMatchers("City/CreateCity","/City/{id}","/City/FindCityPage/**","/City/FindCity/**","/City/DeleteCity/**","/AirPort/CreateAirPort","/AirPort/{id}","/AirPort/FindById/{id}","/AirPort/EditAirPort","/Flight/CreateFlight","/Airline/FindAirline/{id}","/AirPort/FindAllByCountry/{id}","/Flight/FindFlight/{id}","/Flight/FindAll/**","/Flight/UpdateFlight").hasRole("ADMIN")
 
                 .requestMatchers("/auth/").hasAnyRole("ADMIN", "SUPERADMIN","USER")
                 .anyRequest().authenticated()
