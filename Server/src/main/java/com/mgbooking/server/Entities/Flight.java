@@ -1,5 +1,6 @@
 package com.mgbooking.server.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -19,20 +20,24 @@ public class Flight {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "airline_id", nullable = false)
+    @JsonIgnore
     private Airline airline;
 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "departure_airport", nullable = false)
+    @JsonIgnore
     private Airport departureAirport;
 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "arrival_airport", nullable = false)
+    @JsonIgnore
     private Airport arrivalAirport;
 
 
     @Column(name = "departure_time", nullable = false)
+    @JsonIgnore
     private Instant departureTime;
 
     public Integer getId() {

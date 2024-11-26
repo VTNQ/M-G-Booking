@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/Admin/layout :: mainContent('Flight',~{this::.content-wrapper})}">
+      th:replace="~{/Admin/layout :: mainContent('EditFlight',~{this::.content-wrapper})}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -18,7 +18,7 @@
 
             <!-- Input Sizing -->
             <div class="col-md-12">
-                <form th:action="@{/Admin/Flight}"  method="post">
+                <form th:action="@{/Admin/Flight/UpdateFlight}" method="post">
                     <div class="card">
 
                         <div class="card-body">
@@ -46,20 +46,15 @@
                             </div>
                             <div class="mt-2 mb -4">
                                 <label class="form-label">Departure Time</label>
-                                <input type="datetime-local" id="Departure_Time" class="form-control" th:text="${flight.departureTime}">
+                                <input type="datetime-local" id="Departure_Time" class="form-control" th:field="${flight.departure_time}">
                             </div>  <div class="form-group mt-2 mb-4">
                             <label class="form-label">Arrival time</label>
-                            <input type="datetime-local" id="datetimepicker" class="form-control" th:field="${flight.arrivalTime}">
+                            <input type="datetime-local" id="datetimepicker" th:field="${flight.arrival_time}" class="form-control" >
                         </div>
-                            <h4>Detail Flights</h4>
-                            <div id="detailFlights">
-                                <div class="detail-flight mb-3">
-                                    <div class="row">
 
-                                    </div>
-                                </div>
-                            </div>
+
                             <button type="button" class="btn btn-secondary mb-3" id="addDetailFlight">Add Detail Flight</button>
+
 
 
                         </div>
@@ -67,7 +62,7 @@
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-outline-primary">Save</button>
-
+                            <input type="hidden" th:field="${flight.id}">
 
                         </div>
                     </div>
@@ -88,35 +83,33 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Airline</th>
-                            <th>Departure Airport</th>
-                            <th>Arrival Airport</th>
+
+                            <th>Type</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
                             <th>Action</th>
+
                         </tr>
                         </thead>
-                        <tbody class="table-border-bottom-0" id="FlightTableBody">
+                        <tbody class="table-border-bottom-0" >
+                           <th:block th:each="item, iterStat: ${flight.detailFlights}">
+                               <tr>
+                                   <td >
 
+                                       <label th:text="${item.type}" th:id="'type-label-'+${item.id}"></label>
+                                       <input th:value="${item.type}" th:id="'type-' + ${item.id}"  class="form-control" style="display: none;" /></td>
+                                   <td>     <label th:text="${item.price}" th:id="'price-label-'+${item.id}"></label>
+                                       <input th:value="${item.price}" th:id="'price-' + ${item.id}"  class="form-control" style="display: none;" /></td>
+                                   <td >        <label th:text="${item.quantity}" th:id="'quantity-label-'+${item.id}"></label>
+                                       <input th:value="${item.quantity}" th:id="'quantity-' + ${item.id}"  class="form-control" style="display: none;" /></td>
+                                   <td>
+                                       <a   style="background-color: #4299e1;border-color: #4299e1" class="btn btn-info edit-btn" th:data-id="${item.id}"><i style="color: white" class="fa fa-pencil"></i></a>
+                                   </td>
+                               </tr>
+                           </th:block>
                         </tbody>
                     </table>
-                    <div id="paginationControls">
-                        <ul class="pagination">
-                            <!-- Previous Button -->
-                            <li class="page-item">
-                                <button id="prevPageItem" class="page-link" >Previous</button>
-                            </li>
 
-                            <!-- Page Number Buttons (Dynamic) -->
-                            <li class="page-item">
-                                <span id="pageNumbers" class="page-link">1</span>
-                            </li>
-
-                            <!-- Next Button -->
-                            <li class="page-item">
-                                <button id="nextPage" class="page-link">Next</button>
-                            </li>
-                        </ul>
-                    </div>
                     <div id="token" style="display: none" th:text="${token}"></div>
                     <div id="IdCountry" style="display: none" th:text="${IdCountry}"></div>
                 </div>

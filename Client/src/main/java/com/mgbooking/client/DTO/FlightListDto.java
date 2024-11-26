@@ -1,14 +1,7 @@
-package com.mgbooking.server.DTOS;
+package com.mgbooking.client.DTO;
 
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class FlightListDto {
@@ -19,35 +12,13 @@ public class FlightListDto {
     public int getId() {
         return id;
     }
-    @JsonIgnore
-    public Instant getDepartureInstant() {
-        return convertToInstant(departure_time);
-    }
-    @JsonIgnore
-    public Instant getArrivalInstant() {
-        return convertToInstant(arrival_time);
-    }
+    private List<DetailFlight> detailFlights;
 
-    private Instant convertToInstant(String timeString) {
-        if (timeString == null || timeString.isEmpty()) {
-            throw new IllegalArgumentException("Time string cannot be null or empty");
-        }
-
-        // Parse string to LocalDateTime
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        LocalDateTime localDateTime = LocalDateTime.parse(timeString, formatter);
-
-        // Convert LocalDateTime to Instant (UTC)
-        return localDateTime.atZone(ZoneId.systemDefault()).toInstant();
-    }
-
-    private List<DetailFlightDTO> detailFlights;
-
-    public List<DetailFlightDTO> getDetailFlights() {
+    public List<DetailFlight> getDetailFlights() {
         return detailFlights;
     }
 
-    public void setDetailFlights(List<DetailFlightDTO> detailFlights) {
+    public void setDetailFlights(List<DetailFlight> detailFlights) {
         this.detailFlights = detailFlights;
     }
 

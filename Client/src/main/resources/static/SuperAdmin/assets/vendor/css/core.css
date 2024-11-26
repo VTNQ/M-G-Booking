@@ -164,6 +164,10 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   line-height: 1.375;
   color: var(--bs-heading-color);
 }
+.light-style .menu-vertical .menu-item .menu-link:hover {
+  background-color: rgba(46, 38, 61, 0.06);
+}
+
 
 h1, .h1 {
   font-size: calc(1.4125rem + 1.95vw);
