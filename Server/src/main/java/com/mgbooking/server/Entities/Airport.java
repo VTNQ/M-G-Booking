@@ -16,7 +16,7 @@ public class Airport {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id", nullable = false)
-    @JsonIgnore
+
     private City city;
 
     public Integer getId() {

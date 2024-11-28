@@ -1,6 +1,7 @@
 package com.mgbooking.server.Repositories;
 
 import com.mgbooking.server.DTOS.AirPortList;
+import com.mgbooking.server.DTOS.SearchAiportDTO;
 import com.mgbooking.server.Entities.Airport;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +16,8 @@ public interface AirportRepository extends JpaRepository<Airport, Integer> {
     Page<Airport> findAll(@Param("id") int id, Pageable pageable);
     @Query("select t from Airport t where t.city.country.id = :id")
     List<Airport> findAllByCountryId(@Param("id") int id);
-
+    @Query("select new com.mgbooking.server.DTOS.SearchAiportDTO(t.id,t.name,t.city,t.city.country.name) from  Airport t where t.name = :SearchName or  t.city.name = :SearchName")
+    List<SearchAiportDTO>SearchAirPort(@Param("SearchName") String SearchName);
 
 }
 

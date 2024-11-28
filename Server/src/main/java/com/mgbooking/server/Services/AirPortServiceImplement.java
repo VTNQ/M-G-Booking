@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class AirPortServiceImplement implements  AirPortService{
@@ -51,5 +53,14 @@ public class AirPortServiceImplement implements  AirPortService{
     @Override
     public List<AirPortDTO> FindAirPortByCountry(int id) {
         return  modelMapper.map(airportRepository.findAllByCountryId(id),new TypeToken<List<AirPortDTO>>(){}.getType());
+    }
+
+    @Override
+    public List<CountryAiportDTO> SearchAirPort(String SearchName) {
+        List<SearchAiportDTO>aiportDTOList=airportRepository.SearchAirPort(SearchName);
+        Map<String, List<SearchAiportDTO>> groupedByCountry = aiportDTOList.stream()
+                .collect(Collectors.groupingBy(SearchAiportDTO::getCountry));
+        return groupedByCountry.entrySet().stream().map(entry->new
+                CountryAiportDTO(entry.getKey(),entry.getValue())).collect(Collectors.toList());
     }
 }

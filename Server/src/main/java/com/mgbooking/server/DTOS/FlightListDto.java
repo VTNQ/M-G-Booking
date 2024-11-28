@@ -19,6 +19,7 @@ public class FlightListDto {
     public int getId() {
         return id;
     }
+
     @JsonIgnore
     public Instant getDepartureInstant() {
         return convertToInstant(departure_time);
@@ -41,15 +42,7 @@ public class FlightListDto {
         return localDateTime.atZone(ZoneId.systemDefault()).toInstant();
     }
 
-    private List<DetailFlightDTO> detailFlights;
 
-    public List<DetailFlightDTO> getDetailFlights() {
-        return detailFlights;
-    }
-
-    public void setDetailFlights(List<DetailFlightDTO> detailFlights) {
-        this.detailFlights = detailFlights;
-    }
 
     private int departure_airport;
     private int arrival_airport;

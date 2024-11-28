@@ -57,14 +57,15 @@ public class SecurityConfiguration {
                 .csrf(cs -> cs.disable())
                 .cors(cs->cs.configurationSource(corsConfigurationSource()))
                 .authorizeRequests()
-                .requestMatchers("/auth/login","/images/**", "/favicon.ico", "/css/**", "/js/**","/Country","/City/{id}","/registerUser","/registerOwner").permitAll()
+                .requestMatchers("/auth/login","/images/**", "/favicon.ico", "/css/**", "/js/**","/Country","/City/{id}","/registerUser","/registerOwner","/Flight/SearchFlight","/AirPort/SearchAirPort").permitAll()
                 .requestMatchers(
                         "/Country/CreateCountry",
                         "Country/UpdateCountry",
                         "Country/DeleteCountry/**",
                         "/Country/GetAllCountries/**",
                         "/Country/FindByCountry/**","/Airline/AddFlight","/Airline/GetFlight","/Airline/UpdateFlight","/Airline/FindFlight/{id}").hasRole("SUPERADMIN")
-                .requestMatchers("City/CreateCity","/City/{id}","/City/FindCityPage/**","/City/FindCity/**","/City/DeleteCity/**","/AirPort/CreateAirPort","/AirPort/{id}","/AirPort/FindById/{id}","/AirPort/EditAirPort","/Flight/CreateFlight","/Airline/FindAirline/{id}","/AirPort/FindAllByCountry/{id}","/Flight/FindFlight/{id}","/Flight/FindAll/**","/Flight/UpdateFlight").hasRole("ADMIN")
+                .requestMatchers("City/CreateCity","/City/{id}","/City/FindCityPage/**","/City/FindCity/**","/City/DeleteCity/**","/AirPort/CreateAirPort","/AirPort/{id}","/AirPort/FindById/{id}","/AirPort/EditAirPort","/Flight/CreateFlight","/Airline/FindAirline/{id}","/AirPort/FindAllByCountry/{id}","/Flight/FindFlight/{id}","/Flight/FindAll/**",
+                        "/Flight/UpdateFlight","/DetailFlight/{id}","/DetailFlight/UpdateDetail").hasRole("ADMIN")
 
                 .requestMatchers("/auth/").hasAnyRole("ADMIN", "SUPERADMIN","USER")
                 .anyRequest().authenticated()

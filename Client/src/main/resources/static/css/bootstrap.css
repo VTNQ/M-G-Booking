@@ -2186,6 +2186,42 @@ progress {
     -webkit-overflow-scrolling: touch;
   }
 }
+.form-group {
+  margin-bottom: 1.5rem; /* Khoảng cách dưới giữa các trường */
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 0.5rem; /* Khoảng cách giữa nhãn và ô nhập */
+  font-size: 1rem;
+  color: #495057; /* Màu chữ nhãn */
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+
 .form-label {
   margin-bottom: 0.5rem;
 }

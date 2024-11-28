@@ -2,6 +2,9 @@ package com.mgbooking.server.Controllers;
 
 import com.mgbooking.server.DTOS.AirPortDTO;
 import com.mgbooking.server.DTOS.AirPortList;
+import com.mgbooking.server.DTOS.CountryAiportDTO;
+import com.mgbooking.server.DTOS.SearchAiportDTO;
+import com.mgbooking.server.Entities.Airport;
 import com.mgbooking.server.Services.AirPortService;
 import com.mgbooking.server.Services.ValidationService;
 import jakarta.validation.Valid;
@@ -75,6 +78,10 @@ public class AirPortController {
             response.put("message", "Update AirPort Failed");
             return ResponseEntity.badRequest().body(response);
         }
+    }
+    @GetMapping(value = "/SearchAirPort")
+    public List<CountryAiportDTO> SearchAirPort(@RequestParam String search){
+        return airPortService.SearchAirPort(search);
     }
     @PostMapping(value = "/CreateAirPort")
     public ResponseEntity<Object>CreateAirPort(@RequestBody @Valid AirPortDTO airPort, BindingResult bindingResult) {

@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .requestMatchers("/Login","/Home","/css/**","/js/**","/user/**","/SuperAdmin/assets/**","/images/**","/LoginAdmin","/Profile","/Flight","/Hotel","/RegisterUser","/RegisterOwner").permitAll()
                 .requestMatchers("/SuperAdmin/Home","/SuperAdmin/Country","/SuperAdmin/EditCountry/**","/SuperAdmin/UpdateCountry","/SuperAdmin/DeleteCountry/**","/SuperAdmin/Airline","/SuperAdmin/UpdateAirline/**").hasAnyRole("SUPERADMIN")
-                .requestMatchers("/Admin/Home","/Admin/City","/Admin/City/{id}","/Admin/UpdateCity","/Admin/DeleteCity/**","/Admin/AirPort","/Admin/AirPort/Edit/{id}","/Admin/AirPort/UpdateAirPort","/Admin/Flight","/Admin/Flight/Edit/{id}","/Admin/Flight/UpdateFlight").hasRole("ADMIN")// Allow anyone to access /Home
+                .requestMatchers("/Admin/Home","/Admin/City","/Admin/City/{id}","/Admin/UpdateCity","/Admin/DeleteCity/**","/Admin/AirPort","/Admin/AirPort/Edit/{id}","/Admin/AirPort/UpdateAirPort","/Admin/Flight","/Admin/Flight/Edit/{id}","/Admin/Flight/UpdateFlight","/Admin/Flight/UpdateDetailFlight").hasRole("ADMIN")// Allow anyone to access /Home
                 .anyRequest().authenticated() // Require authentication for other requests
                 .and()
 
