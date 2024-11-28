@@ -12,14 +12,14 @@ public class FlightListDto {
     public int getId() {
         return id;
     }
-    private List<DetailFlight> detailFlights;
+    private List<DetailFlight>detailFlightDTOS;
 
-    public List<DetailFlight> getDetailFlights() {
-        return detailFlights;
+    public List<DetailFlight> getDetailFlightDTOS() {
+        return detailFlightDTOS;
     }
 
-    public void setDetailFlights(List<DetailFlight> detailFlights) {
-        this.detailFlights = detailFlights;
+    public void setDetailFlightDTOS(List<DetailFlight> detailFlightDTOS) {
+        this.detailFlightDTOS = detailFlightDTOS;
     }
 
     private int departure_airport;

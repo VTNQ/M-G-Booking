@@ -52,8 +52,10 @@ public class ModelMapConfiguration {
             @Override
             protected void configure() {
            map().setId(source.getId());
+           map().setIdFlight(source.getIdFlight().getId());
             }
         });
+
 
         return modelMapper;
     }

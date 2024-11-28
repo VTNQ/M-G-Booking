@@ -3,6 +3,7 @@ package com.mgbooking.server.Controllers;
 import com.mgbooking.server.DTOS.FlightDTO;
 import com.mgbooking.server.DTOS.FlightListDto;
 import com.mgbooking.server.DTOS.FlightPaginateDTo;
+import com.mgbooking.server.DTOS.SearchFlightDTO;
 import com.mgbooking.server.Entities.Flight;
 import com.mgbooking.server.Services.FlightService;
 import com.mgbooking.server.Services.ValidationService;
@@ -35,6 +36,15 @@ public class FlightController {
         }catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<Page<FlightPaginateDTo>>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("SearchFlight")
+    public ResponseEntity<List<FlightListDto>>SearchFlight(@RequestBody SearchFlightDTO searchFlightDTO) {
+        try {
+            return new ResponseEntity<List<FlightListDto>>(flightService.SearchFlight(searchFlightDTO),HttpStatus.OK);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<List<FlightListDto>>(HttpStatus.BAD_REQUEST);
         }
     }
     @PutMapping(value = "UpdateFlight")

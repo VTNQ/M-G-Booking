@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         defaultDate: document.getElementById("datetimepicker").value// Định dạng 24 giờ
     });
 });
+
 document.addEventListener("DOMContentLoaded", function () {
     flatpickr("#Departure_Time", {
         enableTime: true,
@@ -121,6 +122,51 @@ function changePage(page) {
         fetchFlight(CurrentPage , pageSize);
     }
 }
+$(document).ready(function (){
+    $('#saveButton').click(function (){
+        var flightDate=[];
+        $('tr').each(function (){
+            var row=$(this);
+            var id=row.find("input[name*='id']").val();
+            var idFlight=row.find("input[name*='idFlight']").val();
+            var type=row.find("input[name*='.quantity']").val();
+            var quantity=row.find("input[name*='.quantity']").val();
+            var price = row.find("input[name*='.price']").val();
+            if (id) {
+                flightDate.push({
+                    id: id,
+                    type: type,
+                    quantity: quantity,
+                    price: price,
+                    idFlight:idFlight
+                });
+
+            }
+        });
+        const url = document.getElementById('url') ? document.getElementById('url').textContent : null;
+        const token = document.getElementById('token') ? document.getElementById('token').textContent : null;
+        $.ajax({
+            url: `${url}DetailFlight/UpdateDetail`,
+            type:'PUT',
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+            data: JSON.stringify(flightDate),
+            success:function (response){
+              if(response.status==200){
+                toastr.success(response.message,'Success')
+              }else{
+                  toastr.error(response.message,'Error');
+              }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', status, error);
+                alert('Something went wrong!');
+            }
+        })
+    })
+})
 document.addEventListener('DOMContentLoaded', function () {
     const editButtons = document.querySelectorAll('.edit-btn');
 

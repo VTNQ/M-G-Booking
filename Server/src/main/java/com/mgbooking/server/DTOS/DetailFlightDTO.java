@@ -41,4 +41,13 @@ public class DetailFlightDTO {
     private String type;
     private BigDecimal price;
     private Integer quantity;
+    private int idFlight;
+
+    public int getIdFlight() {
+        return idFlight;
+    }
+
+    public void setIdFlight(int idFlight) {
+        this.idFlight = idFlight;
+    }
 }

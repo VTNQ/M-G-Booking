@@ -74,22 +74,9 @@ public class FlightServiceImplement implements FlightService{
 
     @Override
     public FlightListDto GetFlight(int id) {
-        Flight flight = flightRepository.findFlightWithDetails(id);
-        if (flight == null) {
-            throw new RuntimeException("Flight not found");
-        }
 
-        // Lấy các chi tiết chuyến bay
-        List<DetailFlightDTO> detailFlightDTOs = detailFlightRepository.findDetailFlightsByFlightId(id)
-                .stream()
-                .map(detailFlight -> modelMapper.map(detailFlight, DetailFlightDTO.class))
-                .collect(Collectors.toList());
 
-        // Ánh xạ Flight thành FlightListDto
-        FlightListDto flightListDto = modelMapper.map(flight, FlightListDto.class);
-        flightListDto.setDetailFlights(detailFlightDTOs);
-
-        return flightListDto;
+        return modelMapper.map(flightRepository.findFlightWithDetails(id),new TypeToken<FlightListDto>(){}.getType());
     }
 
     @Override
@@ -118,6 +105,11 @@ public class FlightServiceImplement implements FlightService{
             ex.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<FlightListDto> SearchFlight(SearchFlightDTO searchFlightDTO) {
+        return modelMapper.map(flightRepository.findFlightsByAirportsAndDepartureTime(searchFlightDTO.getDepartureAirport(),searchFlightDTO.getArrivalAirport(),searchFlightDTO.getDepartureTime()),new TypeToken<List<FlightListDto>>(){}.getType());
     }
 
 

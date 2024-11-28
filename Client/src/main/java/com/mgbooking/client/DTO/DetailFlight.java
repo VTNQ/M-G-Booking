@@ -8,8 +8,15 @@ public class DetailFlight {
 
     private Integer id;
 
+    public int getIdFlight() {
+        return idFlight;
+    }
 
+    public void setIdFlight(int idFlight) {
+        this.idFlight = idFlight;
+    }
 
+    private int idFlight;
 
     private String type;
 

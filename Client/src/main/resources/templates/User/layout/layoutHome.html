@@ -8,8 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
           rel="stylesheet">
+
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
     <link th:href="@{/user/layOutHome.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -355,6 +359,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script th:src="@{/user/Register.js}"></script>
 <script>
+
+
     function toggleDropdown(event) {
         event.preventDefault();
         var dropdownMenu = document.getElementById("loginDropdownMenu");
@@ -368,8 +374,76 @@
     }
 </script>
 
+<script>
+    document.querySelector(".swap-button").addEventListener("click", () => {
+        const fromInput = document.querySelectorAll(".search-item input")[0];
+
+        const toInput = document.querySelectorAll(".search-item input")[1];
+        const temp = fromInput.value;
+        fromInput.value = toInput.value;
+        toInput.value = temp;
+
+    });
 
 
+    // Đóng dropdown khi nhấp ngoài
+    document.addEventListener("click", (event) => {
+        const dropdown = document.getElementById("from-dropdown");
+        const searchFrom = document.getElementById("search-from");
+
+        if (!searchFrom.contains(event.target)) {
+            dropdown.style.display = "none";
+        }
+    });
+    document.getElementById("to-input").addEventListener('input',async (event)=>{
+        const search=event.target.value;
+        if(search.trim()===""){
+            document.getElementById("to-dropdown").style.display="none";
+        }
+        try {
+            const response=await fetch(`http://localhost:8686/AirPort/SearchAirPort?search=${encodeURIComponent(search)}`);
+            if(response.ok){
+                const airports=await response.json();
+                const aiportList=document.getElementById("airport-list");
+                aiportList.innerHTML="";
+                airports.forEach(airport=>{
+                    const li=document.createElement("li");
+                    li.innerHTML = `
+                    <div class="airport-item">
+                        <div class="airport-info">
+                            <span>${airport.name}</span>
+                            <span>${airport.code}</span>
+                        </div>
+                        <div class="airport-city">${airport.city.name} (${airport.city.code})</div>
+                    </div>
+                `;
+                    aiportList.appendChild(li);
+                })
+                document.getElementById("to-dropdown").style.display = "block";
+            }
+        }catch (error){
+            console.log(error)
+        }
+    })
+
+    // Đóng dropdown khi nhấp ngoài
+    document.addEventListener("click", (event) => {
+        const fromDropdown = document.getElementById("from-dropdown");
+        const toDropdown = document.getElementById("to-dropdown");
+        const searchFrom = document.getElementById("search-from");
+        const searchTo = document.getElementById("search-to");
+
+        // Ẩn dropdown "Bay từ" nếu nhấp ra ngoài
+        if (!searchFrom.contains(event.target)) {
+            fromDropdown.style.display = "none";
+        }
+
+        // Ẩn dropdown "Bay đến" nếu nhấp ra ngoài
+        if (!searchTo.contains(event.target)) {
+            toDropdown.style.display = "none";
+        }
+    });
+</script>
 <div th:insert="~{'/User/Home/Home' :: customScripts}"></div>
 </body>
 </html>
