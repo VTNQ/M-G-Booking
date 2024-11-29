@@ -1,61 +1,83 @@
 document.addEventListener("DOMContentLoaded", function () {
+    var departureTimeInput = document.getElementById("datetimepicker");
+
+
+    var dateValue = departureTimeInput.value.replace('Z', '');
     flatpickr("#datetimepicker", {
-        enableTime: true, dateFormat: "Y-m-d\\TH:i", time_24hr: true,
-        altFormat: "d/m/Y H:i",
-        altInput: true,
-        defaultDate: document.getElementById("datetimepicker").value// Định dạng 24 giờ
+        enableTime: true,
+        dateFormat: "Y-m-d\\TH:i",  // Date and time format without UTC 'Z'
+        altInput: true,               // Use alternate input for user-friendly display
+        altFormat: "F j, Y, H:i",     // User-friendly display format (e.g., "November 28, 2024, 19:00")
+        time_24hr: true,              // 24-hour format
+        defaultDate: dateValue,  // Default local time (e.g., HCM time)
+        timezone: "Asia/Ho_Chi_Minh", // Set the time zone to HCM
     });
 });
 
+
 document.addEventListener("DOMContentLoaded", function () {
+    var departureTimeInput = document.getElementById("Departure_Time");
+
+
+    var dateValue = departureTimeInput.value.replace('Z', '');
     flatpickr("#Departure_Time", {
         enableTime: true,
-        dateFormat: "Y-m-d\\TH:i", // Format for the actual value
-        altInput: true,           // Enables the alternative input display
-        altFormat: "d/m/Y H:i",   // User-friendly display format
-        time_24hr: true,          // 24-hour format
-        defaultDate: document.getElementById("Departure_Time").value // Set the initial value
+        dateFormat: "Y-m-d\\TH:i",  // Date and time format without UTC 'Z'
+        altInput: true,               // Use alternate input for user-friendly display
+        altFormat: "F j, Y, H:i",     // User-friendly display format (e.g., "November 28, 2024, 19:00")
+        time_24hr: true,              // 24-hour format
+        defaultDate: dateValue,  // Default local time (e.g., HCM time)
+        timezone: "Asia/Ho_Chi_Minh", // Set the time zone to HCM
     });
 });
+
+
 
 console.log(document.getElementById("Departure_Time").value)
 let detailIndex = 0; // Tracks the number of detail flights
 const detailFlights = []; // Array to store detail flights locally
 const detailFlightsContainer = document.getElementById("detailFlights");
 const addDetailFlightButton = document.getElementById("addDetailFlight");
-addDetailFlightButton.addEventListener("click", () => {
+
+// Function to render a detail flight input template
+function renderDetailFlight(index, type = "", price = 0, quantity = 0) {
     const detailFlightTemplate = `
-        <div class="detail-flight mb-3" id="detailFlight-${detailIndex}">
+        <div class="detail-flight mb-3" id="detailFlight-${index}">
             <div class="row">
                 <div class="col-md-4">
-                    <label for="detailFlights[${detailIndex}].type" class="form-label">Type</label>
-                    <input type="text" class="form-control" name="detailFlights[${detailIndex}].type" placeholder="Enter Type" required>
+                    <label for="detailFlights[${index}].type" class="form-label">Type</label>
+                    <select class="form-control" name="detailFlights[${index}].type" required>
+                        <option value="Popular" ${type === "Popular" ? "selected" : ""}>Popular</option>
+                        <option value="Premium Economy" ${type === "Premium Economy" ? "selected" : ""}>Premium Economy</option>
+                        <option value="Merchant" ${type === "Merchant" ? "selected" : ""}>Merchant</option>
+                        <option value="First Class" ${type === "First Class" ? "selected" : ""}>First Class</option>
+                    </select>
                 </div>
                 <div class="col-md-4">
-                    <label for="detailFlights[${detailIndex}].price" class="form-label">Price</label>
-                    <input type="number" step="0.01" class="form-control" name="detailFlights[${detailIndex}].price" placeholder="Enter Price" required>
+                    <label for="detailFlights[${index}].price" class="form-label">Price</label>
+                    <input type="number" step="0.01" class="form-control" name="detailFlights[${index}].price" value="${price}" placeholder="Enter Price" required>
                 </div>
                 <div class="col-md-4">
-                    <label for="detailFlights[${detailIndex}].quantity" class="form-label">Quantity</label>
-                    <input type="number" class="form-control" name="detailFlights[${detailIndex}].quantity" placeholder="Enter Quantity" required>
+                    <label for="detailFlights[${index}].quantity" class="form-label">Quantity</label>
+                    <input type="number" class="form-control" name="detailFlights[${index}].quantity" value="${quantity}" placeholder="Enter Quantity" required>
                 </div>
             </div>
             <div class="text-end mt-2">
-                <button type="button" class="btn btn-danger btn-sm removeDetailFlight" data-index="${detailIndex}">Remove</button>
+                <button type="button" class="btn btn-danger btn-sm removeDetailFlight" data-index="${index}">Remove</button>
             </div>
         </div>
     `;
     detailFlightsContainer.insertAdjacentHTML("beforeend", detailFlightTemplate);
 
-    // Add a blank entry to detailFlights array
-    detailFlights.push({index: detailIndex, type: "", price: 0, quantity: 0});
+    // Add a blank entry to the detailFlights array
+    detailFlights.push({ index, type, price, quantity });
 
     // Listen for changes in inputs
-    const detailFlightElement = document.getElementById(`detailFlight-${detailIndex}`);
+    const detailFlightElement = document.getElementById(`detailFlight-${index}`);
     detailFlightElement.querySelectorAll("input").forEach(input => {
         input.addEventListener("input", () => {
             const field = input.name.split(".")[1]; // Extract the field name (type, price, quantity)
-            const flightDetail = detailFlights.find(df => df.index === detailIndex);
+            const flightDetail = detailFlights.find(df => df.index === index);
             if (flightDetail) {
                 flightDetail[field] = input.value;
             }
@@ -63,7 +85,7 @@ addDetailFlightButton.addEventListener("click", () => {
     });
 
     // Add event listener to the Remove button
-    document.querySelector(`#detailFlight-${detailIndex} .removeDetailFlight`).addEventListener("click", (e) => {
+    document.querySelector(`#detailFlight-${index} .removeDetailFlight`).addEventListener("click", (e) => {
         const detailFlightId = e.target.getAttribute("data-index");
         document.getElementById(`detailFlight-${detailFlightId}`).remove();
 
@@ -73,9 +95,18 @@ addDetailFlightButton.addEventListener("click", () => {
             detailFlights.splice(indexToRemove, 1);
         }
     });
+}
 
+// Add the first (default) detail flight entry on page load
+renderDetailFlight(detailIndex, "", 0, 0);  // Default values
+detailIndex++;  // Increment after initial entry
+
+// Event listener for adding additional flights
+addDetailFlightButton.addEventListener("click", () => {
+    renderDetailFlight(detailIndex);
     detailIndex++;
 });
+
 let pageSize = 10;
 let CurrentPage = 0;
 let TotalPages = 10;
@@ -122,111 +153,7 @@ function changePage(page) {
         fetchFlight(CurrentPage , pageSize);
     }
 }
-$(document).ready(function (){
-    $('#saveButton').click(function (){
-        var flightDate=[];
-        $('tr').each(function (){
-            var row=$(this);
-            var id=row.find("input[name*='id']").val();
-            var idFlight=row.find("input[name*='idFlight']").val();
-            var type=row.find("input[name*='.quantity']").val();
-            var quantity=row.find("input[name*='.quantity']").val();
-            var price = row.find("input[name*='.price']").val();
-            if (id) {
-                flightDate.push({
-                    id: id,
-                    type: type,
-                    quantity: quantity,
-                    price: price,
-                    idFlight:idFlight
-                });
 
-            }
-        });
-        const url = document.getElementById('url') ? document.getElementById('url').textContent : null;
-        const token = document.getElementById('token') ? document.getElementById('token').textContent : null;
-        $.ajax({
-            url: `${url}DetailFlight/UpdateDetail`,
-            type:'PUT',
-            contentType: 'application/json',
-            headers: {
-                'Authorization': 'Bearer ' + token,
-            },
-            data: JSON.stringify(flightDate),
-            success:function (response){
-              if(response.status==200){
-                toastr.success(response.message,'Success')
-              }else{
-                  toastr.error(response.message,'Error');
-              }
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', status, error);
-                alert('Something went wrong!');
-            }
-        })
-    })
-})
-document.addEventListener('DOMContentLoaded', function () {
-    const editButtons = document.querySelectorAll('.edit-btn');
-
-    editButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const id = this.getAttribute('data-id');
-            console.log(id);
-
-            // Get input and label elements
-            const typeInput = document.getElementById(`type-${id}`);
-            const priceInput = document.getElementById(`price-${id}`);
-            const quantityInput = document.getElementById(`quantity-${id}`);
-            const typeLabel = document.getElementById(`type-label-${id}`);
-            const priceLabel = document.getElementById(`price-label-${id}`);
-            const quantityLabel = document.getElementById(`quantity-label-${id}`);
-
-            // If the button is in "Edit" mode, show inputs and hide labels
-            if (this.classList.contains('btn-info')) {
-                typeInput.style.display = 'block';
-                priceInput.style.display = 'block';
-                quantityInput.style.display = 'block';
-
-                typeLabel.style.display = 'none';
-                priceLabel.style.display = 'none';
-                quantityLabel.style.display = 'none';
-
-                // Change button to "Save"
-                this.innerHTML = '<i style="color: white" class="fa fa-save"></i> ';
-                this.classList.remove('btn-info');
-
-            } else { // If the button is in "Save" mode, save the values and switch back to "Edit"
-                const updatedData = {
-                    id: id,
-                    type: typeInput.value,
-                    price: priceInput.value,
-                    quantity: quantityInput.value
-                };
-
-                // Update labels with the new values
-                typeLabel.textContent = updatedData.type;
-                priceLabel.textContent = updatedData.price;
-                quantityLabel.textContent = updatedData.quantity;
-
-                // Hide inputs and show labels
-                typeInput.style.display = 'none';
-                priceInput.style.display = 'none';
-                quantityInput.style.display = 'none';
-
-                typeLabel.style.display = 'inline-block';
-                priceLabel.style.display = 'inline-block';
-                quantityLabel.style.display = 'inline-block';
-
-                // Reset button to "Edit"
-                this.innerHTML = '<i style="color: white" class="fa fa-pencil"></i> ';
-
-                this.classList.add('btn-info');
-            }
-        });
-    });
-});
 
 function fetchFlight(page, size) {
     const token = document.getElementById('token') ? document.getElementById('token').textContent : null;

@@ -1,13 +1,11 @@
 package com.mgbooking.server.Services;
 
-import com.mgbooking.server.DTOS.FlightDTO;
-import com.mgbooking.server.DTOS.FlightListDto;
-import com.mgbooking.server.DTOS.FlightPaginateDTo;
-import com.mgbooking.server.DTOS.SearchFlightDTO;
+import com.mgbooking.server.DTOS.*;
 import com.mgbooking.server.Entities.Flight;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface FlightService {
@@ -15,5 +13,6 @@ public boolean CreateFlight(FlightDTO flightDTO);
 public FlightListDto GetFlight(int id);
 public Page<FlightPaginateDTo>FindAllByCountry(Pageable pageable, int id);
 public boolean UpdateInformationFlight(FlightListDto flightListDto);
-public List<FlightListDto>SearchFlight(SearchFlightDTO searchFlightDTO);
+public List<ResultFlightDTO>SearchFlight(int departureAirport, int arrivalAirport, LocalDate departureTime,String TypeFlight);
+public ShowDetailFlightDTO GetShowDetailFlight(int id);
 }

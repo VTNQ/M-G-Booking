@@ -2,18 +2,18 @@ package com.mgbooking.server.Services;
 
 import com.mgbooking.server.DTOS.*;
 import com.mgbooking.server.Entities.*;
-import com.mgbooking.server.Repositories.AirlineRepository;
-import com.mgbooking.server.Repositories.AirportRepository;
-import com.mgbooking.server.Repositories.DetailFlightRepository;
-import com.mgbooking.server.Repositories.FlightRepository;
+import com.mgbooking.server.Repositories.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +29,9 @@ public class FlightServiceImplement implements FlightService{
     private DetailFlightRepository flightDetailRepository;
     @Autowired
     private AirportRepository airportRepository;
+
+    @Autowired
+    private Environment environment;
     @Autowired
     private DetailFlightRepository detailFlightRepository;
 
@@ -83,7 +86,21 @@ public class FlightServiceImplement implements FlightService{
     public Page<FlightPaginateDTo> FindAllByCountry(Pageable pageable, int id) {
         return modelMapper.map(flightRepository.FindAllFlights(pageable,id),new TypeToken<Page<FlightListDto>>(){}.getType());
     }
+    private Instant convertToInstant(String timeString) {
+        if (timeString == null || timeString.isEmpty()) {
+            throw new IllegalArgumentException("Time string cannot be null or empty");
+        }
 
+        // Parse the string to LocalDateTime (no time zone, just local date and time)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime localDateTime = LocalDateTime.parse(timeString, formatter);
+
+        // Convert LocalDateTime to ZonedDateTime in Ho Chi Minh City time zone (UTC +7)
+        ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.of("UTC"));
+
+        // Convert the ZonedDateTime to Instant
+        return zonedDateTime.toInstant();
+    }
     @Override
     public boolean UpdateInformationFlight(FlightListDto flightListDto) {
         try {
@@ -94,8 +111,8 @@ public class FlightServiceImplement implements FlightService{
             Airport arrival_airport=airportRepository.findById(flightListDto.getArrival_airport())
                     .orElseThrow(() -> new RuntimeException("Arrival Airport not found"));
             Flight flight=modelMapper.map(flightListDto,Flight.class);
-            flight.setArrivalTime(flightListDto.getArrivalInstant());
-            flight.setDepartureTime(flightListDto.getDepartureInstant());
+            flight.setArrivalTime(convertToInstant(flightListDto.getArrival_time()));
+            flight.setDepartureTime(convertToInstant(flightListDto.getDeparture_time()));
             flight.setAirline(airline);
             flight.setDepartureAirport(departure_airport);
             flight.setArrivalAirport(arrival_airport);
@@ -108,8 +125,21 @@ public class FlightServiceImplement implements FlightService{
     }
 
     @Override
-    public List<FlightListDto> SearchFlight(SearchFlightDTO searchFlightDTO) {
-        return modelMapper.map(flightRepository.findFlightsByAirportsAndDepartureTime(searchFlightDTO.getDepartureAirport(),searchFlightDTO.getArrivalAirport(),searchFlightDTO.getDepartureTime()),new TypeToken<List<FlightListDto>>(){}.getType());
+    public List<ResultFlightDTO> SearchFlight(int departureAirport, int arrivalAirport, LocalDate departureTime,String TypeFlight) {
+        String flightUrl = environment.getProperty("FlightUrl");
+        List<ResultFlightDTO> flight=flightRepository.findFlightsByAirportsAndDepartureTime(departureAirport,arrivalAirport,departureTime,TypeFlight);
+
+        return modelMapper.map(flightRepository.findFlightsByAirportsAndDepartureTime(departureAirport,arrivalAirport,departureTime,TypeFlight),new TypeToken<List<ResultFlightDTO>>(){}.getType());
+    }
+
+    @Override
+    public ShowDetailFlightDTO GetShowDetailFlight(int id) {
+        try {
+            return modelMapper.map(flightRepository.DetailFlyDto(id),new TypeToken<ShowDetailFlightDTO>(){}.getType());
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
     }
 
 

@@ -375,15 +375,7 @@
 </script>
 
 <script>
-    document.querySelector(".swap-button").addEventListener("click", () => {
-        const fromInput = document.querySelectorAll(".search-item input")[0];
 
-        const toInput = document.querySelectorAll(".search-item input")[1];
-        const temp = fromInput.value;
-        fromInput.value = toInput.value;
-        toInput.value = temp;
-
-    });
 
 
     // Đóng dropdown khi nhấp ngoài
@@ -395,55 +387,8 @@
             dropdown.style.display = "none";
         }
     });
-    document.getElementById("to-input").addEventListener('input',async (event)=>{
-        const search=event.target.value;
-        if(search.trim()===""){
-            document.getElementById("to-dropdown").style.display="none";
-        }
-        try {
-            const response=await fetch(`http://localhost:8686/AirPort/SearchAirPort?search=${encodeURIComponent(search)}`);
-            if(response.ok){
-                const airports=await response.json();
-                const aiportList=document.getElementById("airport-list");
-                aiportList.innerHTML="";
-                airports.forEach(airport=>{
-                    const li=document.createElement("li");
-                    li.innerHTML = `
-                    <div class="airport-item">
-                        <div class="airport-info">
-                            <span>${airport.name}</span>
-                            <span>${airport.code}</span>
-                        </div>
-                        <div class="airport-city">${airport.city.name} (${airport.city.code})</div>
-                    </div>
-                `;
-                    aiportList.appendChild(li);
-                })
-                document.getElementById("to-dropdown").style.display = "block";
-            }
-        }catch (error){
-            console.log(error)
-        }
-    })
 
-    // Đóng dropdown khi nhấp ngoài
-    document.addEventListener("click", (event) => {
-        const fromDropdown = document.getElementById("from-dropdown");
-        const toDropdown = document.getElementById("to-dropdown");
-        const searchFrom = document.getElementById("search-from");
-        const searchTo = document.getElementById("search-to");
-
-        // Ẩn dropdown "Bay từ" nếu nhấp ra ngoài
-        if (!searchFrom.contains(event.target)) {
-            fromDropdown.style.display = "none";
-        }
-
-        // Ẩn dropdown "Bay đến" nếu nhấp ra ngoài
-        if (!searchTo.contains(event.target)) {
-            toDropdown.style.display = "none";
-        }
-    });
 </script>
-<div th:insert="~{'/User/Home/Home' :: customScripts}"></div>
+<div  th:insert="~{'/User/Home/Home' :: customScripts}"></div>
 </body>
 </html>

@@ -16,7 +16,7 @@ public interface AirportRepository extends JpaRepository<Airport, Integer> {
     Page<Airport> findAll(@Param("id") int id, Pageable pageable);
     @Query("select t from Airport t where t.city.country.id = :id")
     List<Airport> findAllByCountryId(@Param("id") int id);
-    @Query("select new com.mgbooking.server.DTOS.SearchAiportDTO(t.id,t.name,t.city,t.city.country.name) from  Airport t where t.name = :SearchName or  t.city.name = :SearchName")
+    @Query("select new com.mgbooking.server.DTOS.SearchAiportDTO(t.id,t.name,t.city,t.city.country.name) from  Airport t where t.name like %:SearchName% or  t.city.name like %:SearchName%")
     List<SearchAiportDTO>SearchAirPort(@Param("SearchName") String SearchName);
 
 }

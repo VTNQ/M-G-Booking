@@ -4,8 +4,15 @@ import com.mgbooking.client.APIs.ApiClient;
 import com.mgbooking.client.APIs.FlightApi;
 import com.mgbooking.client.DTO.FlightDTO;
 import com.mgbooking.client.DTO.FlightListDto;
+import com.mgbooking.client.DTO.ResultFlightDTO;
+import com.mgbooking.client.DTO.SearchFlightDTO;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class FlightServiceImplement implements FlightService{
     @Override
@@ -53,6 +60,31 @@ public class FlightServiceImplement implements FlightService{
 
         }catch (Exception e) {
             e.printStackTrace();
+            return null;
+        }
+    }
+    private Map<String, String> convertToQueryParams(SearchFlightDTO searchFlightDTO) {
+        Map<String, String> searchParams = new HashMap<>();
+        searchParams.put("departureTime", searchFlightDTO.getDepartureTime());
+        searchParams.put("arrivalAirport", String.valueOf(searchFlightDTO.getArrivalAirport()));
+        searchParams.put("departureAirport", String.valueOf(searchFlightDTO.getDepartureAirport()));
+
+
+        return searchParams;
+    }
+
+    @Override
+    public List<ResultFlightDTO> SearchFlights(SearchFlightDTO searchFlightDTO) {
+        try {
+            FlightApi flightApi=ApiClient.getRetrofit().create(FlightApi.class);
+            Response<List<ResultFlightDTO>>response=flightApi.SearchFlight(searchFlightDTO.getDepartureAirport(),searchFlightDTO.getArrivalAirport(),searchFlightDTO.getDepartureTime(),searchFlightDTO.getTypeFlight()).execute();
+            if(response.isSuccessful()){
+                return response.body();
+            }else{
+                return  null;
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
             return null;
         }
     }

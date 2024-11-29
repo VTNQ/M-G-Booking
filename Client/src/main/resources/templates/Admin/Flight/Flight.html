@@ -46,7 +46,7 @@
                             </div>
                             <div class="mt-2 mb -4">
                                 <label class="form-label">Departure Time</label>
-                                <input type="datetime-local" id="Departure_Time" class="form-control" th:text="${flight.departureTime}">
+                                <input type="datetime-local" id="Departure_Time" class="form-control" th:field="${flight.departureTime}">
                             </div>  <div class="form-group mt-2 mb-4">
                             <label class="form-label">Arrival time</label>
                             <input type="datetime-local" id="datetimepicker" class="form-control" th:field="${flight.arrivalTime}">

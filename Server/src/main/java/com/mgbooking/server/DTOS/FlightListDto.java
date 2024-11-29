@@ -4,10 +4,7 @@ package com.mgbooking.server.DTOS;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -29,19 +26,19 @@ public class FlightListDto {
         return convertToInstant(arrival_time);
     }
 
+
     private Instant convertToInstant(String timeString) {
         if (timeString == null || timeString.isEmpty()) {
             throw new IllegalArgumentException("Time string cannot be null or empty");
         }
 
-        // Parse string to LocalDateTime
+        // Parse string to LocalDateTime (assuming the time is in Ho Chi Minh City time)
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime localDateTime = LocalDateTime.parse(timeString, formatter);
 
-        // Convert LocalDateTime to Instant (UTC)
-        return localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        // Convert LocalDateTime to Instant with Ho Chi Minh City time zone offset (UTC +7)
+        return localDateTime.atOffset(ZoneOffset.ofHours(7)).toInstant();
     }
-
 
 
     private int departure_airport;
