@@ -1,8 +1,7 @@
 package com.mgbooking.server.Entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,19 +41,19 @@ public class Picture {
         this.hotelId = hotelId;
     }
 
-    public @Size(max = 200) @NotNull String getImageUrl() {
+    public  String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(@Size(max = 200) @NotNull String imageUrl) {
+    public void setImageUrl( String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
-    public @NotNull Boolean getMain() {
+    public  Boolean getMain() {
         return isMain;
     }
 
-    public void setMain(@NotNull Boolean main) {
+    public void setMain( Boolean main) {
         isMain = main;
     }
 
@@ -96,12 +95,11 @@ public class Picture {
     @Column(name = "hotel_id")
     private Integer hotelId;
 
-    @Size(max = 200)
-    @NotNull
+
     @Column(name = "image_url", nullable = false, length = 200)
     private String imageUrl;
 
-    @NotNull
+
     @Column(name = "is_main", nullable = false)
     private Boolean isMain = false;
 

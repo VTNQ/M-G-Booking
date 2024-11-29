@@ -46,10 +46,11 @@
                             </div>
                             <div class="mt-2 mb -4">
                                 <label class="form-label">Departure Time</label>
-                                <input type="datetime-local" id="Departure_Time" class="form-control" th:field="${flight.departure_time}">
+                                <input type="text" id="Departure_Time" class="form-control" th:field="${flight.departure_time}">
+
                             </div>  <div class="form-group mt-2 mb-4">
                             <label class="form-label">Arrival time</label>
-                            <input type="datetime-local" id="datetimepicker" th:field="${flight.arrival_time}" class="form-control" >
+                            <input type="text" id="datetimepicker" th:field="${flight.arrival_time}" class="form-control" >
                         </div>
 
 
@@ -95,8 +96,13 @@
                                 <tr>
                                     <td>
                                         <label th:text="${item.type}" th:id="'type-label-' + ${item.id}"></label>
-                                        <input type="text"  th:id="'type-' + ${item.id}" th:name="'detailFlight[' + ${iterStat.index} + '].type'"
-                                               th:value="${item.type}" class="form-control" style="display: none" />
+                                        <select th:id="'type-' + ${item.id}" th:name="'detailFlight[' + ${iterStat.index} + '].type'"
+                                                th:value="${item.type}" class="form-control" style="display: none" >
+                                            <option value="Popular" th:selected="${item.type == 'Popular'}">Popular</option>
+                                            <option value="Premium Economy" th:selected="${item.type == 'Premium Economy'}">Premium Economy</option>
+                                            <option value="Merchant" th:selected="${item.type == 'Merchant'}">Merchant</option>
+                                            <option value="First Class" th:selected="${item.type == 'First Class'}">First Class</option>
+                                        </select>
                                     </td>
                                     <td>
                                         <label th:text="${item.price}" th:id="'price-label-' + ${item.id}" ></label>
@@ -108,10 +114,14 @@
                                         <input type="number" step="0.01"  th:id="'quantity-' + ${item.id}"   th:name="'detailFlight[' + ${iterStat.index} + '].quantity'"
                                                th:value="${item.quantity}" class="form-control" style="display: none" />
                                     </td>
-                                    <td>
-                                        <a style="background-color: #4299e1;border-color: #4299e1"
-                                           class="btn btn-info edit-btn" th:data-id="${item.id}">
+                                    <td >
+                                        <a th:id="'editBtn'+${item.id}" style="background-color: #4299e1;border-color: #4299e1"
+                                           class="btn btn-inf edit-btn" th:data-id="${item.id}">
                                             <i style="color: white" class="fa fa-pencil"></i>
+                                        </a>
+                                        <a th:id="'saveBtn'+${item.id}" style="background-color: #4299e1;border-color: #4299e1;display: none !important;"
+                                           class="btn btn-inf save-btn" th:data-id="${item.id}">
+                                            <i style="color: white" class="fa fa-save"></i>
                                         </a>
                                     </td>
                                     <!-- Hidden fields for ID and related data -->
@@ -177,7 +187,7 @@
     <!-- / Footer -->
 
     <div class="content-backdrop fade"></div>
-    <script th:fragment="customScripts" th:src="@{/Admin/FlightPortTable/FlightPortTable.js}"></script>
+    <script th:fragment="customScripts" th:src="@{/Admin/FlightPortTable/EditPortTable.js}"></script>
 </div>
 
 

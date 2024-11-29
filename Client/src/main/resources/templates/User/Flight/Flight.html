@@ -7,125 +7,147 @@
 </head>
 <body>
 <main id="content" class="relative block">
-<div class="bg-gray-33 py-1">
-    <div class="container-fluid">
-        <div class="border-0">
-            <div class="card-body">
-                <ul class="nav tab-nav tab-nav-1-inner flex-nowrap pb-2 mb-md-1">
-                    <li class="nav-item flex-shrink-0 flex-shrink-md-1">
-                        <a class="nav-link active" style="font-weight: 500 !important;">
-                            <div class="d-flex flex-column flex-md-row position-relative text-black align-items-center">
-                                <span class="tabtext " style="font-weight: 500 !important;color: #fff !important;font-size: 0.75rem">ROUND-TRIP</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item flex-shrink-0 flex-shrink-md-1">
-                        <a class="nav-link " style="font-weight: 500 !important;">
-                            <div class="d-flex flex-column flex-md-row position-relative text-black align-items-center">
-                                <span class="tabtext " style="font-weight: 500 !important;color: #3b444f !important;font-size: 0.75rem">ONE-WAY</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item flex-shrink-0 flex-shrink-md-1">
-                        <a class="nav-link " style="font-weight: 500 !important;">
-                            <div class="d-flex flex-column flex-md-row position-relative text-black align-items-center">
-                                <span class="tabtext " style="font-weight: 500 !important;color: #3b444f !important;font-size: 0.75rem">Multi-City</span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content hero-tab-pane">
-                    <div class="tab-pane fade active show">
-                        <form class="js-validate">
-                            <div class="row nav-select nav-select-1 d-block d-lg-flex mb-lg-2 px-lg-3 px-2 align-items-end">
-                                <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4">
-                                    <span class="d-block text-gray-1 text-left mb-1" style="font-weight: 400!important;">From where</span>
-                                    <div class="js-focus-state">
-                                        <div class="input-group border-bottom-1" >
-                                            <i class="fa-solid fa-location-dot mr-2 align-items-center d-flex" style="color: #297cbb !important"></i>
-                                            <input type="text" class="form-control shadow-none hero-form border-0 pl-0 bg-transparent" placeholder="city or airport" style="font-style: normal;font-weight: bold">
+    <div class="bg-gray-33 py-1">
+        <div class="container-fluid">
+            <div class="border-0">
+                <div class="card-body">
+                    <ul class="nav tab-nav tab-nav-1-inner flex-nowrap pb-2 mb-md-1">
+                        <li class="nav-item flex-shrink-0 flex-shrink-md-1">
+                            <a class="nav-link active" style="font-weight: 500 !important;">
+                                <div class="d-flex flex-column flex-md-row position-relative text-black align-items-center">
+                                    <span class="tabtext "
+                                          style="font-weight: 500 !important;color: #fff !important;font-size: 0.75rem">ROUND-TRIP</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item flex-shrink-0 flex-shrink-md-1">
+                            <a class="nav-link " style="font-weight: 500 !important;">
+                                <div class="d-flex flex-column flex-md-row position-relative text-black align-items-center">
+                                    <span class="tabtext "
+                                          style="font-weight: 500 !important;color: #3b444f !important;font-size: 0.75rem">ONE-WAY</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item flex-shrink-0 flex-shrink-md-1">
+                            <a class="nav-link " style="font-weight: 500 !important;">
+                                <div class="d-flex flex-column flex-md-row position-relative text-black align-items-center">
+                                    <span class="tabtext "
+                                          style="font-weight: 500 !important;color: #3b444f !important;font-size: 0.75rem">Multi-City</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content hero-tab-pane">
+                        <div class="tab-pane fade active show">
+                            <form class="js-validate">
+                                <div class="row nav-select nav-select-1 d-block d-lg-flex mb-lg-2 px-lg-3 px-2 align-items-end">
+                                    <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4">
+                                        <span class="d-block text-gray-1 text-left mb-1"
+                                              style="font-weight: 400!important;">From where</span>
+                                        <div class="js-focus-state">
+                                            <div class="input-group border-bottom-1">
+                                                <i class="fa-solid fa-location-dot mr-2 align-items-center d-flex"
+                                                   style="color: #297cbb !important"></i>
+                                                <input type="text"
+                                                       class="form-control shadow-none hero-form border-0 pl-0 bg-transparent"
+                                                       placeholder="city or airport"
+                                                       style="font-style: normal;font-weight: bold">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4">
-                                    <span class="d-block text-gray-1 text-left mb-1" style="font-weight: 400!important;">To where</span>
-                                    <div class="js-focus-state">
-                                        <div class="input-group border-bottom-1" >
-                                            <i class="fa-solid fa-location-dot mr-2 align-items-center d-flex" style="color: #297cbb !important"></i>
-                                            <input type="text" class="form-control shadow-none hero-form border-0 pl-0 bg-transparent" placeholder="city or airport" style="font-style: normal;font-weight: bold">
+                                    <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4">
+                                        <span class="d-block text-gray-1 text-left mb-1"
+                                              style="font-weight: 400!important;">To where</span>
+                                        <div class="js-focus-state">
+                                            <div class="input-group border-bottom-1">
+                                                <i class="fa-solid fa-location-dot mr-2 align-items-center d-flex"
+                                                   style="color: #297cbb !important"></i>
+                                                <input type="text"
+                                                       class="form-control shadow-none hero-form border-0 pl-0 bg-transparent"
+                                                       placeholder="city or airport"
+                                                       style="font-style: normal;font-weight: bold">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4 ">
-                                    <span class="d-block text-gray-1 text-left mb-1" style="font-weight: 400!important;">Depart Return</span>
-                                    <div class="js-focus-state">
-                                        <div class="input-group border-bottom-1" >
-                                            <div id="datepickerWrapperFromOne"
-                                                 class="u-datepicker input-group relative">
-                                                <div class="input-group-prepend">
+                                    <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4 ">
+                                        <span class="d-block text-gray-1 text-left mb-1"
+                                              style="font-weight: 400!important;">Depart Return</span>
+                                        <div class="js-focus-state">
+                                            <div class="input-group border-bottom-1">
+                                                <div id="datepickerWrapperFromOne"
+                                                     class="u-datepicker input-group relative">
+                                                    <div class="input-group-prepend">
                                                 <span class="d-flex align-items-center mr-2">
                                                     <i class="fa-solid fa-calendar"
                                                        style="color: #297cbb !important;font-weight: 500;font-style: normal"></i>
                                                 </span>
-                                                </div>
-                                                <input id="datePickerInput"
-                                                       class="js-range-datepicker font-size-16 shadow-none font-weight-medium form-control hero-form bg-transparent border-0 flatpickr-input"
-                                                       style="font-weight: 500;font-size: 1rem;box-shadow: none;width: 217.5px;height: 54px"
-                                                       data-rp-default-date="[&quot;Jul 7 / 2020&quot;, &quot;Aug 25 / 2020&quot;]"/>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4">
-                                    <span class="d-block text-gray-1 text-left mb-0" style="font-weight: 400">Travelers</span>
-                                    <div class="js-focus-state">
-                                        <div class="input-group border-bottom-1" >
-                                            <i class="fa-solid fa-location-dot mr-2 align-items-center d-flex" style="color: #297cbb !important"></i>
-                                          <div class="dropdown bootstrap-select js-select dropdown-select" style="width: 89%">
-                                              <select class="js-select selectpicker dropdown-select">
-                                                  <option selected>1 Adult-Economy</option>
-                                              </select>
-                                              <button type="button" class="btn dropdown-toggle btn-light">
-                                                <div class="filter-option">
-                                                    <div class="filter-option-inner">
-                                                        <div class="filter-option-inner-inner">1 Adult - Economy</div>
                                                     </div>
+                                                    <input id="datePickerInput"
+                                                           class="js-range-datepicker font-size-16 shadow-none font-weight-medium form-control hero-form bg-transparent border-0 flatpickr-input"
+                                                           style="font-weight: 500;font-size: 1rem;box-shadow: none;width: 217.5px;height: 54px"
+                                                           data-rp-default-date="[&quot;Jul 7 / 2020&quot;, &quot;Aug 25 / 2020&quot;]"/>
                                                 </div>
-                                              </button>
-                                          </div>
+
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4">
+                                        <span class="d-block text-gray-1 text-left mb-0" style="font-weight: 400">Travelers</span>
+                                        <div class="js-focus-state">
+                                            <div class="input-group border-bottom-1">
+                                                <i class="fa-solid fa-location-dot mr-2 align-items-center d-flex"
+                                                   style="color: #297cbb !important"></i>
+                                                <div class="dropdown bootstrap-select js-select dropdown-select"
+                                                     style="width: 89%">
+                                                    <select class="js-select selectpicker dropdown-select">
+                                                        <option selected>1 Adult-Economy</option>
+                                                    </select>
+                                                    <button type="button" class="btn dropdown-toggle btn-light">
+                                                        <div class="filter-option">
+                                                            <div class="filter-option-inner">
+                                                                <div class="filter-option-inner-inner">1 Adult -
+                                                                    Economy
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4">
+                                        <button type="submit"
+                                                class="btn btn-blue-1 text-white btn-md mb-xl-0 mb-lg-1 transition-3d-hover w-100 me-md-auto"
+                                                style="background-color: #0057ff;border-color: #0057ff;border-radius: 2px !important;font-weight: 500!important;">
+                                            <i class="fa-solid fa-magnifying-glass mr-2"></i>
+                                            Search
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4">
-                                    <button type="submit" class="btn btn-blue-1 text-white btn-md mb-xl-0 mb-lg-1 transition-3d-hover w-100 me-md-auto" style="background-color: #0057ff;border-color: #0057ff;border-radius: 2px !important;font-weight: 500!important;">
-                                        <i class="fa-solid fa-magnifying-glass mr-2"></i>
-                                        Search
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
     <div class="container-fluid">
         <div class="row pt-5 pt-xl-8 mb-5 mb-xl-9 pb-xl-1" style="margin-left: 100px;margin-right: 100px">
             <div class="col-lg-4 col-xl-3 mt-xl-1">
                 <div class="navbar-expand-xl navbar-expand-xl-collapse-block">
-                   <div id="sidebar" class="collapse navbar-collapse">
-                       <div class="mb-6 w-100">
-                           <div class="sidenav border border-color-8 rounded-xs">
-                               <div id="shopCategoryAccordion" class="accordion rounded-0 shadow-none">
-                                   <div class="border-0">
-                                       <div class="card-collapse" id="shopCategoryHeadingOne">
-                                           <h3 class="mb-0">
-                                               <button class="btn btn-link btn-block card-btn py-2 px-5 collapsed" style="line-height: 3">
+                    <div id="sidebar" class="collapse navbar-collapse">
+                        <div class="mb-6 w-100">
+                            <div class="sidenav border border-color-8 rounded-xs">
+                                <div id="shopCategoryAccordion" class="accordion rounded-0 shadow-none">
+                                    <div class="border-0">
+                                        <div class="card-collapse" id="shopCategoryHeadingOne">
+                                            <h3 class="mb-0">
+                                                <button class="btn btn-link btn-block card-btn py-2 px-5 collapsed"
+                                                        style="line-height: 3">
                                                    <span class="row align-items-center">
                                                        <span class="col-2">
-                                                           <span class="text-dark mb-3" style="font-size: 1.063rem;font-weight: 500">Stops</span>
+                                                           <span class="text-dark mb-3"
+                                                                 style="font-size: 1.063rem;font-weight: 500">Stops</span>
                                                        </span>
                                                        <span class="col-10 text-right">
                                                            <span class="card-btn-arrow">
@@ -133,48 +155,53 @@
                                                            </span>
                                                        </span>
                                                    </span>
-                                               </button>
-                                           </h3>
-                                       </div>
-                                       <div id="shopCategoryOne" class="collapse show border-bottom">
-                                           <div class="card-body pt-0 mt-1 px-5 pb-4">
-                                               <div class="form-group mb-3" style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
-                                                   <div class="custom-control custom-checkbox">
-                                                       <input type="checkbox" class="custom-control-input">
-                                                       <label class="cus-control-label">
-                                                           Non Stop
-                                                       </label>
-                                                   </div>
-                                               </div>
-                                               <div class="form-group mb-3" style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
-                                                   <div class="custom-control custom-checkbox">
-                                                       <input type="checkbox" class="custom-control-input">
-                                                       <label class="cus-control-label">
-                                                           Non Stop
-                                                       </label>
-                                                   </div>
-                                               </div>
-                                               <div class="form-group mb-3" style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
-                                                   <div class="custom-control custom-checkbox">
-                                                       <input type="checkbox" class="custom-control-input">
-                                                       <label class="cus-control-label">
-                                                           Non Stop
-                                                       </label>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
+                                                </button>
+                                            </h3>
+                                        </div>
+                                        <div id="shopCategoryOne" class="collapse show border-bottom">
+                                            <div class="card-body pt-0 mt-1 px-5 pb-4">
+                                                <div class="form-group mb-3"
+                                                     style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <label class="cus-control-label">
+                                                            Non Stop
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mb-3"
+                                                     style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <label class="cus-control-label">
+                                                            Non Stop
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mb-3"
+                                                     style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <label class="cus-control-label">
+                                                            Non Stop
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                   </div>
-                               </div>
-                               <div id="shopCartAccordion" class="accordion rounded shadow-none border-bottom">
-                                   <div class="border-0">
-                                       <div class="card-collapse" id="shopCardHeadingOne">
-                                           <h3 class="mb-0">
-                                               <button type="button" class="btn btn-link btn-block card-btn " style="line-height: 3">
+                                    </div>
+                                </div>
+                                <div id="shopCartAccordion" class="accordion rounded shadow-none border-bottom">
+                                    <div class="border-0">
+                                        <div class="card-collapse" id="shopCardHeadingOne">
+                                            <h3 class="mb-0">
+                                                <button type="button" class="btn btn-link btn-block card-btn "
+                                                        style="line-height: 3">
                                                 <span class="row align-items-center">
                                                     <span class="col-5">
-                                                        <span class="d-block" style="font-size: 1.063rem;font-weight: 500 !important;color: #3b444f !important">Price Range ($)</span>
+                                                        <span class="d-block"
+                                                              style="font-size: 1.063rem;font-weight: 500 !important;color: #3b444f !important">Price Range ($)</span>
                                                     </span>
                                                     <span class="col-7 text-right">
                                                         <span class="card-btn-arrow">
@@ -182,31 +209,35 @@
                                                         </span>
                                                     </span>
                                                 </span>
-                                               </button>
-                                           </h3>
-                                       </div>
-                                       <div class="card-body">
-                                           <!-- Range Slider -->
-                                           <div class="price-range-slider">
-                                               <div class="price-range-display">
-                                                   <span id="price-range-text">£200 - £3456</span>
-                                               </div>
-                                               <div class="slider-container">
-                                                   <input type="range" id="range-min" min="200" max="3456" step="10" value="200" class="slider">
-                                                   <input type="range" id="range-max" min="200" max="3456" step="10" value="3456" class="slider">
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                               <div id="shopCategoryAccordi" class="accordion rounded-0 shadow-none">
-                                   <div class="border-0">
-                                       <div class="card-collapse" id="shopCategoryHeadingOne">
-                                           <h3 class="mb-0">
-                                               <button class="btn btn-link btn-block card-btn py-2 px-5 collapsed" style="line-height: 3">
+                                                </button>
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- Range Slider -->
+                                            <div class="price-range-slider">
+                                                <div class="price-range-display">
+                                                    <span id="price-range-text">£200 - £3456</span>
+                                                </div>
+                                                <div class="slider-container">
+                                                    <input type="range" id="range-min" min="200" max="3456" step="10"
+                                                           value="200" class="slider">
+                                                    <input type="range" id="range-max" min="200" max="3456" step="10"
+                                                           value="3456" class="slider">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="shopCategoryAccordi" class="accordion rounded-0 shadow-none">
+                                    <div class="border-0">
+                                        <div class="card-collapse" id="shopCategoryHeadingOne">
+                                            <h3 class="mb-0">
+                                                <button class="btn btn-link btn-block card-btn py-2 px-5 collapsed"
+                                                        style="line-height: 3">
                                                    <span class="row align-items-center">
                                                        <span class="col-2">
-                                                           <span class="text-dark mb-3" style="font-size: 1.063rem;font-weight: 500">Stops</span>
+                                                           <span class="text-dark mb-3"
+                                                                 style="font-size: 1.063rem;font-weight: 500">Stops</span>
                                                        </span>
                                                        <span class="col-10 text-right">
                                                            <span class="card-btn-arrow">
@@ -214,48 +245,53 @@
                                                            </span>
                                                        </span>
                                                    </span>
-                                               </button>
-                                           </h3>
-                                       </div>
-                                       <div id="shopCategoryOne" class="collapse show border-bottom">
-                                           <div class="card-body pt-0 mt-1 px-5 pb-4">
-                                               <div class="form-group mb-3" style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
-                                                   <div class="custom-control custom-checkbox">
-                                                       <input type="checkbox" class="custom-control-input">
-                                                       <label class="cus-control-label">
-                                                           Non Stop
-                                                       </label>
-                                                   </div>
-                                               </div>
-                                               <div class="form-group mb-3" style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
-                                                   <div class="custom-control custom-checkbox">
-                                                       <input type="checkbox" class="custom-control-input">
-                                                       <label class="cus-control-label">
-                                                           Non Stop
-                                                       </label>
-                                                   </div>
-                                               </div>
-                                               <div class="form-group mb-3" style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
-                                                   <div class="custom-control custom-checkbox">
-                                                       <input type="checkbox" class="custom-control-input">
-                                                       <label class="cus-control-label">
-                                                           Non Stop
-                                                       </label>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
+                                                </button>
+                                            </h3>
+                                        </div>
+                                        <div id="shopCategoryOne" class="collapse show border-bottom">
+                                            <div class="card-body pt-0 mt-1 px-5 pb-4">
+                                                <div class="form-group mb-3"
+                                                     style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <label class="cus-control-label">
+                                                            Non Stop
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mb-3"
+                                                     style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <label class="cus-control-label">
+                                                            Non Stop
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mb-3"
+                                                     style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <label class="cus-control-label">
+                                                            Non Stop
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                   </div>
-                               </div>
-                               <div id="shopCategoryAccordi" class="accordion rounded-0 shadow-none">
-                                   <div class="border-0">
-                                       <div class="card-collapse" id="shopCategoryHeadingOne">
-                                           <h3 class="mb-0">
-                                               <button class="btn btn-link btn-block card-btn py-2 px-5 collapsed" style="line-height: 3">
+                                    </div>
+                                </div>
+                                <div id="shopCategoryAccordi" class="accordion rounded-0 shadow-none">
+                                    <div class="border-0">
+                                        <div class="card-collapse" id="shopCategoryHeadingOne">
+                                            <h3 class="mb-0">
+                                                <button class="btn btn-link btn-block card-btn py-2 px-5 collapsed"
+                                                        style="line-height: 3">
                                                    <span class="row align-items-center">
                                                        <span class="col-2">
-                                                           <span class="text-dark mb-3" style="font-size: 1.063rem;font-weight: 500">Stops</span>
+                                                           <span class="text-dark mb-3"
+                                                                 style="font-size: 1.063rem;font-weight: 500">Stops</span>
                                                        </span>
                                                        <span class="col-10 text-right">
                                                            <span class="card-btn-arrow">
@@ -263,52 +299,58 @@
                                                            </span>
                                                        </span>
                                                    </span>
-                                               </button>
-                                           </h3>
-                                       </div>
-                                       <div id="shopCategoryOne" class="collapse show border-bottom">
-                                           <div class="card-body pt-0 mt-1 px-5 pb-4">
-                                               <div class="form-group mb-3" style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
-                                                   <div class="custom-control custom-checkbox">
-                                                       <input type="checkbox" class="custom-control-input">
-                                                       <label class="cus-control-label">
-                                                           Non Stop
-                                                       </label>
-                                                   </div>
-                                               </div>
-                                               <div class="form-group mb-3" style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
-                                                   <div class="custom-control custom-checkbox">
-                                                       <input type="checkbox" class="custom-control-input">
-                                                       <label class="cus-control-label">
-                                                           Non Stop
-                                                       </label>
-                                                   </div>
-                                               </div>
-                                               <div class="form-group mb-3" style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
-                                                   <div class="custom-control custom-checkbox">
-                                                       <input type="checkbox" class="custom-control-input">
-                                                       <label class="cus-control-label">
-                                                           Non Stop
-                                                       </label>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
+                                                </button>
+                                            </h3>
+                                        </div>
+                                        <div id="shopCategoryOne" class="collapse show border-bottom">
+                                            <div class="card-body pt-0 mt-1 px-5 pb-4">
+                                                <div class="form-group mb-3"
+                                                     style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <label class="cus-control-label">
+                                                            Non Stop
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mb-3"
+                                                     style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <label class="cus-control-label">
+                                                            Non Stop
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group mb-3"
+                                                     style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <label class="cus-control-label">
+                                                            Non Stop
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-xl-9 mt-xl-1">
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 pb-1">
-                    <h3 class="mb-4 mb-md-0 text-center" style="font-size: 1.313rem;font-weight: 500;line-height: 1;text-align: left">1984 results found.</h3>
+                    <h3 class="mb-4 mb-md-0 text-center"
+                        style="font-size: 1.313rem;font-weight: 500;line-height: 1;text-align: left">1984 results
+                        found.</h3>
                     <div class="d-flex align-items-center justify-content-between justify-content-md-start">
                         <div class="position-relative">
-                            <a id="basicDropdownClickInvoker" class="dropdown-nav-link dropdown-toggle" style="border: none">
-                                <span  style="font-weight: 500 !important;color: #3b444f !important;font-size: 0.875rem;"> Sorted By</span>
+                            <a id="basicDropdownClickInvoker" class="dropdown-nav-link dropdown-toggle"
+                               style="border: none">
+                                <span style="font-weight: 500 !important;color: #3b444f !important;font-size: 0.875rem;"> Sorted By</span>
                             </a>
                         </div>
                         <ul class="nav tab-nav-shop flex-nowrap">
@@ -332,59 +374,265 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show active">
                         <div class="row">
-                            <div class="col-md-6 col-xl-4">
-                                <div class="mb-5">
-                                    <div class="card w-100 shadow-hover-3">
-                                        <a class="d-block mb-0 mx-1 mt-1 p-3">
-                                            <img class="card-img-top" src="https://transvelo.github.io/mytravel-html/assets/img/260x200/img1.jpg">
-                                        </a>
-                                        <div class="card-body px-3 pt-0 pb-3 my-0 mx-1">
-                                            <div class="row">
-                                                <div class="col-7">
-                                                    <a class="card-title text-dark " style="font-size: 1.063rem;font-weight: 500!important;">Paris</a>
-                                                    <span class="d-block" style="color: #67747c;font-size: 0.875rem;font-weight: 400">Oneway flight</span>
-                                                </div>
-                                                <div class="col-5">
-                                                    <div class="text-right">
-                                                        <h6 class="mb-0" style="font-weight: 500;font-size: 1.063rem;color: #3b444f !important">£350.00</h6>
-                                                        <span class="" style="font-weight: 400!important;font-size: 0.875rem;color: #67747c">avg/person</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 pb-1">
-                                            <div class="border-bottom pb-3 mb-3">
-                                                <div class="px-3">
-                                                    <div class="d-flex mx-1">
-                                                        <i class="fa-solid fa-plane-departure mr-3" style="font-size: 1.875rem;color: #297cbb !important"></i>
-                                                        <div class="d-flex flex-column">
-                                                            <span class="" style="font-weight: 400!important;color: #18181b !important">Take off</span>
-                                                            <span class="" style="font-weight: 400!important;color:#67747c !important;font-size: 0.875rem">Wed Nov 19 7:50 AM</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="border-bottom pb-3 mb-3">
-                                                <div class="px-3">
-                                                    <div class="d-flex mx-1">
 
-                                                        <i class="fa-solid fa-plane-arrival mr-3" style="font-size: 1.875rem;color: #297cbb !important"></i>
-                                                        <div class="d-flex flex-column">
-                                                            <span class="" style="font-weight: 400!important;color: #18181b !important">Take off</span>
-                                                            <span class="" style="font-weight: 400!important;color:#67747c !important;font-size: 0.875rem">Wed Nov 19 7:50 AM</span>
+                            <th:block th:each="item: ${Flight}">
+                                <div class="col-md-6 col-xl-4">
+                                    <div class="mb-5">
+                                        <div class="card w-100 shadow-hover-3">
+                                            <a class="d-block mb-0 mx-1 mt-1 p-3">
+                                                <img class="card-img-top" th:src="${url + item.imageUrl}">
+                                            </a>
+                                            <div class="card-body px-3 pt-0 pb-3 my-0 mx-1">
+                                                <div class="row">
+                                                    <div class="col-7">
+                                                        <a class="card-title text-dark "
+                                                           style="font-size: 1.063rem;font-weight: 500!important;"
+                                                           th:text="${item.nameCity}"></a>
+                                                        <span class="d-block"
+                                                              style="color: #67747c;font-size: 0.875rem;font-weight: 400">Oneway flight</span>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <div class="text-right">
+                                                            <h6 class="mb-0"
+                                                                style="font-weight: 500;font-size: 1.063rem;color: #3b444f !important"
+                                                                th:text=" ${'$'+item.price}"></h6>
+                                                            <span class=""
+                                                                  style="font-weight: 400!important;font-size: 0.875rem;color: #67747c">avg/person</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="text-center mb-3" style="font-size: 0.875rem;color: #297cbb !important">
-                                                <a class="" style="font-size: 1rem;color: #67747c !important;text-decoration: none">Flight Details</a>
-                                            </div>
-                                            <div class="d-flex justify-content-center">
-                                                <a class="btn transition-3d-hover py-1" style="background-color: #0057ff;border-color: #0057ff;font-size: 0.875rem;line-height: 1.9;width: 16.25rem;color: #fff;font-weight: bold">Choose</a>
+                                            <div class="mb-3 pb-1">
+                                                <div class="border-bottom pb-3 mb-3">
+                                                    <div class="px-3">
+                                                        <div class="d-flex mx-1">
+                                                            <i class="fa-solid fa-plane-departure mr-3"
+                                                               style="font-size: 1.875rem;color: #297cbb !important"></i>
+                                                            <div class="d-flex flex-column">
+                                                                <span class=""
+                                                                      style="font-weight: 400!important;color: #18181b !important">Take off</span>
+                                                                <span class=""
+                                                                      style="font-weight: 400!important;color:#67747c !important;font-size: 0.875rem"
+                                                                      th:text="${item.getFormattedDepartureTime()}"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="border-bottom pb-3 mb-3">
+                                                    <div class="px-3">
+                                                        <div class="d-flex mx-1">
+
+                                                            <i class="fa-solid fa-plane-arrival mr-3"
+                                                               style="font-size: 1.875rem;color: #297cbb !important"></i>
+                                                            <div class="d-flex flex-column">
+                                                                <span class=""
+                                                                      style="font-weight: 400!important;color: #18181b !important">Take off</span>
+                                                                <span class=""
+                                                                      style="font-weight: 400!important;color:#67747c !important;font-size: 0.875rem"
+                                                                      th:text="${item.getFormattedArrivalTime()}"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center mb-3"
+                                                     style="font-size: 0.875rem;color: #297cbb !important">
+                                                    <a class="" id="clickShowDetail"
+                                                       style="font-size: 1rem;color: #67747c !important;text-decoration: none;cursor: pointer" th:data-id="${item.id}">Flight
+                                                        Details</a>
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a class="btn transition-3d-hover py-1"
+                                                       style="background-color: #0057ff;border-color: #0057ff;font-size: 0.875rem;line-height: 1.9;width: 16.25rem;color: #fff;font-weight: bold">Choose</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:fragment="customScripts">
+        function initFlatpickr() {
+            flatpickr("#datePickerInput", {
+                mode: "range",  // Enable date range selection
+                dateFormat: "M j / Y",  // Format for displayed dates
+                defaultDate: ["Jul 7 / 2020", "Aug 25 / 2020"],  // Set default dates
+                onReady: function (selectedDates, dateStr, instance) {
+                    instance.element.value = dateStr;
+                }
+            });
+        }
+        $(document).ready(function () {
+            $('#clickShowDetail').click(function () {
+
+
+                // Lấy phần tử với id fadeOpen
+                const fadeOpenElement = document.querySelector("#fadeOpen");
+                const ShowOpenElement = document.querySelector("#showOpen");
+                const id = this.getAttribute('data-id');
+                console.log(id)
+                fadeOpenElement.classList.add('custombox-open');
+                fadeOpenElement.style.zIndex = '10';
+                ShowOpenElement.classList.add('custombox-open');
+                ShowOpenElement.style.zIndex='10'
+              $.ajax({
+                  url:`http://localhost:8686/Flight/ShowDetailFlight/${id}`,
+                  method:'GET',
+                  contentType: 'application/json',
+                  success:function (response){
+                      const detailImgElement = document.querySelector("#DetailImg");
+                      const TimeDepart = document.querySelector("#TimeDepart");
+                      const NameFlight = document.querySelector("#nameFlight");
+                      const DateDepart = document.querySelector("#DateDepart");
+                      const depatureAirPorts = document.querySelector("#depatureAirPorts");
+                      const TimeArrival = document.querySelector("#TimeArrival");
+                      const dateArrival = document.querySelector("#dateArrival");
+                      const arrivalAirPort = document.querySelector("#arrivalAirPort");
+
+                      detailImgElement.src=`http://localhost:8686/images/Flight/${response.imageUrl}`;
+                      NameFlight.textContent=response.nameAirline;
+                      TimeDepart.textContent=response.timeDepart;
+                      DateDepart.textContent=response.dateDepart;
+                      depatureAirPorts.textContent=response.depatureAirPorts;
+                      TimeArrival.textContent=response.timeArrival;
+                      dateArrival.textContent=response.dateArrival;
+                      arrivalAirPort.textContent=response.arrivalAirPort;
+
+                  }
+              })
+            });
+        });
+        document.getElementById("datePickerInput").addEventListener("focus", function () {
+            // Initialize flatpickr only if not already initialized
+            if (!this.classList.contains("flatpickr-input-active")) {
+                initFlatpickr();
+                this.classList.add("flatpickr-input-active");
+            }
+        });
+    </script>
+    <div class="custombox-overlay custombox-fadein " id="fadeOpen" style="background-color: rgb(0, 0, 0);z-index: -1"></div>
+    <div class="custombox-content custombox-x-center custombox-y-center custombox-fadein " id="showOpen"
+         style="animation-duration: 300ms;animation-delay: 150ms;z-index: -1">
+        <div id="ontargetModal" class="js-modal-window u-modal-window max-width-960" style="display: block">
+            <div class="card mx-4 mx-xl-0 mb-4 mb-md-0" style="position: relative">
+                <button type="button" class="border-0  bg-primary flex-content-center  mt-n4 mr-n4 top-0 right-0"
+                        style="position: absolute;right: 2vh;border-radius: 1%;width: 8vh;height: 8vh">
+                    <i class="fa-solid fa-xmark" style="color: #fff !important;font-size: 0.875rem"></i>
+                </button>
+                <header class="card-header bg-light py-4 px-4" style="width: 100%">
+                    <div class="row align-items-center text-center">
+                        <div class="col-md-auto mb-4 mb-md-0">
+                            <div class="d-block d-lg-flex flex-horizontal-center">
+                                <img id="DetailImg" class="img-fluid mr-3 mb-3 mb-lg-0" style="width: 65px;height: 74px"
+                                     src="https://transvelo.github.io/mytravel-html/assets/img/90x90/img1.png">
+                                <div id="nameFlight" style="font-size: 0.875rem;font-family:'Rubik',Helvetica, Arial, sans-serif ;color: #3b444f;font-weight: 400
+                                    ;line-height: 1.5">Spicejet SG 143 | Boeing 737-700
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-auto mb-4 mb-md-0">
+                            <div class="mx-2 mx-xl-3 flex-content-center align-items-start d-block d-lg-flex">
+                                <div class="mr-lg-3 mb-1 mb-lg-0">
+                                    <i class="fa-solid fa-plane-departure mr-3"
+                                       style="font-size: 1.875rem;color: #297cbb !important"></i>
+                                </div>
+                                <div class="text-lg-start">
+                                    <h6 class="mb-1"
+                                        id="TimeDepart"
+                                        style="font-weight: 500!important;font-size: 1.313rem;color: #18181b !important">
+                                        18:30
+                                    </h6>
+                                    <div id="DateDepart" style="font-size: 0.875rem;color: #18181b !important;font-weight: 400;line-height: 1.5;font-family:'Rubik',Helvetica, Arial, sans-serif">
+                                        Sat, 21 Sep 19
+                                    </div>
+                                    <span id="depatureAirPorts" class="text-gray-1" style="font-size: 0.875rem;">New Delhi, India</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-auto mb-4 mb-md-0">
+                            <div class="mx-2 mx-xl-3 flex align-items-center justify-content-center flex-column"
+                                 style="display: flex">
+                                <h6 class="mb-0"
+                                    style="font-size: 0.875rem;font-weight: 500 !important;color: #18181b !important">02
+                                    hrs 45 mins</h6>
+                                <div class="width-60 border-top border-primary border-width-2 my-1"></div>
+                                <div class="text-gray-1" style="font-size: 0.875rem;">Non Stop</div>
+                            </div>
+                        </div>
+                        <div class="col-md-auto mb-4 mb-md-0">
+                            <div class="mx-2 mx-xl-3 flex-content-center align-items-start d-block d-lg-flex">
+                                <div class="mr-lg-3 mb-1 mb-lg-0">
+                                    <i class="fa-solid fa-plane-arrival mr-3"
+                                       style="font-size: 1.875rem;color: #297cbb !important"></i>
+                                </div>
+                                <div class="text-lg-start">
+                                    <h6 class="mb-1"
+                                        id="TimeArrival"
+                                        style="font-weight: 500!important;font-size: 1.313rem;color: #18181b !important">
+                                        18:30
+                                    </h6>
+                                    <div id="dateArrival" style="font-size: 0.875rem;color: #18181b !important;font-weight: 400;line-height: 1.5;font-family:'Rubik',Helvetica, Arial, sans-serif">
+                                        Sat, 21 Sep 19
+                                    </div>
+                                    <span class="text-gray-1" id="arrivalAirPort" style="font-size: 0.875rem;">New Delhi, India</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <div class="card-body py-4 p-md-5">
+                    <div class="row">
+                        <div class="col">
+                            <ul class="d-block d-md-flex list-group list-group-borderless list-group-horizontal list-group-flush no-gutters ">
+                                <li class="mr-md-8 mr-lg-10 mb-5 list-group-item py-0">
+                                    <div class=""
+                                         style="font-weight: 500 !important;color: #3b444f !important;font-size: 1.3rem">
+                                        Baggage
+                                    </div>
+                                    <span class="text-gray-1" style="font-size: 1.3rem">Adult</span>
+                                </li>
+                                <li class="mr-md-8 mr-lg-10 mb-5 list-group-item py-0">
+                                    <div class=""
+                                         style="font-weight: 500 !important;color: #3b444f !important;font-size: 1.3rem">
+                                        Check-in
+                                    </div>
+                                    <span class="text-gray-1" style="font-size: 1.3rem">15 Kgs</span>
+                                </li>
+                                <li class="mr-md-8 mr-lg-10 mb-5 list-group-item py-0">
+                                    <div class=""
+                                         style="font-weight: 500 !important;color: #3b444f !important;font-size: 1.3rem">
+                                        Cabin
+                                    </div>
+                                    <span class="text-gray-1" style="font-size: 1.3rem">7 kgs</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-auto">
+                            <div class="min-width-250">
+                                <h5 class=""
+                                    style="font-size: 1.3rem;font-weight: 500!important;color: #3b444f !important">
+                                    Fare breakup
+                                </h5>
+                                <ul class="list-unstyled mb-0" style="font-size: 1.3rem">
+                                    <li class="d-flex justify-content-between py-2">
+                                        <span class="" style="font-weight: 500 !important;font-size: 1.3rem
+                                           ;color: #3b444f !important">Base Fare</span>
+                                        <span style="font-weight: 500 !important;font-size: 1.3rem;color: #77838f !important">€580,00</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between py-2">
+                                        <span class="" style="font-weight: 500 !important;font-size: 1.3rem
+                                           ;color: #3b444f !important">Surcharges</span>
+                                        <span style="font-weight: 500 !important;font-size: 1.3rem;color: #77838f !important">€0,00</span>
+                                    </li>
+                                    <li class="d-flex justify-content-between py-2" style="font-size: 1.063rem;font-weight: 500 !important">
+                                        <span style="font-weight: 500 !important;color: #3b444f;font-size: 1.3rem">Pay Amount</span>
+                                        <span style="font-weight: 500 !important;color: #3b444f;font-size: 1.3rem">€580,00</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -392,25 +640,6 @@
             </div>
         </div>
     </div>
-<script th:fragment="customScripts">
-    function initFlatpickr() {
-        flatpickr("#datePickerInput", {
-            mode: "range",  // Enable date range selection
-            dateFormat: "M j / Y",  // Format for displayed dates
-            defaultDate: ["Jul 7 / 2020", "Aug 25 / 2020"],  // Set default dates
-            onReady: function (selectedDates, dateStr, instance) {
-                instance.element.value = dateStr;
-            }
-        });
-    }
-    document.getElementById("datePickerInput").addEventListener("focus", function () {
-        // Initialize flatpickr only if not already initialized
-        if (!this.classList.contains("flatpickr-input-active")) {
-            initFlatpickr();
-            this.classList.add("flatpickr-input-active");
-        }
-    });
-</script>
 </main>
 
 

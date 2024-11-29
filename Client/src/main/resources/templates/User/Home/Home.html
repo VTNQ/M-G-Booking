@@ -91,7 +91,7 @@
                     <div class="tab-pane fade active show">
                         <div class="card border-0 tab-shadow">
                             <div class="card-body">
-                                <form class="js-validate">
+                                <form th:action="@{/SearchFlight}" method="get">
                                     <div class="row d-block nav-select d-lg-flex mb-lg-3 px-2 px-lg-3 align-items-end">
                                         <div class="col-sm-3 ">
                                             <span class="d-block text-gray mb-0"
@@ -105,18 +105,10 @@
                                                             id="from-input"
                                                             autocomplete="off"
                                                     />
+                                                    <input type="hidden" id="from-input-id" th:field="${Search.departureAirport}" />
                                                 </div>
                                                 <div class="search-dropdown" id="from-dropdown">
-                                                    <p>Quý khách đã tìm kiếm gần đây</p>
-                                                    <ul>
-                                                        <li class="recent-search">
-                                                            <div>
-                                                                <span>Hồ Chí Minh (SGN) → Hà Nội (HAN)</span>
-                                                                <span>16 tháng 12, 2024</span>
-                                                            </div>
-                                                            <div>1 Người lớn | Phổ thông</div>
-                                                        </li>
-                                                    </ul>
+                                                    <ul id="airport-list-from"></ul>
                                                 </div>
                                                 <button type="button" class="swap-button">
                                                     <i class="fa-solid fa-right-left"></i>
@@ -129,12 +121,10 @@
                                                             id="to-input"
                                                             autocomplete="off"
                                                     />
+                                                    <input type="hidden" id="to-input-id" th:field="${Search.arrivalAirport}" />
                                                 </div>
                                                 <div class="search-dropdown" id="to-dropdown">
-                                                    <div class="dropdown-header">
-                                                        <span id="city-name">Hồng Kông, Hồng Kông</span>
-                                                        <span id="all-airports">Mọi sân bay</span>
-                                                    </div>
+
                                                     <ul id="airport-list"></ul>
                                                 </div>
                                             </div>
@@ -153,10 +143,11 @@
                                                        style="color: #297cbb !important;font-weight: 500;font-style: normal"></i>
                                                 </span>
                                                     </div>
-                                                    <input id="datePickerInput"
+                                                    <input type="date" id="datePickerInput"
+                                                           th:field="${Search.departureTime}"
                                                            class="js-range-datepicker font-size-16 shadow-none font-weight-medium form-control hero-form bg-transparent border-0 flatpickr-input"
                                                            style="font-weight: 500;font-size: 1rem;box-shadow: none;width: 217.5px;height: 54px"
-                                                           data-rp-default-date="[&quot;Jul 7 / 2020&quot;, &quot;Aug 25 / 2020&quot;]"/>
+                                                          />
                                                 </div>
                                             </div>
 
@@ -164,13 +155,18 @@
                                         <div class="col-sm-2 col-xl-3 mb-4 mb-lg-0 dropdown-custom">
                                             <span class="text-left d-block"
                                                   style="color: #67747c !important;font-weight: 400;font-size: 1.2rem;text-align: left">Rooms and Guests</span>
-                                            <a id="basicDropdownClickInvoker"
-                                               class="dropdown-nav-link dropdown-toggle text-decoration-none d-flex pt-4 pb-2">
-                                                <i class="fa-solid fa-user-plus d-flex align-items-center  "
-                                                   style="font-size: 1.125rem;color: #297cbb !important;margin-right: 12px"></i>
-                                                <span class="text-black "
-                                                      style="font-size: 1rem;font-weight: 500;color: black">2 Rooms - 3 Guests</span>
-                                            </a>
+                                            <div class="dropdown-container">
+
+                                                <div class="dropdown">
+                                                    <select id="classSelect" th:field="${Search.typeFlight}" class="form-select " style="margin-top: 2vh">
+                                                        <option value="Popular" >Popular</option>
+                                                        <option value="Premium Economy">Premium Economy</option>
+                                                        <option value="Merchant" >Merchant</option>
+                                                        <option value="First Class">First Class</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
                                             <div id="basicDropdownClick"
                                                  class="dropdown-menu  dropdown-unfold col-11 m-0 u-unfold--css-animation slideInUp "
                                                  style="max-width: 22%">
@@ -1008,41 +1004,8 @@
 
 </main>
 
-<script th:fragment="customScripts">
-    //Dropdown select
+<script th:fragment="customScripts" th:src="@{/user/Home/Home.js}">
 
-    document.getElementById('basicDropdownClickInvoker').addEventListener('click', function () {
-        const dropdownMenu = document.querySelector('#basicDropdownClick');
-        console.log(dropdownMenu)
-        dropdownMenu.classList.toggle('show');
-    });
-    document.addEventListener('click',function (event){
-        const isClickInside = document.getElementById('basicDropdownClickInvoker').contains(event.target) ||
-            document.querySelector('#basicDropdownClick').contains(event.target);
-
-        if (!isClickInside) {
-            document.querySelector('#basicDropdownClick').classList.remove('show');
-        }
-    })
-    // Close dropdown if clicked outside
-
-    function initFlatpickr() {
-        flatpickr("#datePickerInput", {
-            mode: "range",  // Enable date range selection
-            dateFormat: "M j / Y",  // Format for displayed dates
-            defaultDate: ["Jul 7 / 2020", "Aug 25 / 2020"],  // Set default dates
-            onReady: function(selectedDates, dateStr, instance) {
-                instance.element.value = dateStr;
-            }
-        });
-    }
-    document.getElementById("datePickerInput").addEventListener("focus", function() {
-        // Initialize flatpickr only if not already initialized
-        if (!this.classList.contains("flatpickr-input-active")) {
-            initFlatpickr();
-            this.classList.add("flatpickr-input-active");
-        }
-    });
 </script>
 </body>
 </html>

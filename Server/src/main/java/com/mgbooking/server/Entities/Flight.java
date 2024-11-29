@@ -37,7 +37,7 @@ public class Flight {
 
 
     @Column(name = "departure_time", nullable = false)
-    @JsonIgnore
+
     private Instant departureTime;
 
     public Integer getId() {

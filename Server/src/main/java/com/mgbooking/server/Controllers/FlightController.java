@@ -1,9 +1,6 @@
 package com.mgbooking.server.Controllers;
 
-import com.mgbooking.server.DTOS.FlightDTO;
-import com.mgbooking.server.DTOS.FlightListDto;
-import com.mgbooking.server.DTOS.FlightPaginateDTo;
-import com.mgbooking.server.DTOS.SearchFlightDTO;
+import com.mgbooking.server.DTOS.*;
 import com.mgbooking.server.Entities.Flight;
 import com.mgbooking.server.Services.FlightService;
 import com.mgbooking.server.Services.ValidationService;
@@ -17,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,13 +36,24 @@ public class FlightController {
             return new ResponseEntity<Page<FlightPaginateDTo>>(HttpStatus.BAD_REQUEST);
         }
     }
+
     @GetMapping("SearchFlight")
-    public ResponseEntity<List<FlightListDto>>SearchFlight(@RequestBody SearchFlightDTO searchFlightDTO) {
+    public ResponseEntity<List<ResultFlightDTO>>SearchFlight(@RequestParam("departureAirport")int departureAirport, @RequestParam("arrivalAirport") int arrivalAirport,
+                                                             @RequestParam("departureTime")LocalDate departureTime,@RequestParam("TypeFlight")String TypeFlight) {
         try {
-            return new ResponseEntity<List<FlightListDto>>(flightService.SearchFlight(searchFlightDTO),HttpStatus.OK);
+            return new ResponseEntity<List<ResultFlightDTO>>(flightService.SearchFlight(departureAirport,arrivalAirport,departureTime,TypeFlight),HttpStatus.OK);
         }catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<List<FlightListDto>>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<List<ResultFlightDTO>>(HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("ShowDetailFlight/{id}")
+    public ResponseEntity<ShowDetailFlightDTO>GetShowDetailFlight(@PathVariable int id) {
+        try {
+            return new ResponseEntity<ShowDetailFlightDTO>(flightService.GetShowDetailFlight(id),HttpStatus.OK);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<ShowDetailFlightDTO>(HttpStatus.BAD_REQUEST);
         }
     }
     @PutMapping(value = "UpdateFlight")
