@@ -6,14 +6,15 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class JWTTokenFilter extends OncePerRequestFilter {
@@ -24,36 +25,52 @@ public class JWTTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String token = request.getHeader("Authorization");
+        HttpSession session = request.getSession();
 
+        // Retrieve the tokensList from session
+        List<String> tokensList = (List<String>) session.getAttribute("tokensList");
+
+        // If the Authorization header contains a Bearer token
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7);  // Extract the token after "Bearer "
-            try {
-                Claims claims = extractAllClaims(token);
 
-                // Extract roles from claims (assuming it's a list of roles)
-                List<String> roles = claims.get("roles", List.class); // roles should be stored as a list of strings
+            // Check if the token is already in the tokensList
+            boolean isTokenInList = tokensList != null && tokensList.contains(token);
 
-                // Convert roles into SimpleGrantedAuthorities
-                if (roles != null && !roles.isEmpty()) {
-                    List<SimpleGrantedAuthority> authorities = roles.stream()
-                            .map(role -> new SimpleGrantedAuthority(role)) // Convert each role to a SimpleGrantedAuthority
-                            .toList();
+            if (isTokenInList) {
+                // Token is found in the tokensList, so process it
+                try {
+                    Claims claims = extractAllClaims(token);
 
-                    // Set authentication with roles and claims
-                    JWTAuthentication authentication = new JWTAuthentication(claims, authorities);
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    // Extract roles from claims (assuming it's a list of roles)
+                    List<String> roles = claims.get("roles", List.class); // roles should be stored as a list of strings
+
+                    // Convert roles into SimpleGrantedAuthorities
+                    if (roles != null && !roles.isEmpty()) {
+                        List<SimpleGrantedAuthority> authorities = roles.stream()
+                                .map(role -> new SimpleGrantedAuthority(role)) // Convert each role to a SimpleGrantedAuthority
+                                .toList();
+
+                        // Set authentication with roles and claims
+                        JWTAuthentication authentication = new JWTAuthentication(claims, authorities);
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
+                    }
+
+                } catch (Exception e) {
+                    // Handle token parsing errors here
+                    e.printStackTrace();
                 }
-
-            } catch (Exception e) {
-                // Handle token parsing errors here
-                e.printStackTrace();
+            } else {
+                // Token not found in the session tokensList
+                System.out.println("Token not found in the tokens list.");
             }
-        }else{
-
         }
 
+        // Continue with the filter chain
         filterChain.doFilter(request, response);
     }
+
+    // Method to extract claims from JWT token
     private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
     }

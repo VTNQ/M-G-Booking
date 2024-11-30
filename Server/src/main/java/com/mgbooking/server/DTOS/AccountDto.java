@@ -6,6 +6,7 @@ import java.io.Serializable;
  * DTO for {@link com.mgbooking.server.Entities.Account}
  */
 public class AccountDto {
+    private int id;
     private String username;
     private String fullName;
     private String email;
@@ -39,7 +40,16 @@ public class AccountDto {
     public AccountDto() {
     }
 
-    public AccountDto(String username, String fullName, String email, String phone, String address, Integer cityId, String otp, String avatar, String password, String accountType) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public AccountDto(int id,String username, String fullName, String email, String phone, String address, Integer cityId, String otp, String avatar, String password, String accountType) {
+        this.id = id;
         this.username = username;
         this.fullName = fullName;
         this.email = email;

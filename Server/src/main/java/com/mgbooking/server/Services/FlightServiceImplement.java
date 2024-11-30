@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -131,16 +132,19 @@ public class FlightServiceImplement implements FlightService{
 
         return modelMapper.map(flightRepository.findFlightsByAirportsAndDepartureTime(departureAirport,arrivalAirport,departureTime,TypeFlight),new TypeToken<List<ResultFlightDTO>>(){}.getType());
     }
-
     @Override
-    public ShowDetailFlightDTO GetShowDetailFlight(int id) {
+    public BigDecimal FindPrice(LocalDate departureTime) {
         try {
-            return modelMapper.map(flightRepository.DetailFlyDto(id),new TypeToken<ShowDetailFlightDTO>(){}.getType());
-        }catch (Exception ex){
-            ex.printStackTrace();
-            return null;
+            // Sử dụng modelMapper để chuyển đổi kết quả từ repository
+            return modelMapper.map(flightRepository.FindPrice(departureTime), new TypeToken<BigDecimal>(){}.getType());
+        } catch (Exception ex) {
+            // Ghi log lỗi để dễ dàng kiểm tra
+            System.err.println("Error finding price: " + ex.getMessage());
+            // Trả về giá trị mặc định là BigDecimal.ZERO
+            return BigDecimal.ZERO;
         }
     }
+
 
 
 }

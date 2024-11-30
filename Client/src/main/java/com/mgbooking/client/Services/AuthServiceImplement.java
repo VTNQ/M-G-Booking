@@ -7,20 +7,46 @@ import com.mgbooking.client.Configuration.JwtUtil;
 import com.mgbooking.client.DTO.AccountDto;
 import com.mgbooking.client.DTO.LoginDTO;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class AuthServiceImplement  implements  AuthService{
     @Autowired
     private  JwtUtil jwtUtil;
+    public List<String> getTokensFromSession(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        List<String> tokensList = (List<String>) session.getAttribute("tokensList");
+
+        if (tokensList != null) {
+            return tokensList; // Return the list of tokens if available
+        }
+        return Collections.emptyList(); // Return an empty list if no tokens are found
+    }
     @Override
-    public String login(LoginDTO loginDTO, HttpServletResponse response) {
+    public String login(LoginDTO loginDTO, HttpServletResponse response,HttpServletRequest request) {
         try {
             LoginApi loginApi= ApiClient.getRetrofit().create(LoginApi.class);
             String token=loginApi.Login(loginDTO).execute().body().get("AccessToken");
+            List<String> tokensList = getTokensFromSession(request);
+            if (tokensList.size()<=0) {
+                tokensList = new ArrayList<>();
+            }
+
+            // Add the generated jwt to the tokens list
+            tokensList.add(token);  // Adding the current access token (JWT)
+
+            // Store the updated list of tokens back in session
+            HttpSession session = request.getSession();
+            session.setAttribute("tokensList", tokensList);
             if(token!=null){
                 Cookie accessToken=new Cookie("accessToken",token);
                 accessToken.setHttpOnly(true);

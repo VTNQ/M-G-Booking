@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class JwtUtil {
 
     private String secretKey = "sRbgDVJHhto1l0DxFi09N/5phc9FEEWfN4MQIzWKBEs=";
-    private int expirationTime = 86400000;
+    private int expirationTime = 3600000;
     private String userTokenVersion = "1";
 
     public String generateToken(UserDetails userDetails) {

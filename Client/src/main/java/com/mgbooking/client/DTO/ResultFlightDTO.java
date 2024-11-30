@@ -10,6 +10,71 @@ public class ResultFlightDTO {
     private String nameCity;
     private Instant arrivalTime;
     private int id;
+    private String nameAirline;
+    private String timeDepart;
+    private String dateDepart;
+    private String durationString;
+    private String nameAiport;
+
+    public String getNameAiport() {
+        return nameAiport;
+    }
+
+    public void setNameAiport(String nameAiport) {
+        this.nameAiport = nameAiport;
+    }
+
+    public String getDurationString() {
+        return durationString;
+    }
+
+    public void setDurationString(String durationString) {
+        this.durationString = durationString;
+    }
+
+    public String getDateArrival() {
+        return dateArrival;
+    }
+
+    public void setDateArrival(String dateArrival) {
+        this.dateArrival = dateArrival;
+    }
+
+    private String dateArrival;
+
+
+    public String getDateDepart() {
+        return dateDepart;
+    }
+
+    public void setDateDepart(String dateDepart) {
+        this.dateDepart = dateDepart;
+    }
+
+    public String getTimeArrival() {
+        return timeArrival;
+    }
+
+    public void setTimeArrival(String timeArrival) {
+        this.timeArrival = timeArrival;
+    }
+
+    private String timeArrival;
+    public String getTimeDepart() {
+        return timeDepart;
+    }
+
+    public void setTimeDepart(String timeDepart) {
+        this.timeDepart = timeDepart;
+    }
+
+    public String getNameAirline() {
+        return nameAirline;
+    }
+
+    public void setNameAirline(String nameAirline) {
+        this.nameAirline = nameAirline;
+    }
 
     public int getId() {
         return id;

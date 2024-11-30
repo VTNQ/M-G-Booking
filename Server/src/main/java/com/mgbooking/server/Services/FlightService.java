@@ -5,6 +5,7 @@ import com.mgbooking.server.Entities.Flight;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,5 +15,5 @@ public FlightListDto GetFlight(int id);
 public Page<FlightPaginateDTo>FindAllByCountry(Pageable pageable, int id);
 public boolean UpdateInformationFlight(FlightListDto flightListDto);
 public List<ResultFlightDTO>SearchFlight(int departureAirport, int arrivalAirport, LocalDate departureTime,String TypeFlight);
-public ShowDetailFlightDTO GetShowDetailFlight(int id);
+public BigDecimal FindPrice(LocalDate departureTime);
 }
