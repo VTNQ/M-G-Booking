@@ -87,7 +87,7 @@ public class OwnerServiceImplement implements OwnerService {
     public boolean updateAccount(AccountDto accountDto) {
         try {
            Account owner=modelMapper.map(accountDto,Account.class);
-            owner.setPassword(BCrypt.hashpw(accountDto.getPassword(), BCrypt.gensalt()));
+
             owner.setAccountType(accountDto.getAccountType());
             Level level=new Level();
             level.setId(1);
