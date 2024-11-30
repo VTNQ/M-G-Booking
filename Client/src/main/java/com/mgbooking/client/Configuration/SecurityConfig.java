@@ -21,8 +21,9 @@ public class SecurityConfig {
         http
                 .csrf(cs->cs.disable())// Disable CSRF protection
                 .authorizeRequests()
-                .requestMatchers("/Login","/Home","/css/**","/js/**","/user/**","/SuperAdmin/assets/**","/images/**","/LoginAdmin","/Profile","/Flight","/Hotel","/RegisterUser","/RegisterOwner","/SearchFlight").permitAll()
+                .requestMatchers("/Login","/Home","/css/**","/js/**","/user/**","/SuperAdmin/assets/**","/images/**","/LoginAdmin","/Profile","/Flight","/Hotel","/RegisterUser","/RegisterOwner","/SearchFlight","/Owner").permitAll()
                 .requestMatchers("/SuperAdmin/Home","/SuperAdmin/Country","/SuperAdmin/EditCountry/**","/SuperAdmin/UpdateCountry","/SuperAdmin/DeleteCountry/**","/SuperAdmin/Airline","/SuperAdmin/UpdateAirline/**").hasAnyRole("SUPERADMIN")
+                .requestMatchers("/UpdateProfile").hasAnyRole("USER")
                 .requestMatchers("/Admin/Home","/Admin/City","/Admin/City/{id}","/Admin/UpdateCity","/Admin/DeleteCity/**","/Admin/AirPort","/Admin/AirPort/Edit/{id}","/Admin/AirPort/UpdateAirPort","/Admin/Flight","/Admin/Flight/Edit/{id}","/Admin/Flight/UpdateFlight","/Admin/Flight/UpdateDetailFlight").hasRole("ADMIN")// Allow anyone to access /Home
                 .anyRequest().authenticated() // Require authentication for other requests
                 .and()
@@ -31,8 +32,7 @@ public class SecurityConfig {
                  // URL to redirect to on login failure
                  // Allow everyone to access the login page
 
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)).exceptionHandling(ex->ex.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/Login"))).addFilterBefore(tokenFilter,UsernamePasswordAuthenticationFilter.class); // Stateless session
+                .exceptionHandling(ex->ex.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/Login"))).addFilterBefore(tokenFilter,UsernamePasswordAuthenticationFilter.class); // Stateless session
 
         return http.build();
     }

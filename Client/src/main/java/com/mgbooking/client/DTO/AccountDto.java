@@ -2,6 +2,16 @@ package com.mgbooking.client.DTO;
 
 
 public class AccountDto {
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private String username;
     private String fullName;
     private String email;

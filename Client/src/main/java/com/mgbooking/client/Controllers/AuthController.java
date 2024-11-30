@@ -30,9 +30,9 @@ public class AuthController {
         return "SuperAdmin/Login/login";
     }
     @PostMapping("LoginAdmin")
-    public String LoginAdmin(@ModelAttribute("login")LoginDTO login, HttpServletResponse session, ModelMap modelMap) {
+    public String LoginAdmin(@ModelAttribute("login")LoginDTO login, HttpServletResponse session,HttpServletRequest request, ModelMap modelMap) {
         try {
-            String redirectUrl=authService.login(login,session);
+            String redirectUrl=authService.login(login,session,request);
             if(session!=null){
                 return  redirectUrl;
             }else{
@@ -47,7 +47,7 @@ public class AuthController {
     @PostMapping("Login")
     public String Login(@ModelAttribute("login") LoginDTO loginDTO, ModelMap modelMap, HttpServletRequest request, HttpServletResponse session) {
         try {
-            String redirectUrl = authService.login(loginDTO,session);
+            String redirectUrl = authService.login(loginDTO,session,request);
             if (redirectUrl != null) {
                 return redirectUrl;
             } else {

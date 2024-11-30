@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -47,13 +48,13 @@ public class FlightController {
             return new ResponseEntity<List<ResultFlightDTO>>(HttpStatus.BAD_REQUEST);
         }
     }
-    @GetMapping("ShowDetailFlight/{id}")
-    public ResponseEntity<ShowDetailFlightDTO>GetShowDetailFlight(@PathVariable int id) {
+    @GetMapping(value = "FindPrice")
+    public ResponseEntity<BigDecimal>FindPrice(@RequestParam("departureTime")LocalDate departureTime){
         try {
-            return new ResponseEntity<ShowDetailFlightDTO>(flightService.GetShowDetailFlight(id),HttpStatus.OK);
+            return new ResponseEntity<BigDecimal>(flightService.FindPrice(departureTime),HttpStatus.OK);
         }catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<ShowDetailFlightDTO>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<BigDecimal>(HttpStatus.BAD_REQUEST);
         }
     }
     @PutMapping(value = "UpdateFlight")

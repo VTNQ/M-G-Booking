@@ -6,6 +6,7 @@ import com.mgbooking.client.DTO.ResultFlightDTO;
 import retrofit2.Call;
 import retrofit2.http.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface FlightApi {
@@ -19,4 +20,6 @@ public interface FlightApi {
     Call<List<ResultFlightDTO>>SearchFlight(@Query("departureAirport")int departureAirport, @Query("arrivalAirport")int arrivalAirport,
                                             @Query("departureTime")String departureTime,
                                             @Query("TypeFlight")String TypeFlight);
+    @GET("/Flight/FindPrice")
+    Call<BigDecimal>FindMinPrce(@Query("departureTime")String departureTime);
 }

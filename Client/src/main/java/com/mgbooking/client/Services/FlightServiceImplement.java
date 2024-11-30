@@ -9,6 +9,7 @@ import com.mgbooking.client.DTO.SearchFlightDTO;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +83,22 @@ public class FlightServiceImplement implements FlightService{
                 return response.body();
             }else{
                 return  null;
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public BigDecimal FindMinPrice(String departureTime) {
+        try {
+            FlightApi flightApi=ApiClient.getRetrofit().create(FlightApi.class);
+            Response<BigDecimal>response=flightApi.FindMinPrce(departureTime).execute();
+            if(response.isSuccessful()){
+                return response.body();
+            }else{
+                return null;
             }
         }catch (Exception ex){
             ex.printStackTrace();

@@ -32,6 +32,131 @@
 .custombox-fadein.custombox-content {
     opacity: 0;
 }
+.flight-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.flight-header {
+    background-color: #f8f9fa;
+}
+
+.flight-tag {
+    font-size: 12px;
+}
+
+.flight-time {
+    font-size: 16px;
+}
+
+.flight-time .time {
+    font-weight: bold;
+}
+/* Kiểu dáng chung cho tab */
+.date-tabs .nav-pills .nav-link {
+    border-radius: 20px;
+    padding: 8px 16px;
+    margin: 0 5px;
+    color: #333;
+    background-color: #f8f9fa;
+    border: none;
+    text-align: center; /* Căn giữa văn bản */
+    min-width: 80px; /* Đặt chiều rộng tối thiểu */
+}
+
+.date-tabs .nav-pills .nav-link .day {
+    font-size: 18px; /* Kích thước chữ ngày */
+    font-weight: bold;
+}
+
+.date-tabs .nav-pills .nav-link .month {
+    font-size: 12px; /* Kích thước chữ tháng */
+}
+
+.date-tabs .nav-pills .nav-link.active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.date-tabs .nav-pills .nav-link:hover {
+    background-color: #e9ecef;
+}
+
+.date-tabs .tab-content .price-container {
+    text-align: center; /* Căn giữa giá */
+    font-size: 16px;
+}
+
+.date-tabs .tab-content .price-container .from {
+    font-size: 14px; /* Kích thước chữ "Từ" */
+    color: #6c757d; /* Màu chữ xám */
+}
+.date-tab {
+    background-color: #ffffff !important; /* Màu nền xám nhạt */
+    border: 2px solid #ced4da !important; /* Viền xanh dương */
+    border-radius: 25px !important; /* Bo tròn góc */
+    padding: 10px 51px !important; /* Khoảng cách bên trong */
+    text-align: center !important;
+    font-size: 16px !important;
+    color: black;
+    cursor: pointer !important;
+    margin: 12px  !important;
+    transition: all 0.2s ease !important;
+}
+.date-tab:hover {
+    transform: translateY(-2px); /* Di chuyển lên trên 2px */
+    box-shadow: rgba(4, 7, 10, 0.24) 0px 4px 10px 0px !important;
+    color: black !important;;/* Thêm hiệu ứng đổ bóng */
+}
+
+.date-tab.active {
+    background-color: #e5efff !important;
+    border: 1px solid rgb(32, 103, 218) !important;/* Màu nền xanh dương */
+    color: rgb(32, 103, 218) !important; /* Màu chữ trắng */
+}
+
+.date-tab .day {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.date-tab .price {
+    font-size: 14px;
+}
+.flight-details > div.hidden {
+    max-height: 0; /* Ẩn div bằng cách đặt max-height là 0 */
+}
+.flight-details > div { /* Chọn tất cả div con trực tiếp của flight-details */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+.flight-time {
+    justify-content: space-between; /* Căn đều khoảng cách giữa các phần tử */
+}
+
+.arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.flight-details > div.show {
+    max-height: 100px; /* Điều chỉnh giá trị này cho phù hợp */
+}
+.arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flight-amenities li {
+    display: flex;
+    align-items: center;
+}
+
+.flight-amenities .fa-solid {
+    margin-right: 5px;
+}
 .custombox-fadein.custombox-content.custombox-open {
     animation-name: fadeIn;
     animation-timing-function: ease-in;

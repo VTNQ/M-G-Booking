@@ -10,7 +10,7 @@
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
     <link th:href="@{/user/layout.css}" rel="stylesheet">
     <link rel="stylesheet" th:if="${cssPath != null}" th:href="${cssPath}">
-
+    <link rel="stylesheet" th:if="${title=='ChangeOwner'}" th:href="@{/user/ChangeProfile/Change.css}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Toastr JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
