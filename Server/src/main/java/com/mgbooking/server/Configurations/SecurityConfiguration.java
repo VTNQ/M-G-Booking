@@ -69,7 +69,7 @@ public class SecurityConfiguration {
                 .requestMatchers("City/CreateCity","/City/{id}","/City/FindCityPage/**","/City/FindCity/**","/City/DeleteCity/**","/AirPort/CreateAirPort","/AirPort/{id}","/AirPort/FindById/{id}","/AirPort/EditAirPort","/Flight/CreateFlight","/Airline/FindAirline/{id}","/AirPort/FindAllByCountry/{id}","/Flight/FindFlight/{id}","/Flight/FindAll/**",
                         "/Flight/UpdateFlight","/DetailFlight/{id}","/DetailFlight/UpdateDetail").hasRole("ADMIN")
 
-                .requestMatchers("/auth/","/auth/UpdateAccount").hasAnyRole("ADMIN", "SUPERADMIN","USER")
+                .requestMatchers("/auth/","/auth/UpdateAccount").hasAnyRole("ADMIN", "SUPERADMIN","USER","OWNER")
                 .anyRequest().authenticated()
                 .and()
                .exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler()))
