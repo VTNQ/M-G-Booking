@@ -10,7 +10,17 @@ import java.time.format.DateTimeFormatter;
 public class ResultFlightDTO {
     private String imageUrl;
     private int id;
+    private int idFlight;
     private String nameCity;
+
+    public int getIdFlight() {
+        return idFlight;
+    }
+
+    public void setIdFlight(int idFlight) {
+        this.idFlight = idFlight;
+    }
+
     private String timeArrival;
     private String DateDepart;
     private String DateArrival;
@@ -138,7 +148,8 @@ public class ResultFlightDTO {
     private Instant departureTime;
 
     public ResultFlightDTO(int id, String imageUrl, String nameCity, Instant arrivalTime, Instant departureTime, BigDecimal price,
-                           String nameAirline, Instant TimeDepart, Instant TimeArrival, Instant DateDepart, Instant DateArrival,String nameAiport) {
+                           String nameAirline, Instant TimeDepart, Instant TimeArrival, Instant DateDepart, Instant DateArrival,String nameAiport,
+    int idFlight) {
         this.imageUrl = imageUrl;
         this.nameCity = nameCity;
         this.arrivalTime = arrivalTime;
@@ -152,6 +163,7 @@ public class ResultFlightDTO {
         this.DateArrival = formatDate(arrivalTime);
         calculateAndStoreDuration();
         this.nameAiport=nameAiport;
+        this.idFlight=idFlight;
     }
 
     public String getNameCity() {

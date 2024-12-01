@@ -14,13 +14,8 @@
     animation: 400ms ease 0s 1 normal none running OpenFade;
     opacity: 0.48;
 }
-.custombox-overlay {
-    z-index: 9997;
-    opacity: 0;
-    transition-delay: 0s;
-    transition-timing-function: linear;
-    transition-property: opacity;
-}
+
+
 .custombox-y-center {
     -ms-flex-align: center;
     align-items: center;
@@ -309,24 +304,9 @@
         opacity: 1;
     }
 }
-.custom-checkbox .cus-control-label::before{
-    border-radius: 0.3125rem;
-    position: relative;
-    top: 18px;
-}
-.cus-control-label::after{
-    position: absolute;
-    top: 0.0935rem;
-    left: -1.813rem;
-    display: block;
-    width: 1.313rem;
-    height: 1.313rem;
-    content: "";
-    background: no-repeat 50% / 50% 50%;
-}
-.cus-control-label::before{
-    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
+
+
+
 .custom-control-label::before, .custom-file-label, .custom-select {
     transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -568,18 +548,7 @@
 .slider-container input[type="range"]:nth-child(1)::-webkit-slider-thumb {
     z-index: 3;
 }
-.cus-control-label::before{
-    position: absolute;
-    top: 0.0935rem;
-    left: -1.813rem;
-    display: block;
-    width: 1.2rem!important;
-    height: 1.2rem!important;
-    pointer-events: none;
-    content: "";
-    background-color: #fff;
-    border: #ebf0f7 solid 2px;
-}
+
 .custom-control-label::before {
     position: absolute;
     top: 0.0935rem;
@@ -593,11 +562,108 @@
     border: #ebf0f7 solid 2px;
 }
 
-.cus-control-label{
-    position: relative;
-    margin-bottom: 0;
-    vertical-align: top;
+/* Tùy chỉnh checkbox */
+.airline-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #007bff; /* Màu xanh của Bootstrap */
 }
+.dropdown-menu li.selected {
+    background-color: #007bff !important;
+    color: white !important;
+}
+/* Tùy chỉnh nhãn */
+.form-check-label {
+    margin-left: 8px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+#returnDateContainer {
+    margin-top: 10px; /* Khoảng cách với phần tử phía trên */
+}
+.search-item i {
+    color: #297cbb;
+}
+.search-item input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+}
+.search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 0.5rem;
+    display: none;
+    z-index: 10;
+    padding: 1rem;
+}
+.swap-button {
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+.search-item {
+    display: flex
+;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 600px; /* Chiều rộng tối đa */
+    margin: auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 0.5rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.noUi-target {
+    width: 100%; /* Ensure full width */
+}
+
+.noUi-handle {
+    background: #007bff; /* Add a color for the handles */
+}
+
+.noUi-base {
+    border: 1px solid #ccc; /* Optional: add border to the base */
+}
+
+/* Khoảng cách giữa các checkbox */
+.form-check {
+    margin-bottom: 10px;
+}
+
 .custom-control-label {
     position: relative;
     margin-bottom: 0;

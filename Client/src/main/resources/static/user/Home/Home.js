@@ -150,7 +150,7 @@ function initFlatpickr() {
     flatpickr("#datePickerInput", {
         mode: "range", // Enable date range selection
         dateFormat: "Y-m-d", // Format to match LocalDate (yyyy-MM-dd)
-        defaultDate: ["2023-07-07", "2023-08-25"], // Set default dates in LocalDate format
+        defaultDate: [new Date()], // Set default dates in LocalDate format
         onReady: function (selectedDates, dateStr, instance) {
             if (selectedDates.length) {
                 // Display only the first date in the range

@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet">
     <link th:href="@{/user/layout.css}" rel="stylesheet">
+    <link rel="stylesheet" th:if="${title=='SearchFlight'}"  href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.css"/>
+    <script th:if="${title=='SearchFlight'}"  src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.js"></script>
     <link rel="stylesheet" th:if="${cssPath != null}" th:href="${cssPath}">
     <link rel="stylesheet" th:if="${title=='ChangeOwner'}" th:href="@{/user/ChangeProfile/Change.css}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -20,11 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 </head>
-<style>
-    .dropdown-item:hover{
-        color: #297cbb;
-    }
-</style>
+
 <body>
 <header class="transition-none relative right-0 left-0 w-full " style="z-index: 1001">
 <div class="shadow-none relative z-1 bg-white pb-0 pt-0">
@@ -404,5 +402,6 @@
 
 <div th:insert="~{'/User/Register/RegisterUser' :: customScripts}"></div>
 <div th:if="${title=='Hotel'}" th:insert="~{'/User/Hotel/Hotel':: customScripts}"></div>
+<div  th:if="${title=='SearchFlight'}" th:insert="~{'/User/Flight/Flight' :: customScripts}"></div>
 </body>
 </html>

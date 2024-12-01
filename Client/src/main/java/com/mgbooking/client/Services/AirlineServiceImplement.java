@@ -115,4 +115,20 @@ public class AirlineServiceImplement implements AirlineService{
             return null;
         }
     }
+
+    @Override
+    public List<Airline> SearchAirline(SearchFlightDTO searchFlightDTO) {
+        try {
+            AirlinesApi airlinesApi=ApiClient.getRetrofit().create(AirlinesApi.class);
+            Response<List<Airline>>airline=airlinesApi.SearchAirline(searchFlightDTO.getDepartureAirport(),searchFlightDTO.getArrivalAirport(),searchFlightDTO.getDepartureTime(),searchFlightDTO.getTypeFlight()).execute();
+            if(airline.isSuccessful()){
+                return airline.body();
+            }else {
+                return null;
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

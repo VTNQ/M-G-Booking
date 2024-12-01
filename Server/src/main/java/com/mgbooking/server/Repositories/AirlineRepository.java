@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -27,4 +28,13 @@ public interface AirlineRepository extends JpaRepository<Airline,Integer> {
             "FROM Airline a " +
             "JOIN Picture i ON a.country.id = :id")
     List<ListFlightDto> ShowAirlineDto(@Param("id") int id);
+    @Query("select a from Airline a Join Flight b on a.id=b.airline.id join DetailFlight c on c.idFlight.id=b.id " +
+            " where b.departureAirport.id= :departureAirport"+
+            " and b.arrivalAirport.id = :arrivalAirport"+
+            " and Date(b.departureTime) = :departureTime"+
+            " and c.type = :TypeFlight")
+    List<Airline>SearchAirline( @Param("departureAirport") int departureAirport,
+                                @Param("arrivalAirport") int arrivalAirport,
+                                @Param("departureTime") LocalDate departureTime,
+                                @Param("TypeFlight") String TypeFlight);
 }
