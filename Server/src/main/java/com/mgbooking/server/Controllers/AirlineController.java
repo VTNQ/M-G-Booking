@@ -4,6 +4,7 @@ import com.mgbooking.server.DTOS.AirLineDTO;
 
 import com.mgbooking.server.DTOS.ListFlightDto;
 import com.mgbooking.server.DTOS.UpdateFlightDTO;
+import com.mgbooking.server.Entities.Airline;
 import com.mgbooking.server.Services.AirlineService;
 import com.mgbooking.server.Services.ValidationService;
 import jakarta.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,16 @@ public class AirlineController {
     private ValidationService validationService;
     @Autowired
     private AirlineService flightService;
+    @GetMapping(value = "/SearchAirline")
+    public ResponseEntity<List<Airline>>SearchAirline(@RequestParam("departureAirport")int departureAirport, @RequestParam("arrivalAirport") int arrivalAirport,
+                                                @RequestParam("departureTime") LocalDate departureTime, @RequestParam("TypeFlight")String TypeFlight){
+        try {
+            return new ResponseEntity<List<Airline>>(flightService.SearchAirline(departureAirport,arrivalAirport,departureTime,TypeFlight),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<List<Airline>>(HttpStatus.BAD_REQUEST);
+        }
+    }
     @PostMapping(value = "/UpdateFlight")
     public ResponseEntity<Object>UpdateFlight(@ModelAttribute UpdateFlightDTO flightDTO,@RequestParam("imageForm")MultipartFile imageFile){
         try {

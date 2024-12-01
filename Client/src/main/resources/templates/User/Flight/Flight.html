@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/User/layout/layout :: mainContent('Flight',~{this::#content})}">
+      th:replace="~{/User/layout/layout :: mainContent('SearchFlight',~{this::#content})}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -82,7 +82,7 @@
                                                        style="color: #297cbb !important;font-weight: 500;font-style: normal"></i>
                                                 </span>
                                                     </div>
-                                                    <input id="datePickerInput"
+                                                    <input type="date" id="datePickerInput"
                                                            class="js-range-datepicker font-size-16 shadow-none font-weight-medium form-control hero-form bg-transparent border-0 flatpickr-input"
                                                            style="font-weight: 500;font-size: 1rem;box-shadow: none;width: 217.5px;height: 54px"
                                                            data-rp-default-date="[&quot;Jul 7 / 2020&quot;, &quot;Aug 25 / 2020&quot;]"/>
@@ -100,17 +100,25 @@
                                                 <div class="dropdown bootstrap-select js-select dropdown-select"
                                                      style="width: 89%">
                                                     <select class="js-select selectpicker dropdown-select">
-                                                        <option selected>1 Adult-Economy</option>
+                                                        <option selected>1 Người lớn - Hạng phổ thông</option>
+                                                        <option>1 Người lớn - Hạng phổ thông</option>
+                                                        <option>1 Người lớn - Hạng phổ thông</option>
+                                                        <option>1 Người lớn - Hạng phổ thông</option>
                                                     </select>
-                                                    <button type="button" class="btn dropdown-toggle btn-light">
+                                                    <button type="button" id="dropdownMenuButton"  data-bs-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-light">
                                                         <div class="filter-option">
                                                             <div class="filter-option-inner">
-                                                                <div class="filter-option-inner-inner">1 Adult -
-                                                                    Economy
-                                                                </div>
+                                                                <div class="filter-option-inner-inner">1 Người lớn - Hạng phổ thông</div>
                                                             </div>
                                                         </div>
+                                                        <span class="dropdown-icon"></span> <!-- Adding a down arrow icon -->
                                                     </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <li><a class="dropdown-item" href="#">1 Người lớn - Hạng phổ thông</a></li>
+                                                        <li><a class="dropdown-item" href="#">2 Người lớn - Hạng phổ thông</a></li>
+                                                        <li><a class="dropdown-item" href="#">1 Trẻ em - Hạng phổ thông</a></li>
+                                                        <li><a class="dropdown-item" href="#">1 Người lớn - Hạng thương gia</a></li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -159,34 +167,31 @@
                                             </h3>
                                         </div>
                                         <div id="shopCategoryOne" class="collapse show border-bottom">
+
                                             <div class="card-body pt-0 mt-1 px-5 pb-4">
-                                                <div class="form-group mb-3"
-                                                     style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <label class="cus-control-label">
-                                                            Non Stop
-                                                        </label>
+                                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                                    <label class="form-check-label" for="selectAllToggle">Chọn tất cả các hãng</label>
+                                                    <div class="form-check form-switch ms-3">
+                                                        <input class="form-check-input" type="checkbox" id="selectAllToggle" style="font-size: 24px">
                                                     </div>
                                                 </div>
                                                 <div class="form-group mb-3"
                                                      style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <label class="cus-control-label">
-                                                            Non Stop
-                                                        </label>
-                                                    </div>
+
+
+                                                    <th:block th:each="item: ${Airline}">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="form-check-input airline-checkbox flight-select"
+
+                                                                   th:id="'checkbox-' + ${item.id}"  style="font-size: 25px">
+                                                            <label class="cus-control-label mt-2 ml-3" th:for="'checkbox-'+${item.name}" th:text="${item.name}">
+
+                                                            </label>
+                                                        </div>
+                                                    </th:block>
+
                                                 </div>
-                                                <div class="form-group mb-3"
-                                                     style="font-size: 0.875rem;line-height: 1;color: #67747c !important">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <label class="cus-control-label">
-                                                            Non Stop
-                                                        </label>
-                                                    </div>
-                                                </div>
+
                                             </div>
                                         </div>
 
@@ -219,12 +224,84 @@
                                                     <span id="price-range-text">£200 - £3456</span>
                                                 </div>
                                                 <div class="slider-container">
-                                                    <input type="range" id="range-min" min="200" max="3456" step="10"
-                                                           value="200" class="slider">
-                                                    <input type="range" id="range-max" min="200" max="3456" step="10"
-                                                           value="3456" class="slider">
+                                                    <div id="price-range" class="slider"></div>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="shopCartAccordion" class="accordion rounded shadow-none border-bottom">
+                                    <div class="border-0">
+                                        <div class="card-collapse" id="shopCardHeadingOne">
+                                            <h3 class="mb-0">
+                                                <button type="button" class="btn btn-link btn-block card-btn "
+                                                        style="line-height: 3">
+                                                <span class="row align-items-center">
+                                                    <span class="col-5">
+                                                        <span class="d-block"
+                                                              style="font-size: 1.063rem;font-weight: 500 !important;color: #3b444f !important">Price Range ($)</span>
+                                                    </span>
+                                                    <span class="col-7 text-right">
+                                                        <span class="card-btn-arrow">
+                                                            <i class="fas fa-chevron-down small"></i>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                                </button>
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- Range Slider -->
+                                            <div class="price-range-slider">
+                                                <div class="price-range-display">
+                                                    <span id="ScheduleStart">£200 - £3456</span>
+                                                </div>
+                                                <div class="slider-container">
+                                                    <div id="Schedule-range" class="slider"></div>
+                                                </div>
+                                            </div>
+                                            <div class="price-range-slider pt-5">
+                                                <div class="price-range-display">
+                                                    <span id="ScheduleEnd">£200 - £3456</span>
+                                                </div>
+                                                <div class="slider-container">
+                                                    <div id="Schedule-range-end" class="slider"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="shopCartAccordion" class="accordion rounded shadow-none border-bottom">
+                                    <div class="border-0">
+                                        <div class="card-collapse" id="shopCardHeadingOne">
+                                            <h3 class="mb-0">
+                                                <button type="button" class="btn btn-link btn-block card-btn "
+                                                        style="line-height: 3">
+                                                <span class="row align-items-center">
+                                                    <span class="col-5">
+                                                        <span class="d-block"
+                                                              style="font-size: 1.063rem;font-weight: 500 !important;color: #3b444f !important">Price Range ($)</span>
+                                                    </span>
+                                                    <span class="col-7 text-right">
+                                                        <span class="card-btn-arrow">
+                                                            <i class="fas fa-chevron-down small"></i>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                                </button>
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- Range Slider -->
+                                            <div class="price-range-slider">
+                                                <div class="price-range-display">
+                                                    <span id="TimeRange">£200 - £3456</span>
+                                                </div>
+                                                <div class="slider-container">
+                                                    <div id="Time-range" class="slider"></div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -342,7 +419,7 @@
                 </div>
             </div>
             <div class="col-xl-9 mt-xl-1">
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <ul class="nav nav-tabs mb-3" id="tabMenu" role="tablist">
                     <th:block th:each="item: ${dateList}">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link date-tab" id="pills-30-11-tab" data-bs-toggle="pill" data-bs-target="#pills-30-11" type="button" role="tab" aria-controls="pills-30-11" aria-selected="true">
@@ -353,7 +430,6 @@
                         </li>
 
                     </th:block>
-
                 </ul>
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 pb-1">
                     <h3 class="mb-4 mb-md-0 text-center"
@@ -385,130 +461,85 @@
                     </div>
                 </div>
                 <div class="tab-content">
-                    <div class="tab-pane fade show active">
-                        <div class="row">
+                    <th:block th:each="item, iterStat: ${dateList}">
+                        <div class="tab-pane fade TabShow" th:id="'TabPanel' + ${iterStat.index}" >
+                            <div class="row">
+                                <th:block th:with="currentFlights=${#vars['Flight' + iterStat.index]}">
+                                    <th:block th:each="item: ${currentFlights}">
+                                        <div class="flight-item" th:data-airline-id="${item.idFlight}" th:data-price="${item.price}" th:data-TimeDepart="${item.timeDepart}"
+                                             th:data-timeArrival="${item.timeArrival}" th:data-duration="${item.durationString}">
+                                            <div class="flight-card card">
+                                                <div class="flight-header card-header d-flex align-items-center">
+                                                    <img class="airline-logo" th:src="${url+item.imageUrl}" style="width: 7%;height: auto;object-fit: cover" alt="VietJet Air">
+                                                    <div class="airline-info ms-3">
+                                                        <div class="airline-name fw-bold" th:text="${item.nameAirline}"></div>
+                                                        <div class="flight-tag badge bg-danger">Rẻ nhất</div>
+                                                    </div>
+                                                    <div class="dropdown ms-auto">
+                                                        <button id="dropdownToggle" class="btn btn-sm btn-secondary dropdown-toggle" type="button">
+                                                            <i class="fa-solid fa-chevron-up"></i>
+                                                        </button>
 
-                            <th:block th:each="item: ${Flight}">
-                                <div class="flight-card card">
-                                    <div class="flight-header card-header d-flex align-items-center">
-                                        <img class="airline-logo" th:src="${url+item.imageUrl}" style="width: 7%;height: auto;object-fit: cover" alt="VietJet Air">
-                                        <div class="airline-info ms-3">
-                                            <div class="airline-name fw-bold" th:text="${item.nameAirline}"></div>
-                                            <div class="flight-tag badge bg-danger">Rẻ nhất</div>
-                                        </div>
-                                        <div class="dropdown ms-auto">
-                                            <button id="dropdownToggle" class="btn btn-sm btn-secondary dropdown-toggle" type="button">
-                                                <i class="fa-solid fa-chevron-up"></i>
-                                            </button>
+                                                    </div>
+                                                </div>
+                                                <div class="flight-details card-body">
+                                                    <div class="flight-time d-flex align-items-center">
+                                                        <div class="departure">
+                                                            <span class="time h5" th:text="${item.timeDepart}"></span><br>
+                                                            <span class="location text-muted">SGN</span><br>
+                                                            <span class="date text-muted" th:text="${item.dateDepart}"></span>
+                                                        </div>
+                                                        <div class="arrow mx-3">
+                                                            <i class="fa-solid fa-arrow-right fa-2x"></i>
+                                                            <span class="duration" th:text="${item.durationString}">2h 5ph</span>
+                                                        </div>
+                                                        <div class="arrival">
+                                                            <span class="time h5" th:text="${item.timeArrival}">01:20</span><br>
+                                                            <span class="location text-muted">HAN</span><br>
+                                                            <span class="date text-muted" th:text="${item.dateArrival}"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flight-info mt-3">
+                                                        <div class="d-flex justify-content-between">
+                                                            <span th:text="${item.nameAirline}">VietJet Air</span>
+                                                        </div>
+                                                        <div>
+                                                            <small class="text-muted" th:text="${item.nameAiport}"></small>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="flight-details card-body">
-                                        <div class="flight-time d-flex align-items-center">
-                                            <div class="departure">
-                                                <span class="time h5" th:text="${item.timeDepart}"></span><br>
-                                                <span class="location text-muted">SGN</span><br>
-                                                <span class="date text-muted" th:text="${item.dateDepart}"></span>
                                             </div>
-                                            <div class="arrow mx-3">
-                                                <i class="fa-solid fa-arrow-right fa-2x"></i>
-                                                <span class="duration" th:text="${item.durationString}">2h 5ph</span>
+                                            <div class="flight-price card-footer d-flex align-items-center justify-content-between">
+                                                <span class="price h5" th:text="${'$'+item.price}"><span class="currency">₫</span></span>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Chi tiết giá vé
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#">Giá vé cơ bản: 1.800.000₫</a></li>
+                                                        <li><a class="dropdown-item" href="#">Thuế phí: 427.222₫</a></li>
+                                                    </ul>
+                                                </div>
+                                                <button class="btn btn-success">Chọn</button>
                                             </div>
-                                            <div class="arrival">
-                                                <span class="time h5" th:text="${item.timeArrival}">01:20</span><br>
-                                                <span class="location text-muted">HAN</span><br>
-                                                <span class="date text-muted" th:text="${item.dateArrival}"></span>
-                                            </div>
+
                                         </div>
-                                        <div class="flight-info mt-3">
-                                            <div class="d-flex justify-content-between">
-                                                <span th:text="${item.nameAirline}">VietJet Air</span>
-                                            </div>
-                                            <div>
-                                                <small class="text-muted" th:text="${item.nameAiport}"></small>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    </div>
-                                    <div class="flight-price card-footer d-flex align-items-center justify-content-between">
-                                        <span class="price h5" th:text="${'$'+item.price}"><span class="currency">₫</span></span>
-                                        <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Chi tiết giá vé
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Giá vé cơ bản: 1.800.000₫</a></li>
-                                                <li><a class="dropdown-item" href="#">Thuế phí: 427.222₫</a></li>
-                                            </ul>
-                                        </div>
-                                        <button class="btn btn-success">Chọn</button>
-                                    </div>
 
 
+                                    </th:block>
+                                </th:block>
 
 
-                            </th:block>
+                            </div>
                         </div>
-                    </div>
+                    </th:block>
+
                 </div>
             </div>
         </div>
     </div>
-    <script th:fragment="customScripts">
-        function initFlatpickr() {
-            flatpickr("#datePickerInput", {
-                mode: "range",  // Enable date range selection
-                dateFormat: "M j / Y",  // Format for displayed dates
-                defaultDate: ["Jul 7 / 2020", "Aug 25 / 2020"],  // Set default dates
-                onReady: function (selectedDates, dateStr, instance) {
-                    instance.element.value = dateStr;
-                }
-            });
-        }
-
-        document.getElementById("datePickerInput").addEventListener("focus", function () {
-            // Initialize flatpickr only if not already initialized
-            if (!this.classList.contains("flatpickr-input-active")) {
-                initFlatpickr();
-                this.classList.add("flatpickr-input-active");
-            }
-        });
-        const flightDetails = document.querySelector('.flight-details');
-        const detailsDivs = flightDetails.querySelectorAll('div');
-        const dropdownButton = document.querySelector('#dropdownToggle');
-
-        // Ẩn tất cả các div con ban đầu
-        detailsDivs.forEach(div => {
-            div.classList.add('hidden');
-        });
-
-        // Thay đổi icon thành mũi tên xuống
-        dropdownButton.innerHTML = '<i class="fa-solid fa-arrow-down"></i>';
-
-        // Thêm sự kiện click cho nút dropdown
-        dropdownButton.addEventListener('click', () => {
-            // Chuyển đổi trạng thái hiển thị và icon
-            if (detailsDivs[0].classList.contains('hidden')) {
-                detailsDivs.forEach((div, index) => {
-                    setTimeout(() => {
-                        div.classList.remove('hidden');
-                        div.classList.add('show');
-                    }, index * 100);
-                });
-                dropdownButton.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
-            } else {
-                detailsDivs.forEach((div, index) => {
-                    setTimeout(() => {
-                        div.classList.remove('show');
-                        div.classList.add('hidden');
-                    }, index * 100);
-                });
-                dropdownButton.innerHTML = '<i class="fa-solid fa-arrow-down"></i>';
-            }
-        });
-
-
+    <script th:fragment="customScripts" th:src="@{/user/SearchFlight/SearchFlight.js}">
 
     </script>
 

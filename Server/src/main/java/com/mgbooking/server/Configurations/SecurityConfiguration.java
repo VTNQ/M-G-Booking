@@ -58,7 +58,8 @@ public class SecurityConfiguration {
                 .csrf(cs -> cs.disable())
                 .cors(cs->cs.configurationSource(corsConfigurationSource()))
                 .authorizeRequests()
-                .requestMatchers("/auth/login","/auth/logout","/images/**", "/favicon.ico", "/css/**", "/js/**","/Country","/City/{id}","/registerUser","/registerOwner","/Flight/SearchFlight","/AirPort/SearchAirPort","/Flight/ShowDetailFlight/{id}","/Flight/FindPrice").permitAll()
+                .requestMatchers("/auth/login","/auth/logout","/images/**", "/favicon.ico", "/css/**", "/js/**","/Country","/City/{id}","/registerUser","/registerOwner","/Flight/SearchFlight","/AirPort/SearchAirPort","/Flight/ShowDetailFlight/{id}",
+                        "/Flight/FindPrice","/Airline/SearchAirline").permitAll()
 
                 .requestMatchers(
                         "/Country/CreateCountry",

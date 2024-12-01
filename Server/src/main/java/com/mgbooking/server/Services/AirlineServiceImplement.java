@@ -23,6 +23,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -153,5 +154,10 @@ public class AirlineServiceImplement implements AirlineService {
     public List<ListFlightDto> ShowAirlineDto(int id) {
         List<ListFlightDto>airlines=AirlineRepository.ShowAirlineDto(id);
         return modelMapper.map(airlines,new TypeToken<List<ListFlightDto>>(){}.getType());
+    }
+
+    @Override
+    public List<Airline> SearchAirline(int departureAirport, int arrivalAirport, LocalDate departureTime, String TypeFlight) {
+        return modelMapper.map(AirlineRepository.SearchAirline(departureAirport,arrivalAirport,departureTime,TypeFlight),new TypeToken<List<Airline>>(){}.getType());
     }
 }

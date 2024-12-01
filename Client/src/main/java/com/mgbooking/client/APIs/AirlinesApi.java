@@ -1,5 +1,6 @@
 package com.mgbooking.client.APIs;
 
+import com.mgbooking.client.DTO.Airline;
 import com.mgbooking.client.DTO.ListFlightDto;
 import com.mgbooking.client.DTO.ResultApi;
 import com.mgbooking.client.DTO.UpdateFlightDTO;
@@ -27,4 +28,8 @@ public interface AirlinesApi {
     Call<ResultApi>Update(@Header("Authorization") String auth, @Part("id")RequestBody id, @Part("name")RequestBody name,@Part("idCountry") RequestBody idCountry,@Part MultipartBody.Part image);
     @GET("/Airline/FindAirline/{id}")
     Call<List<ListFlightDto>>FindAirlineByCountry(@Header("Authorization") String auth,@Path("id")int id);
+    @GET("/Airline/SearchAirline")
+    Call<List<Airline>>SearchAirline(@Query("departureAirport")int departureAirport, @Query("arrivalAirport")int arrivalAirport,
+                                     @Query("departureTime")String departureTime,
+                                     @Query("TypeFlight")String TypeFlight);
 }

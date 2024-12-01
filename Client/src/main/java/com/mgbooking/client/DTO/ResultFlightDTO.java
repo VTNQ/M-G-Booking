@@ -7,6 +7,16 @@ import java.time.format.DateTimeFormatter;
 
 public class ResultFlightDTO {
     private String imageUrl;
+
+    public int getIdFlight() {
+        return idFlight;
+    }
+
+    public void setIdFlight(int idFlight) {
+        this.idFlight = idFlight;
+    }
+
+    private int idFlight;
     private String nameCity;
     private Instant arrivalTime;
     private int id;

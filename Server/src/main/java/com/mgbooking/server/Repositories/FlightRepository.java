@@ -22,7 +22,7 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
     @Query("SELECT MIN(G.price) FROM Flight f Join DetailFlight G on f.id=G.idFlight.id where  DATE(f.departureTime) = :departureTime")
     public BigDecimal FindPrice(@Param("departureTime") LocalDate departureTime);
     @Query("SELECT new com.mgbooking.server.DTOS.ResultFlightDTO(f.id,d.imageUrl,f.arrivalAirport.city.name,f.arrivalTime,f.departureTime," +
-            "G.price,c.name,f.departureTime,f.arrivalTime,f.departureTime,f.arrivalTime,f.departureAirport.name) FROM Flight f " +
+            "G.price,c.name,f.departureTime,f.arrivalTime,f.departureTime,f.arrivalTime,f.departureAirport.name,f.airline.id) FROM Flight f " +
             "JOIN Airport a on a.id=f.departureAirport.id " +
             "JOIN Airport b on b.id=f.arrivalAirport.id " +
             "JOIN Airline c on c.id=f.airline.id "+

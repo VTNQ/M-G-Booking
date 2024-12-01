@@ -58,11 +58,9 @@ public class JWTTokenFilter extends OncePerRequestFilter {
 
                 } catch (Exception e) {
                     // Handle token parsing errors here
-                    e.printStackTrace();
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token: " + e.getMessage());
+                    return;
                 }
-            } else {
-                // Token not found in the session tokensList
-                System.out.println("Token not found in the tokens list.");
             }
         }
 

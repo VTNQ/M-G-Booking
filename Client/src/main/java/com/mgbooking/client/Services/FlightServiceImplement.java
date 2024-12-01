@@ -75,10 +75,14 @@ public class FlightServiceImplement implements FlightService{
     }
 
     @Override
-    public List<ResultFlightDTO> SearchFlights(SearchFlightDTO searchFlightDTO) {
+    public List<ResultFlightDTO> SearchFlights(int departureAirport, int arrivalAirport,
+                                               String departureTime,
+                                               String TypeFlight) {
         try {
             FlightApi flightApi=ApiClient.getRetrofit().create(FlightApi.class);
-            Response<List<ResultFlightDTO>>response=flightApi.SearchFlight(searchFlightDTO.getDepartureAirport(),searchFlightDTO.getArrivalAirport(),searchFlightDTO.getDepartureTime(),searchFlightDTO.getTypeFlight()).execute();
+            Response<List<ResultFlightDTO>>response=flightApi.SearchFlight(departureAirport, arrivalAirport,
+            departureTime,
+            TypeFlight).execute();
             if(response.isSuccessful()){
                 return response.body();
             }else{

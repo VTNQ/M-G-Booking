@@ -3,6 +3,7 @@ package com.mgbooking.client.Controllers;
 import com.mgbooking.client.Configuration.JwtUtil;
 import com.mgbooking.client.DTO.ResultFlightDTO;
 import com.mgbooking.client.DTO.SearchFlightDTO;
+import com.mgbooking.client.Services.AirlineService;
 import com.mgbooking.client.Services.FlightService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class HomeController {
     private FlightService flightService;
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private AirlineService airlineService;
     @Value("${FlightUrl}")
     private String url;
     @GetMapping("Home")
@@ -54,10 +57,12 @@ public class HomeController {
             dateMap.put("day", String.valueOf(nextDate.getDayOfMonth()));
             dateMap.put("month", String.valueOf(nextDate.getMonthValue()));
             dateMap.put("minprice",String.valueOf(minPrice));
+            modelMap.put("Flight"+i,flightService.SearchFlights(searchFlightDTO.getDepartureAirport(),searchFlightDTO.getArrivalAirport(),nextDateStr,searchFlightDTO.getTypeFlight()));
             dateList.add(dateMap);
         }
         modelMap.put("dateList", dateList);
-        modelMap.put("Flight",flightService.SearchFlights(searchFlightDTO));
+
+        modelMap.put("Airline",airlineService.SearchAirline(searchFlightDTO));
     modelMap.put("url",url);
     return "User/Flight/Flight";
     }
