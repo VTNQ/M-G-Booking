@@ -8,6 +8,15 @@ public class SearchFlightDTO {
     private String departureTime;
     private String TypeFlight;
 
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    private String arrivalTime;
     public String getTypeFlight() {
         return TypeFlight;
     }

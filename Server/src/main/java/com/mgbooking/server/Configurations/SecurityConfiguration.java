@@ -59,7 +59,7 @@ public class SecurityConfiguration {
                 .cors(cs->cs.configurationSource(corsConfigurationSource()))
                 .authorizeRequests()
                 .requestMatchers("/auth/login","/auth/logout","/images/**", "/favicon.ico", "/css/**", "/js/**","/Country","/City/{id}","/registerUser","/registerOwner","/Flight/SearchFlight","/AirPort/SearchAirPort","/Flight/ShowDetailFlight/{id}",
-                        "/Flight/FindPrice","/Airline/SearchAirline").permitAll()
+                        "/Flight/FindPrice","/Airline/SearchAirline","/AirPort/FindById/{id}","/Flight/SearchFlightByArrivalTime").permitAll()
 
                 .requestMatchers(
                         "/Country/CreateCountry",
@@ -67,7 +67,7 @@ public class SecurityConfiguration {
                         "Country/DeleteCountry/**",
                         "/Country/GetAllCountries/**",
                         "/Country/FindByCountry/**","/Airline/AddFlight","/Airline/GetFlight","/Airline/UpdateFlight","/Airline/FindFlight/{id}").hasRole("SUPERADMIN")
-                .requestMatchers("City/CreateCity","/City/{id}","/City/FindCityPage/**","/City/FindCity/**","/City/DeleteCity/**","/AirPort/CreateAirPort","/AirPort/{id}","/AirPort/FindById/{id}","/AirPort/EditAirPort","/Flight/CreateFlight","/Airline/FindAirline/{id}","/AirPort/FindAllByCountry/{id}","/Flight/FindFlight/{id}","/Flight/FindAll/**",
+                .requestMatchers("City/CreateCity","/City/{id}","/City/FindCityPage/**","/City/FindCity/**","/City/DeleteCity/**","/AirPort/CreateAirPort","/AirPort/{id}","/AirPort/EditAirPort","/Flight/CreateFlight","/Airline/FindAirline/{id}","/AirPort/FindAllByCountry/{id}","/Flight/FindFlight/{id}","/Flight/FindAll/**",
                         "/Flight/UpdateFlight","/DetailFlight/{id}","/DetailFlight/UpdateDetail").hasRole("ADMIN")
 
                 .requestMatchers("/auth/","/auth/UpdateAccount").hasAnyRole("ADMIN", "SUPERADMIN","USER","OWNER")

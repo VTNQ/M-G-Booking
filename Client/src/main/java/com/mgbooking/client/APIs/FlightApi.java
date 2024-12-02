@@ -21,5 +21,11 @@ public interface FlightApi {
                                             @Query("departureTime")String departureTime,
                                             @Query("TypeFlight")String TypeFlight);
     @GET("/Flight/FindPrice")
-    Call<BigDecimal>FindMinPrce(@Query("departureTime")String departureTime);
+    Call<BigDecimal>FindMinPirce(@Query("departureTime")String departureTime);
+    @GET("/Flight/SearchFlightByArrivalTime")
+    Call<List<ResultFlightDTO>>SearchFlightByArrivalTime(@Query("departureAirport")int departureAirport,
+                                                         @Query("arrivalAirport")int arrivalAirport,
+                                                         @Query("departureTime")String departureTime,
+                                                         @Query("ArrivalTime")String ArrivalTime,
+                                                         @Query("TypeFlight")String TypeFlight);
 }

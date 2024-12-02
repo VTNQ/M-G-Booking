@@ -16,4 +16,5 @@ public Page<FlightPaginateDTo>FindAllByCountry(Pageable pageable, int id);
 public boolean UpdateInformationFlight(FlightListDto flightListDto);
 public List<ResultFlightDTO>SearchFlight(int departureAirport, int arrivalAirport, LocalDate departureTime,String TypeFlight);
 public BigDecimal FindPrice(LocalDate departureTime);
+public List<ResultFlightDTO>SearchFlightAllDto(int departureAirport, int arrivalAirport, LocalDate departureTime,LocalDate ArrivalTime,String TypeFlight);
 }

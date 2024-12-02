@@ -140,11 +140,18 @@ public class FlightServiceImplement implements FlightService{
         } catch (Exception ex) {
             // Ghi log lỗi để dễ dàng kiểm tra
             System.err.println("Error finding price: " + ex.getMessage());
-            // Trả về giá trị mặc định là BigDecimal.ZERO
+
             return BigDecimal.ZERO;
         }
     }
 
+    @Override
+    public List<ResultFlightDTO> SearchFlightAllDto(int departureAirport, int arrivalAirport, LocalDate departureTime, LocalDate ArrivalTime, String TypeFlight) {
+        String flightUrl = environment.getProperty("FlightUrl");
+        List<ResultFlightDTO> flight=flightRepository.SearchFindFlightAll(departureAirport,arrivalAirport,departureTime,ArrivalTime,TypeFlight);
+
+        return modelMapper.map(flight,new TypeToken<List<ResultFlightDTO>>(){}.getType());
+    }
 
 
 }
