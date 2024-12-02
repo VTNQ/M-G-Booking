@@ -98,7 +98,23 @@ public class FlightServiceImplement implements FlightService{
     public BigDecimal FindMinPrice(String departureTime) {
         try {
             FlightApi flightApi=ApiClient.getRetrofit().create(FlightApi.class);
-            Response<BigDecimal>response=flightApi.FindMinPrce(departureTime).execute();
+            Response<BigDecimal>response=flightApi.FindMinPirce(departureTime).execute();
+            if(response.isSuccessful()){
+                return response.body();
+            }else{
+                return null;
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ResultFlightDTO> SearchFlightsByArrivalTime(int departureAirport, int arrivalAirport, String departureTime, String ArrivalTime, String TypeFlight) {
+        try {
+            FlightApi flightApi=ApiClient.getRetrofit().create(FlightApi.class);
+            Response<List<ResultFlightDTO>>response=flightApi.SearchFlightByArrivalTime(departureAirport,arrivalAirport,departureTime,ArrivalTime,TypeFlight).execute();
             if(response.isSuccessful()){
                 return response.body();
             }else{

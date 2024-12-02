@@ -7,6 +7,7 @@
 </head>
 <body>
 <main id="content" class="relative block">
+
     <div class="bg-gray-33 py-1">
         <div class="container-fluid">
             <div class="border-0">
@@ -39,7 +40,7 @@
                     </ul>
                     <div class="tab-content hero-tab-pane">
                         <div class="tab-pane fade active show">
-                            <form class="js-validate">
+                            <form th:action="@{/SearchFlight}" method="get" class="js-validate">
                                 <div class="row nav-select nav-select-1 d-block d-lg-flex mb-lg-2 px-lg-3 px-2 align-items-end">
                                     <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4">
                                         <span class="d-block text-gray-1 text-left mb-1"
@@ -51,7 +52,13 @@
                                                 <input type="text"
                                                        class="form-control shadow-none hero-form border-0 pl-0 bg-transparent"
                                                        placeholder="city or airport"
+                                                       id="from-airport"
                                                        style="font-style: normal;font-weight: bold">
+                                                <input type="hidden" id="FromAirport" th:field="${searchFlightDTO.departureAirport}">
+                                            </div>
+                                            <div class="search-dropdown" id="from-dropdown" style="width: 100vh">
+
+                                                <ul id="airport-list" style="list-style: none;padding: 1px"></ul>
                                             </div>
                                         </div>
                                     </div>
@@ -65,13 +72,19 @@
                                                 <input type="text"
                                                        class="form-control shadow-none hero-form border-0 pl-0 bg-transparent"
                                                        placeholder="city or airport"
+                                                       id="To-Airport"
                                                        style="font-style: normal;font-weight: bold">
+                                                <input type="hidden" id="ToAirPort" th:field="${searchFlightDTO.arrivalAirport}">
+                                            </div>
+                                            <div class="search-dropdown" id="to-dropdown" style="width: 100vh">
+
+                                                <ul id="airportListDropdown" style="list-style: none;padding: 1px"></ul>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4 ">
                                         <span class="d-block text-gray-1 text-left mb-1"
-                                              style="font-weight: 400!important;">Depart Return</span>
+                                              style="font-weight: 400!important;">Depart From</span>
                                         <div class="js-focus-state">
                                             <div class="input-group border-bottom-1">
                                                 <div id="datepickerWrapperFromOne"
@@ -82,7 +95,29 @@
                                                        style="color: #297cbb !important;font-weight: 500;font-style: normal"></i>
                                                 </span>
                                                     </div>
-                                                    <input type="date" id="datePickerInput"
+                                                    <input type="date" id="datePickerInput" th:field="${searchFlightDTO.departureTime}"
+                                                           class="js-range-datepicker font-size-16 shadow-none font-weight-medium form-control hero-form bg-transparent border-0 flatpickr-input"
+                                                           style="font-weight: 500;font-size: 1rem;box-shadow: none;width: 217.5px;height: 54px"
+                                                           data-rp-default-date="[&quot;Jul 7 / 2020&quot;, &quot;Aug 25 / 2020&quot;]"/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-2 col-xl-2dot3 mb-4 ">
+                                        <span class="d-block text-gray-1 text-left mb-1"
+                                              style="font-weight: 400!important;">Depart To</span>
+                                        <div class="js-focus-state">
+                                            <div class="input-group border-bottom-1">
+                                                <div id="datepickerWrapperFromOne"
+                                                     class="u-datepicker input-group relative">
+                                                    <div class="input-group-prepend">
+                                                <span class="d-flex align-items-center mr-2">
+                                                    <i class="fa-solid fa-calendar"
+                                                       style="color: #297cbb !important;font-weight: 500;font-style: normal"></i>
+                                                </span>
+                                                    </div>
+                                                    <input type="date" id="datePickerOutput" th:field="${searchFlightDTO.arrivalTime}"
                                                            class="js-range-datepicker font-size-16 shadow-none font-weight-medium form-control hero-form bg-transparent border-0 flatpickr-input"
                                                            style="font-weight: 500;font-size: 1rem;box-shadow: none;width: 217.5px;height: 54px"
                                                            data-rp-default-date="[&quot;Jul 7 / 2020&quot;, &quot;Aug 25 / 2020&quot;]"/>
@@ -99,25 +134,21 @@
                                                    style="color: #297cbb !important"></i>
                                                 <div class="dropdown bootstrap-select js-select dropdown-select"
                                                      style="width: 89%">
-                                                    <select class="js-select selectpicker dropdown-select">
-                                                        <option selected>1 Người lớn - Hạng phổ thông</option>
-                                                        <option>1 Người lớn - Hạng phổ thông</option>
-                                                        <option>1 Người lớn - Hạng phổ thông</option>
-                                                        <option>1 Người lớn - Hạng phổ thông</option>
-                                                    </select>
+
+                                                    <input type="hidden" id="selectElement" th:field="${searchFlightDTO.typeFlight}">
                                                     <button type="button" id="dropdownMenuButton"  data-bs-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-light">
                                                         <div class="filter-option">
                                                             <div class="filter-option-inner">
-                                                                <div class="filter-option-inner-inner">1 Người lớn - Hạng phổ thông</div>
+                                                                <div class="filter-option-inner-inner"  id="dropdownSelectedItem" th:text="${searchFlightDTO.typeFlight}">Popular</div>
                                                             </div>
                                                         </div>
                                                         <span class="dropdown-icon"></span> <!-- Adding a down arrow icon -->
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <li><a class="dropdown-item" href="#">1 Người lớn - Hạng phổ thông</a></li>
-                                                        <li><a class="dropdown-item" href="#">2 Người lớn - Hạng phổ thông</a></li>
-                                                        <li><a class="dropdown-item" href="#">1 Trẻ em - Hạng phổ thông</a></li>
-                                                        <li><a class="dropdown-item" href="#">1 Người lớn - Hạng thương gia</a></li>
+                                                        <li><a class="dropdown-item" href="#" data-value="Popular">Popular</a></li>
+                                                        <li><a class="dropdown-item" href="#" data-value="Premium Economy">Premium Economy</a></li>
+                                                        <li><a class="dropdown-item" href="#" data-value="Merchant">Merchant</a></li>
+                                                        <li><a class="dropdown-item" href="#" data-value="First Class">First Class</a></li>
                                                     </ul>
                                                 </div>
                                             </div>

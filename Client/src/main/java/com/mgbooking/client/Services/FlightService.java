@@ -17,4 +17,6 @@ public interface FlightService {
                                             String departureTime,
                                               String TypeFlight);
     public BigDecimal FindMinPrice(String departureTime);
+    public List<ResultFlightDTO>SearchFlightsByArrivalTime(int departureAirport,int arrivalAirport,
+                                                           String departureTime,String ArrivalTime,String TypeFlight);
 }

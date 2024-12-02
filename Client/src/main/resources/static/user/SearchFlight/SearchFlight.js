@@ -283,7 +283,27 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-
+function initFlatPickrOutPut(){
+    flatpickr("#datePickerOutput", {
+        mode: "range", // Enable date range selection
+        dateFormat: "Y-m-d", // Format to match LocalDate (yyyy-MM-dd)
+        defaultDate: [new Date()], // Set default dates in LocalDate format
+        onReady: function (selectedDates, dateStr, instance) {
+            if (selectedDates.length) {
+                // Display only the first date in the range
+                const firstDate = instance.formatDate(selectedDates[0], "Y-m-d");
+                instance.element.value = firstDate; // Set the input value to the first date
+            }
+        },
+        onChange: function (selectedDates, dateStr, instance) {
+            if (selectedDates.length) {
+                // Update the input value to show only the first selected date
+                const firstDate = instance.formatDate(selectedDates[0], "Y-m-d");
+                instance.element.value = firstDate;
+            }
+        }
+    });
+}
 function initFlatpickr() {
     flatpickr("#datePickerInput", {
         mode: "range", // Enable date range selection
@@ -304,6 +324,7 @@ function initFlatpickr() {
             }
         }
     });
+
 }
 
 
@@ -311,6 +332,13 @@ document.getElementById("datePickerInput").addEventListener("focus", function ()
     // Initialize flatpickr only if not already initialized
     if (!this.classList.contains("flatpickr-input-active")) {
         initFlatpickr();
+        this.classList.add("flatpickr-input-active");
+    }
+});
+document.getElementById("datePickerOutput").addEventListener("focus", function () {
+    // Initialize flatpickr only if not already initialized
+    if (!this.classList.contains("flatpickr-input-active")) {
+        initFlatPickrOutPut();
         this.classList.add("flatpickr-input-active");
     }
 });
@@ -327,5 +355,210 @@ document.querySelectorAll('.dropdown-item').forEach(item => {
         var dropdownItems = this.closest('.dropdown-menu').querySelectorAll('.dropdown-item');
         dropdownItems.forEach(i => i.classList.remove('selected'));
         this.classList.add('selected');
+    });
+});
+async function SearchById( id){
+    try {
+    const response=await fetch(`http://localhost:8686/AirPort/FindById/${encodeURIComponent(id)}`);
+   let airports=null;
+    if(response.ok){
+       airports=await response.json();
+
+    }else {
+        console.error(`Error: ${response.status} - ${response.statusText}`);
+    }
+    return airports;
+    }catch (error){
+        console.log(error)
+    }
+}
+document.addEventListener('DOMContentLoaded', async function () {
+    const fromSearchDropdown = document.querySelector("#from-airport");
+    const fromAirport = document.querySelector("#FromAirport");
+    const ToSearch = document.querySelector("#To-Airport");
+    const ToAirPort = document.querySelector("#ToAirPort");
+    const loadingOverlay = document.createElement("div");
+    loadingOverlay.className = "loading-overlay";
+
+    // Spinner element
+    const spinner = document.createElement("div");
+    spinner.className = "spinner";
+    loadingOverlay.appendChild(spinner);
+
+    // Optional loading text
+    const loadingText = document.createElement("div");
+    loadingText.className = "loading-text";
+    loadingText.textContent = "Loading, please wait...";
+    loadingOverlay.appendChild(loadingText);
+
+    // Add overlay to the body
+    document.body.appendChild(loadingOverlay);
+
+    // Create skeleton elements
+
+
+    try {
+        let fromAirports = await SearchById(fromAirport.value);
+        let ToAirports = await SearchById(ToAirPort.value);
+        if (fromAirports != null) {
+            // Replace skeleton with the real content
+
+
+            fromSearchDropdown.value = fromAirports.name;
+            ToSearch.value = ToAirports.name;
+        }
+    } catch (error) {
+        console.log(error);
+    } finally {
+        // Remove the loading overlay after the async operation
+        document.body.removeChild(loadingOverlay);
+    }
+});
+
+document.getElementById('from-airport').addEventListener('input',async (event)=>{
+    const search=event.target.value;
+    const dropdown=document.getElementById('from-dropdown');
+    const airportList=document.getElementById('airport-list');
+    if(search.trim()===''){
+        dropdown.style.display='none';
+        return;
+    }
+    try {
+    const response=await fetch(`http://localhost:8686/AirPort/SearchAirPort?search=${encodeURIComponent(search)}`);
+    if(response.ok){
+        const airports=await response.json();
+        airportList.innerHTML = "";
+        airports.forEach(airport => {
+            const li = document.createElement("li");
+
+            // Set the dropdown header with the country of the airport
+            li.innerHTML = `
+                    <div class="dropdown-header" style="display: flex">
+                        <span id="city-name">${airport.country}</span>
+                        <span id="all-airports">Mọi sân bay</span>
+                    </div>
+                `;
+
+            // Iterate over the airportDTOS and append each airport item
+            airport.aiportDTOS.forEach(airportdto => {
+                const airportItem = document.createElement("div");
+                airportItem.classList.add("airport-item");
+                airportItem.innerHTML = `
+                        <div class="airport-info">
+                            <span class="airport-name"><i class="fa fa-plane icon" style="margin-right: 8px; color: #2a2a2a;"></i>Sân bay ${airportdto.name}</span>
+                            <span class="airport-code">${airportdto.code}</span>
+                        </div>
+                    `;
+
+                // Add click event listener specifically to the 'airport-item' div
+                airportItem.addEventListener("click", () => {
+                    document.getElementById("from-airport").value = `${airportdto.name} (${airportdto.code})`;
+                    document.getElementById("to-input-id").value = airportdto.id;
+                    dropdown.style.display = "none"; // Hide dropdown after selection
+                });
+
+                li.appendChild(airportItem);
+            });
+
+            airportList.appendChild(li);
+        });
+        dropdown.style.display = "block";
+    }
+    }catch (error){
+        console.error("Error fetching airport data:", error);
+    }
+});
+
+document.getElementById('To-Airport').addEventListener('input',async (event)=>{
+    const search=event.target.value;
+    const dropdown=document.getElementById('to-dropdown');
+    const airportList=document.getElementById('airportListDropdown');
+    if(search.trim()===''){
+        dropdown.style.display='none';
+        return;
+    }
+    try {
+        const response=await fetch(`http://localhost:8686/AirPort/SearchAirPort?search=${encodeURIComponent(search)}`);
+        if(response.ok){
+            const airports=await response.json();
+            airportList.innerHTML = "";
+            airports.forEach(airport => {
+                const li = document.createElement("li");
+
+                // Set the dropdown header with the country of the airport
+                li.innerHTML = `
+                    <div class="dropdown-header" style="display: flex">
+                        <span id="city-name">${airport.country}</span>
+                        <span id="all-airports">Mọi sân bay</span>
+                    </div>
+                `;
+
+                // Iterate over the airportDTOS and append each airport item
+                airport.aiportDTOS.forEach(airportdto => {
+                    const airportItem = document.createElement("div");
+                    airportItem.classList.add("airport-item");
+                    airportItem.innerHTML = `
+                        <div class="airport-info">
+                            <span class="airport-name"><i class="fa fa-plane icon" style="margin-right: 8px; color: #2a2a2a;"></i>Sân bay ${airportdto.name}</span>
+                            <span class="airport-code">${airportdto.code}</span>
+                        </div>
+                    `;
+
+                    // Add click event listener specifically to the 'airport-item' div
+                    airportItem.addEventListener("click", () => {
+                        document.getElementById("To-Airport").value = `${airportdto.name} (${airportdto.code})`;
+                        document.getElementById("to-input-id").value = airportdto.id;
+                        dropdown.style.display = "none"; // Hide dropdown after selection
+                    });
+
+                    li.appendChild(airportItem);
+                });
+
+                airportList.appendChild(li);
+            });
+            dropdown.style.display = "block";
+        }
+    }catch (error){
+        console.error("Error fetching airport data:", error);
+    }
+})
+document.addEventListener("click", (event) => {
+    const fromDropdown = document.getElementById("from-dropdown");
+    const toDropdown = document.getElementById("to-dropdown");
+    const searchFrom = document.getElementById("from-airport");
+    const searchTo = document.getElementById("To-Airport");
+
+    // Ẩn dropdown "Bay từ" nếu nhấp ra ngoài
+    if (!searchFrom.contains(event.target)) {
+        fromDropdown.style.display = "none";
+    }
+
+    // Ẩn dropdown "Bay đến" nếu nhấp ra ngoài
+    if (!searchTo.contains(event.target)) {
+        toDropdown.style.display = "none";
+    }
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdownItems = document.querySelectorAll('.dropdown-item');
+    const dropdownSelectedItem = document.getElementById('dropdownSelectedItem');
+    const selectElement = document.getElementById('selectElement');
+
+    // Event listener for dropdown item selection
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', function (event) {
+            const selectedText = event.target.textContent;
+            const selectedValue = event.target.getAttribute('data-value');
+
+            // Update dropdown button text
+            dropdownSelectedItem.textContent = selectedText;
+
+            // Update the <select> element selected option
+            const options = selectElement.value;
+
+            selectElement.value=selectedText;
+
+            // Trigger selectpicker update (optional if using a library like bootstrap-select)
+
+        });
     });
 });

@@ -57,11 +57,17 @@ public class HomeController {
             dateMap.put("day", String.valueOf(nextDate.getDayOfMonth()));
             dateMap.put("month", String.valueOf(nextDate.getMonthValue()));
             dateMap.put("minprice",String.valueOf(minPrice));
-            modelMap.put("Flight"+i,flightService.SearchFlights(searchFlightDTO.getDepartureAirport(),searchFlightDTO.getArrivalAirport(),nextDateStr,searchFlightDTO.getTypeFlight()));
+            if(searchFlightDTO.getArrivalTime()==null){
+                modelMap.put("Flight"+i,flightService.SearchFlights(searchFlightDTO.getDepartureAirport(),searchFlightDTO.getArrivalAirport(),
+                        nextDateStr,searchFlightDTO.getTypeFlight()));
+            }else{
+                modelMap.put("Flight"+i,flightService.SearchFlightsByArrivalTime(searchFlightDTO.getDepartureAirport(),searchFlightDTO.getArrivalAirport(),searchFlightDTO.getDepartureTime(),searchFlightDTO.getArrivalTime(),searchFlightDTO.getTypeFlight()));
+            }
+
             dateList.add(dateMap);
         }
         modelMap.put("dateList", dateList);
-
+        modelMap.put("searchFlightDTO",searchFlightDTO);
         modelMap.put("Airline",airlineService.SearchAirline(searchFlightDTO));
     modelMap.put("url",url);
     return "User/Flight/Flight";

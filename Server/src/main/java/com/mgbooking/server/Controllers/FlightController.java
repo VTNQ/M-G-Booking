@@ -37,6 +37,16 @@ public class FlightController {
             return new ResponseEntity<Page<FlightPaginateDTo>>(HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping("SearchFlightByArrivalTime")
+    public ResponseEntity<List<ResultFlightDTO>>SearchFlightByArrivalTime(@RequestParam("departureAirport")int departureAirport, @RequestParam("arrivalAirport") int arrivalAirport,
+                                                                          @RequestParam("departureTime")LocalDate departureTime,@RequestParam("ArrivalTime") LocalDate ArrivalTime,@RequestParam("TypeFlight")String TypeFlight){
+        try {
+            return new ResponseEntity<List<ResultFlightDTO>>(flightService.SearchFlightAllDto(departureAirport,arrivalAirport,departureTime,ArrivalTime,TypeFlight),HttpStatus.OK);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<List<ResultFlightDTO>>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @GetMapping("SearchFlight")
     public ResponseEntity<List<ResultFlightDTO>>SearchFlight(@RequestParam("departureAirport")int departureAirport, @RequestParam("arrivalAirport") int arrivalAirport,
