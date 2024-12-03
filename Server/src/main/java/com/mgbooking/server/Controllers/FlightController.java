@@ -28,10 +28,10 @@ public class FlightController {
     @Autowired
     private FlightService flightService;
     @GetMapping(value = "FindAll/{id}")
-    public ResponseEntity<Page<FlightPaginateDTo>> findAllFlights(@PathVariable int id, @RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "10")int size) {
+    public ResponseEntity<Page<FlightPaginateDTo>> findAllFlights(@PathVariable int id, @RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "10")int size,@RequestParam("name")String name) {
         try {
             Pageable pageable= PageRequest.of(page,size);
-            return new ResponseEntity<Page<FlightPaginateDTo>>(flightService.FindAllByCountry(pageable,id),HttpStatus.OK);
+            return new ResponseEntity<Page<FlightPaginateDTo>>(flightService.FindAllByCountry(pageable,id,name),HttpStatus.OK);
         }catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<Page<FlightPaginateDTo>>(HttpStatus.BAD_REQUEST);

@@ -6,6 +6,7 @@ import com.mgbooking.server.DTOS.AuthenticationResponse;
 import com.mgbooking.server.DTOS.LoginDTO;
 import com.mgbooking.server.Services.OwnerService;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -50,15 +51,7 @@ public class AuthController {
         }
 
     }
-    public List<String> getTokensFromSession(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        List<String> tokensList = (List<String>) session.getAttribute("tokensList");
 
-        if (tokensList != null) {
-            return tokensList; // Return the list of tokens if available
-        }
-        return Collections.emptyList(); // Return an empty list if no tokens are found
-    }
     @PutMapping("UpdateAccount")
     public ResponseEntity<Object>UpdateAccount(@RequestBody AccountDto accountDto){
         Map<String, Object> response = new LinkedHashMap<>();
@@ -73,7 +66,7 @@ public class AuthController {
         }
     }
     @PostMapping("login")
-    public ResponseEntity<Map<String, String>> createAuthenticationToken(@RequestBody LoginDTO authenticationRequest, HttpServletRequest request) throws Exception {
+    public ResponseEntity<Map<String, String>> createAuthenticationToken(@RequestBody LoginDTO authenticationRequest, HttpServletRequest request,HttpServletResponse response) throws Exception {
         try {
             // Authenticate the user
             authenticationManager.authenticate(
@@ -84,25 +77,11 @@ public class AuthController {
             final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
             final String jwt = jwtTokenUtil.generateToken(userDetails);
 
-            // Retrieve tokens from session (get both access token and refresh token)
-            List<String> tokensList = getTokensFromSession(request);
-            if (tokensList.size()<=0) {
-                tokensList = new ArrayList<>();
-            }
-
-            // Add the generated jwt to the tokens list
-            tokensList.add(jwt);  // Adding the current access token (JWT)
-
-            // Store the updated list of tokens back in session
-            HttpSession session = request.getSession();
-            session.setAttribute("tokensList", tokensList);
-
-            // Prepare the response with the AccessToken and RefreshToken
-            Map<String, String> response = new HashMap<>();
-            response.put("AccessToken", jwt);
+            Map<String, String> responseBody = new HashMap<>();
+            responseBody.put("AccessToken", jwt);
 
 
-            return ResponseEntity.ok(response);
+            return ResponseEntity.ok(responseBody);
         } catch (BadCredentialsException e) {
             throw new Exception("Invalid username or password", e);
         }

@@ -12,7 +12,7 @@ import java.util.List;
 public interface FlightService {
 public boolean CreateFlight(FlightDTO flightDTO);
 public FlightListDto GetFlight(int id);
-public Page<FlightPaginateDTo>FindAllByCountry(Pageable pageable, int id);
+public Page<FlightPaginateDTo>FindAllByCountry(Pageable pageable, int id,String name);
 public boolean UpdateInformationFlight(FlightListDto flightListDto);
 public List<ResultFlightDTO>SearchFlight(int departureAirport, int arrivalAirport, LocalDate departureTime,String TypeFlight);
 public BigDecimal FindPrice(LocalDate departureTime);

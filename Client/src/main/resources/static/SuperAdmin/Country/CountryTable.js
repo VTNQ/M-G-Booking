@@ -2,6 +2,7 @@ const pageSize = 10;
 let CurrentPage = 0;
 let totalPages = 10;
 
+let SearchQuery='';
 function updatePaginationControls(totalCount) {
     totalPages = Math.ceil(totalCount / pageSize);
     $('#prevPage').prop('disabled', CurrentPage);
@@ -18,10 +19,10 @@ function changePage(page){
 
     if (page >= 0 && page <= totalPages) {
         CurrentPage = page;
-        fetchCountries(CurrentPage, pageSize);  // Fetch countries for the selected page
+        fetchCountries(CurrentPage, pageSize,SearchQuery);  // Fetch countries for the selected page
     }
 }
-function fetchCountries(page, size) {
+function fetchCountries(page, size,search) {
     const token = document.getElementById('token') ? document.getElementById('token').textContent : null;
 
     if (!token) {
@@ -29,7 +30,7 @@ function fetchCountries(page, size) {
         return; // Exit early if no token is available
     }
     console.log(token);
-    const url = `http://localhost:8686/Country/GetAllCountries?page=${page}&size=${size}`;
+    const url = `http://localhost:8686/Country/GetAllCountries?page=${page}&size=${size}&name=${search}`;
     console.log(`Fetching countries from: ${url}`);
 
     $.ajax({
@@ -40,7 +41,7 @@ function fetchCountries(page, size) {
         },
         success: function (response) {
 
-            const countries = response.content;
+            let countries= response.content;
             const totalCount = response.totalPages;
             const currentPage = response.number;
             const pageSize = response.size;
@@ -71,13 +72,19 @@ function fetchCountries(page, size) {
 $('#prevPage').click(function (){
     if(CurrentPage>1){
         CurrentPage--;
-        fetchCountries(CurrentPage,pageSize);
+        fetchCountries(CurrentPage,pageSize,SearchQuery);
     }
 })
 $('#nextPage').click(function (){
     if(CurrentPage<totalPages){
         CurrentPage++;
-        fetchCountries(CurrentPage,pageSize);
+        fetchCountries(CurrentPage,pageSize,SearchQuery);
     }
 })
-fetchCountries(CurrentPage, pageSize);
+function searchCountry(){
+    SearchQuery=document.getElementById("searchCountry").value;
+    CurrentPage=0;
+    fetchCountries(CurrentPage,pageSize,SearchQuery)
+}
+
+fetchCountries(CurrentPage, pageSize,SearchQuery);

@@ -1,6 +1,7 @@
 const pageSize = 10;
 let CurrentPage = 0;
 let totalPages = 10;
+let SearchQuery='';
 function updatePaginationControls(totalCount){
     totalPages=Math.ceil(totalCount/pageSize);
     $('#prevPage').prop('disabled',CurrentPage);
@@ -16,16 +17,16 @@ function updatePaginationControls(totalCount){
 function changePage(page){
     if (page >= 0 && page <= totalPages) {
         CurrentPage = page;
-        fetchAirline(CurrentPage, pageSize);  // Fetch countries for the selected page
+        fetchAirline(CurrentPage, pageSize,SearchQuery);  // Fetch countries for the selected page
     }
 }
-function fetchAirline(page,size){
+function fetchAirline(page,size,search){
     const token = document.getElementById('token') ? document.getElementById('token').textContent : null;
     if (!token) {
         console.error('No access token found.');
         return; // Exit early if no token is available
     }
-    const url=`http://localhost:8686/Flight/GetFlight?page=${page}&size=${size}`;
+    const url=`http://localhost:8686/Airline/GetFlight?page=${page}&size=${size}&name=${encodeURIComponent(search)}`;
     $.ajax({
         url: url,
         method: 'GET',
@@ -57,15 +58,20 @@ function fetchAirline(page,size){
 $('#prevPage').click(function (){
     if(CurrentPage>1){
         CurrentPage--;
-        fetchAirline(CurrentPage,pageSize);
+        fetchAirline(CurrentPage,pageSize,SearchQuery);
     }
 })
 $('#nextPage').click(function (){
     if(CurrentPage<totalPages){
         CurrentPage++;
-        fetchAirline(CurrentPage,pageSize);
+        fetchAirline(CurrentPage,pageSize,SearchQuery);
     }
 });
+function searchAirline(){
+    SearchQuery=document.getElementById("searchAirline").value;
+    CurrentPage=0;
+    fetchAirline(CurrentPage,pageSize,SearchQuery)
+}
 document.getElementById('fileInput').addEventListener('change', function(event) {
     const file = event.target.files[0];
     if (file) {
@@ -78,4 +84,4 @@ document.getElementById('fileInput').addEventListener('change', function(event) 
         reader.readAsDataURL(file); // Đọc tệp và chuyển thành URL
     }
 });
-fetchAirline(CurrentPage,pageSize);
+fetchAirline(CurrentPage,pageSize,SearchQuery);

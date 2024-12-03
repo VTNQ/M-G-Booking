@@ -84,8 +84,8 @@ public class FlightServiceImplement implements FlightService{
     }
 
     @Override
-    public Page<FlightPaginateDTo> FindAllByCountry(Pageable pageable, int id) {
-        return modelMapper.map(flightRepository.FindAllFlights(pageable,id),new TypeToken<Page<FlightListDto>>(){}.getType());
+    public Page<FlightPaginateDTo> FindAllByCountry(Pageable pageable, int id,String name) {
+        return modelMapper.map(flightRepository.FindAllFlights(pageable,id,name),new TypeToken<Page<FlightListDto>>(){}.getType());
     }
     private Instant convertToInstant(String timeString) {
         if (timeString == null || timeString.isEmpty()) {

@@ -70,10 +70,10 @@ public class AirlineController {
         }
     }
     @GetMapping(value = "/GetFlight")
-    public ResponseEntity<Page<ListFlightDto>>GetFlight(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "10")int size){
+    public ResponseEntity<Page<ListFlightDto>>GetFlight(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "10")int size,@RequestParam("name")String name){
         try {
             Pageable pageable= PageRequest.of(page,size);
-            return new ResponseEntity<Page<ListFlightDto>>(flightService.findAll(pageable), HttpStatus.OK);
+            return new ResponseEntity<Page<ListFlightDto>>(flightService.findAll(pageable,name), HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<Page<ListFlightDto>>(HttpStatus.BAD_REQUEST);

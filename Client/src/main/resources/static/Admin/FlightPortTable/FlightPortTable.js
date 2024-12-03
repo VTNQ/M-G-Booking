@@ -110,7 +110,7 @@ addDetailFlightButton.addEventListener("click", () => {
 let pageSize = 10;
 let CurrentPage = 0;
 let TotalPages = 10;
-
+let SearchQuery="";
 function updatePaginationControls(totalCount) {
     totalPages = Math.ceil(totalCount / pageSize);
     $('#prevPage').prop('disabled', CurrentPage === 1);
@@ -128,7 +128,7 @@ $('#prevPageItem').click(function () {
     if (CurrentPage >= 0) {
         CurrentPage--;
 
-        fetchFlight(CurrentPage, pageSize);
+        fetchFlight(CurrentPage, pageSize,SearchQuery);
     }
 
     // Disable the button if CurrentPage is 0 or less
@@ -142,7 +142,7 @@ $('#nextPage').click(function () {
     if (CurrentPage < TotalPages) {
         CurrentPage++;
 
-        fetchFlight(CurrentPage,pageSize);
+        fetchFlight(CurrentPage,pageSize,SearchQuery);
     }
 })
 
@@ -150,19 +150,19 @@ function changePage(page) {
 
     if (page >= 0 && page <= totalPages) {
         CurrentPage = page;
-        fetchFlight(CurrentPage , pageSize);
+        fetchFlight(CurrentPage , pageSize,SearchQuery);
     }
 }
 
 
-function fetchFlight(page, size) {
+function fetchFlight(page, size,query) {
     const token = document.getElementById('token') ? document.getElementById('token').textContent : null;
     const id = document.getElementById('IdCountry') ? document.getElementById('IdCountry').textContent : null;
     if (!token) {
         console.error('No access token found.');
         return;
     }
-    const url = `http://localhost:8686/Flight/FindAll/${id}?page=${page}&size=${size}`;
+    const url = `http://localhost:8686/Flight/FindAll/${id}?page=${page}&size=${size}&name=${query}`;
     $.ajax({
         url: url, method: 'GET', headers: {
             'Authorization': `Bearer ${token}`
@@ -190,4 +190,9 @@ function fetchFlight(page, size) {
     })
 
 }
-fetchFlight(CurrentPage,pageSize);
+function SearchFlight(){
+    SearchQuery=document.getElementById("searchFlight").value;
+    CurrentPage=0;
+    fetchFlight(CurrentPage,pageSize,SearchQuery)
+}
+fetchFlight(CurrentPage,pageSize,SearchQuery);

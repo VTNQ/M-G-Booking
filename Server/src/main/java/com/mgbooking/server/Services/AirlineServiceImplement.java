@@ -77,9 +77,9 @@ public class AirlineServiceImplement implements AirlineService {
     }
 
     @Override
-    public Page<ListFlightDto> findAll(Pageable pageable) {
+    public Page<ListFlightDto> findAll(Pageable pageable,String name) {
         String flightUrl = environment.getProperty("FlightUrl");
-        Page<ListFlightDto>airlines=AirlineRepository.AllAirlineDto(pageable);
+        Page<ListFlightDto>airlines=AirlineRepository.AllAirlineDto(pageable,name);
         airlines.forEach(dto->dto.setImage(flightUrl+dto.getImage()));
         return modelMapper.map(airlines,new TypeToken<Page<ListFlightDto>>(){}.getType());
     }

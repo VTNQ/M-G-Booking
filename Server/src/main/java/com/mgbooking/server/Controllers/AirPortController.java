@@ -47,10 +47,10 @@ public class AirPortController {
         }
     }
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Page<AirPortList>>getAirPort(@PathVariable int id, @RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "10")int size){
+    public ResponseEntity<Page<AirPortList>>getAirPort(@PathVariable int id, @RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "10")int size,@RequestParam("name")String name){
         try {
             Pageable pageable= PageRequest.of(page,size);
-            return new ResponseEntity<Page<AirPortList>>(airPortService.GetAll(id,pageable), HttpStatus.OK);
+            return new ResponseEntity<Page<AirPortList>>(airPortService.GetAll(id,pageable,name), HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<Page<AirPortList>>(HttpStatus.BAD_REQUEST);
