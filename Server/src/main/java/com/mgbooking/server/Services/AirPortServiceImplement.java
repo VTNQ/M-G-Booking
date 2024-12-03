@@ -40,9 +40,9 @@ public class AirPortServiceImplement implements  AirPortService{
     }
 
     @Override
-    public Page<AirPortList> GetAll(int id, Pageable pageable) {
+    public Page<AirPortList> GetAll(int id, Pageable pageable,String name) {
 
-        return modelMapper.map(airportRepository.findAll(id,pageable),new TypeToken<Page<Airport>>(){}.getType());
+        return modelMapper.map(airportRepository.findAll(id,pageable,name),new TypeToken<Page<Airport>>(){}.getType());
     }
 
     @Override

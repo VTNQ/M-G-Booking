@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface AirlineService {
     public boolean AddFlight(AirLineDTO flightDTO);
-    public Page<ListFlightDto> findAll(Pageable pageable);
+    public Page<ListFlightDto> findAll(Pageable pageable,String name);
     public UpdateFlightDTO FindFlight(int id);
     public boolean UpdateFlight(UpdateFlightDTO flightDTO,MultipartFile file);
     public List<ListFlightDto>ShowAirlineDto(int id);

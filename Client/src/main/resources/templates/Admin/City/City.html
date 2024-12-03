@@ -55,6 +55,12 @@
         <div class="row">
             <div class="card">
                 <h5 class="card-header">Danh sach City</h5>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" id="searchCity" class="form-control"
+                               placeholder="Search for City" onkeyup="SearchCities()">
+                    </div>
+                </div>
                 <div class="table-responsive text-nowrap">
                     <table class="table">
                         <thead>
@@ -130,7 +136,7 @@
     <!-- / Footer -->
 
     <div class="content-backdrop fade"></div>
-
+    <script th:fragment="customScripts" th:src="@{/Admin/CityTable/CityTable.js}"></script>
 </div>
 
 

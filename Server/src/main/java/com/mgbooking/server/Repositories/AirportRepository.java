@@ -12,8 +12,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface AirportRepository extends JpaRepository<Airport, Integer> {
-    @Query("select new com.mgbooking.server.DTOS.AirPortList(t.id,t.name,t.city) from Airport t where t.city.country.id = :id")
-    Page<Airport> findAll(@Param("id") int id, Pageable pageable);
+    @Query("select new com.mgbooking.server.DTOS.AirPortList(t.id,t.name,t.city) from Airport t where t.city.country.id = :id and t.name like %:name%")
+    Page<Airport> findAll(@Param("id") int id, Pageable pageable,@Param("name")String name);
     @Query("select t from Airport t where t.city.country.id = :id")
     List<Airport> findAllByCountryId(@Param("id") int id);
     @Query("select new com.mgbooking.server.DTOS.SearchAiportDTO(t.id,t.name,t.city,t.city.country.name) from  Airport t where t.name like %:SearchName% or  t.city.name like %:SearchName%")

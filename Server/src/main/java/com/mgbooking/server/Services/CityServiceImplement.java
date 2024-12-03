@@ -41,8 +41,8 @@ public class CityServiceImplement implements CityService{
     }
 
     @Override
-    public Page<City> findCity(int id,Pageable pageable) {
-        return modelMapper.map(cityRepository.findCitiesByCountryId(id,pageable),new TypeToken<Page<City>>(){}.getType());
+    public Page<City> findCity(int id,Pageable pageable,String name) {
+        return modelMapper.map(cityRepository.findCitiesByCountryId(id,pageable,name),new TypeToken<Page<City>>(){}.getType());
     }
 
     @Override
