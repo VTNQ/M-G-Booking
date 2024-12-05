@@ -29,9 +29,9 @@ public class AirPortController {
     @Autowired
     private ValidationService validationService;
     @GetMapping("/FindAllByCountry/{id}")
-    public ResponseEntity<List<AirPortDTO>>FindAllByCountry(@PathVariable int id){
+    public ResponseEntity<List<Airport>>FindAllByCountry(@PathVariable int id){
         try {
-            return new ResponseEntity<List<AirPortDTO>>(airPortService.FindAirPortByCountry(id),HttpStatus.OK);
+            return new ResponseEntity<List<Airport>>(airPortService.FindAirPortByCountry(id),HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -46,16 +46,7 @@ public class AirPortController {
             return new ResponseEntity<AirPortDTO>(HttpStatus.BAD_REQUEST);
         }
     }
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Page<AirPortList>>getAirPort(@PathVariable int id, @RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "10")int size,@RequestParam("name")String name){
-        try {
-            Pageable pageable= PageRequest.of(page,size);
-            return new ResponseEntity<Page<AirPortList>>(airPortService.GetAll(id,pageable,name), HttpStatus.OK);
-        }catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<Page<AirPortList>>(HttpStatus.BAD_REQUEST);
-        }
-    }
+
     @PutMapping(value = "/EditAirPort")
     public ResponseEntity<Object>EditAirPort(@RequestBody @Valid AirPortDTO airPortDTO, BindingResult bindingResult){
         List<String>errors=validationService.validate(airPortDTO,bindingResult);

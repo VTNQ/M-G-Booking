@@ -65,17 +65,7 @@ public class CountryController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-    @GetMapping("GetAllCountries")
-    @CrossOrigin(origins = "http://localhost:8386")
-    public ResponseEntity<Page<Country>>GetAllCountries(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "10")int size,@RequestParam("name")String name){
-        try {
-            Pageable pageable= PageRequest.of(page,size);
-                return new ResponseEntity<Page<Country>>(CountryService.findByPage(pageable,name),HttpStatus.OK);
-        }catch (Exception ex){
-            ex.printStackTrace();
-            return new ResponseEntity<Page<Country>>(HttpStatus.BAD_REQUEST);
-        }
-    }
+
 
     @PostMapping(value = "CreateCountry",produces = MimeTypeUtils.APPLICATION_JSON_VALUE,consumes = MimeTypeUtils.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object>CreateCountry(@RequestBody Country Country){

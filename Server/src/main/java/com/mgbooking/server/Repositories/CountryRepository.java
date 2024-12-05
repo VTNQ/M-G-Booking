@@ -12,7 +12,5 @@ import java.util.List;
 
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Integer> {
-    @Query("select t from Country t where t.name like %:name%")
-Page<Country>findAll(Pageable pageable,@Param("name")String name);
 
 }

@@ -34,6 +34,7 @@ public class AuthController {
         try {
             String redirectUrl=authService.login(login,session,request);
             if(session!=null){
+
                 return  redirectUrl;
             }else{
                 return "redirect:/LoginAdmin";

@@ -3,16 +3,15 @@ package com.mgbooking.client.DTO;
 public class ListFlightDto {
     private int id;
     private String name;
-    private String imageUrl;
-    private String Country;
+    private String image_url;
+    private String nameCountry;
 
-
-    public String getCountry() {
-        return Country;
+    public String getNameCountry() {
+        return nameCountry;
     }
 
-    public void setCountry(String country) {
-        Country = country;
+    public void setNameCountry(String nameCountry) {
+        this.nameCountry = nameCountry;
     }
 
     public int getId() {
@@ -27,15 +26,17 @@ public class ListFlightDto {
         return name;
     }
 
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getImage() {
-        return imageUrl;
-    }
 
-    public void setImage(String image) {
-        imageUrl = image;
-    }
 }

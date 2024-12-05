@@ -21,16 +21,7 @@ public class CityController
 {
     @Autowired
     private CityService cityService;
-    @GetMapping({"FindCityPage/{id}"})
-    public ResponseEntity<Page<City>>FindCityPage(@PathVariable("id")int id, @RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "10")int size,@RequestParam("name")String name){
-        try {
-            Pageable pageable= PageRequest.of(page,size);
-            return new ResponseEntity<Page<City>>(cityService.findCity(id,pageable,name),HttpStatus.OK);
-        }catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<Page<City>>(HttpStatus.BAD_REQUEST);
-        }
-    }
+
     @DeleteMapping({"DeleteCity/{id}"})
     public ResponseEntity<Object>DeleteCity(@PathVariable("id")int id){
         try {

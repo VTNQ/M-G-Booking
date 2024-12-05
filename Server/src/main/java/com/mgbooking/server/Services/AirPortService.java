@@ -12,8 +12,8 @@ import java.util.List;
 
 public interface AirPortService {
     public boolean AddAirPort(AirPortDTO airportDTO);
-    public Page<AirPortList>GetAll(int id, Pageable pageable,String name);
+
     public AirPortDTO FindById(int id);
-    public List<AirPortDTO>FindAirPortByCountry(int id);
+    public List<Airport>FindAirPortByCountry(int id);
     public  List<CountryAiportDTO>SearchAirPort(String SearchName);
 }

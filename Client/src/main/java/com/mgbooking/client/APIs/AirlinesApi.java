@@ -19,8 +19,9 @@ public interface AirlinesApi {
                            @Part("name") RequestBody name,
                            @Part("country_id") RequestBody country_id,
                            @Part MultipartBody.Part image);
-    @GET("/Airline/GetFlight")
-    Call<List<ListFlightDto>> getFlight(@Header("Authorization") String auth);
+    @GET("/Airline/FindAll")
+    Call<List<ListFlightDto>> FindAll(@Header("Authorization")String auth);
+
     @GET("/Airline/FindFlight/{id}")
     Call<UpdateFlightDTO>FindFlight(@Header("Authorization") String auth,@Path("id")int id);
     @Multipart

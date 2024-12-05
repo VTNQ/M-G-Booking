@@ -66,11 +66,12 @@ public class SecurityConfiguration {
                         "Country/UpdateCountry",
                         "Country/DeleteCountry/**",
                         "/Country/GetAllCountries/**",
-                        "/Country/FindByCountry/**","/Airline/AddFlight","/Airline/GetFlight","/Airline/UpdateFlight","/Airline/FindFlight/{id}").hasRole("SUPERADMIN")
-                .requestMatchers("City/CreateCity","/City/{id}","/City/FindCityPage/**","/City/FindCity/**","/City/DeleteCity/**","/AirPort/CreateAirPort","/AirPort/{id}","/AirPort/EditAirPort","/Flight/CreateFlight","/Airline/FindAirline/{id}","/AirPort/FindAllByCountry/{id}","/Flight/FindFlight/{id}","/Flight/FindAll/**",
+                        "/Country/FindByCountry/**","/Airline/AddFlight","/Airline/UpdateFlight","/Airline/FindFlight/{id}","/Airline/FindAll").hasRole("SUPERADMIN")
+                .requestMatchers("City/CreateCity","/City/{id}","/City/FindCity/**","/City/DeleteCity/**","/AirPort/CreateAirPort","/AirPort/EditAirPort","/Flight/CreateFlight","/AirPort/FindAllByCountry/{id}","/Flight/FindFlight/{id}","/Flight/FindAll/**",
                         "/Flight/UpdateFlight","/DetailFlight/{id}","/DetailFlight/UpdateDetail").hasRole("ADMIN")
 
                 .requestMatchers("/auth/","/auth/UpdateAccount").hasAnyRole("ADMIN", "SUPERADMIN","USER","OWNER")
+                .requestMatchers("/Airline/FindAirline/{id}").hasAnyRole("ADMIN","SUPERAMIN")
                 .anyRequest().authenticated()
                 .and()
                .exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler()))

@@ -11,18 +11,20 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-
+        <form th:action="@{/Admin/AirPort/UpdateAirPort}" method="post">
         <div class="row ">
             <!-- Form controls -->
 
 
             <!-- Input Sizing -->
-            <div class="col-md-12">
-                <form th:action="@{/Admin/AirPort/UpdateAirPort}" method="post">
-                    <div class="card">
+            <div class="col-12 col-md-9">
 
-                        <div class="card-body">
-                            <h5>AirPort</h5>
+                    <div class="card">
+                        <div class="card-header justify-content-center" style="border-bottom: 1px solid #e6e7e9">
+                            <h3 class="mb-0">Airport</h3>
+                        </div>
+                        <div class="card-body mt-5">
+
                             <div class="mt-2 mb-4">
                                 <label class="form-label">Name</label>
                                 <input th:field="${Airport.name}"
@@ -42,20 +44,27 @@
                         </div>
 
 
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-outline-primary">Save</button>
-                            <input type="hidden" th:field="${Airport.id}">
 
-                        </div>
                     </div>
-                </form>
+
 
             </div>
-
+            <div class="col-12 col-md-3">
+                <div class="card mb-3">
+                    <div class="card-header" style="border-bottom: 1px solid #e6e7e9">Post</div>
+                    <div class="card-body p-2">
+                        <div class="w-100 d-flex align-items-center h-100 gap-2">
+                            <button type="submit" class="btn btn-primary flex-column-gap-1 text-wrap p-2 flex-grow-1">Save</button>
+                            <a th:href="@{/Admin/AirPort}" class="btn p-2 text-wrap w-50" style="border: 1px solid #e6e7e9">Back</a>
+                            <input type="hidden" th:field="${Airport.id}">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Default Checkboxes and radios & Default checkboxes and radios -->
 
         </div>
-
+        </form>
     </div>
 
     <!-- / Content -->

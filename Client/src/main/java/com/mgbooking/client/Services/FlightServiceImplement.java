@@ -2,10 +2,7 @@ package com.mgbooking.client.Services;
 
 import com.mgbooking.client.APIs.ApiClient;
 import com.mgbooking.client.APIs.FlightApi;
-import com.mgbooking.client.DTO.FlightDTO;
-import com.mgbooking.client.DTO.FlightListDto;
-import com.mgbooking.client.DTO.ResultFlightDTO;
-import com.mgbooking.client.DTO.SearchFlightDTO;
+import com.mgbooking.client.DTO.*;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
 
@@ -115,6 +112,22 @@ public class FlightServiceImplement implements FlightService{
         try {
             FlightApi flightApi=ApiClient.getRetrofit().create(FlightApi.class);
             Response<List<ResultFlightDTO>>response=flightApi.SearchFlightByArrivalTime(departureAirport,arrivalAirport,departureTime,ArrivalTime,TypeFlight).execute();
+            if(response.isSuccessful()){
+                return response.body();
+            }else{
+                return null;
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<FlightPaginateDTo> ShowAll(String token, int id) {
+        try {
+            FlightApi flightApi=ApiClient.getRetrofit().create(FlightApi.class);
+            Response<List<FlightPaginateDTo>>response=flightApi.ShowAll("Bearer " + token,id).execute();
             if(response.isSuccessful()){
                 return response.body();
             }else{
