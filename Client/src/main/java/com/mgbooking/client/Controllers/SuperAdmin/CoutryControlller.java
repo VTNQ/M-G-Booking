@@ -11,6 +11,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller("superAdminCountryController")
 @RequestMapping({"/SuperAdmin"})
 public class CoutryControlller {
@@ -19,12 +22,25 @@ public class CoutryControlller {
     @Autowired
     private GetToken getToken;
     @GetMapping("Country")
-    public String Country(ModelMap modelMap, @RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "10")int size,HttpServletRequest request ){
-        modelMap.put("Country",new Country());
+    public String Country(ModelMap modelMap,HttpServletRequest request ,  @RequestParam(defaultValue = "1") int page,
+                          @RequestParam(defaultValue = "10") int size,@RequestParam(defaultValue = "")String name){
+
         String token=getToken.getTokenFromCookies(request);
+        List<Country> countries = countryService.GetCountry(token);
+        List<Country> filteredCountries = countries.stream()
+                .filter(country -> country.getName().toLowerCase().contains(name.toLowerCase()))
+                .collect(Collectors.toList());
+        int start = (page - 1) * size;
+        int end = Math.min(start + size, filteredCountries.size());
+        List<Country> paginatedCountries = filteredCountries.subList(start, end);
+        modelMap.put("Country", paginatedCountries);
+        modelMap.put("totalPages", (int) Math.ceil((double) filteredCountries.size() / size));
+        modelMap.put("currentPage", page);
         modelMap.put("token",token);
+        modelMap.put("searchName", name);
     return  "/SuperAdmin/Country/Country";
     }
+
     @GetMapping("EditCountry/{id}")
     public String EditCountry(ModelMap modelMap, @PathVariable int id, HttpServletRequest request ){
         String token=getToken.getTokenFromCookies(request);
@@ -62,7 +78,17 @@ public class CoutryControlller {
         }
         return "redirect:/SuperAdmin/EditCountry/"+country.getId();
     }
-    @PostMapping("Country")
+    @GetMapping("Country/add")
+    public String AddCountry(ModelMap modelMap){
+        try {
+            modelMap.put("Country", new Country());
+            return "SuperAdmin/Country/add";
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    @PostMapping("Country/add")
     public String Country(@ModelAttribute("Country") Country country, HttpServletRequest request, RedirectAttributes redirectAttributes){
         String token=getToken.getTokenFromCookies(request);
         boolean success=countryService.CreateCountry(token,country);

@@ -77,12 +77,23 @@ public class AirlineServiceImplement implements AirlineService {
     }
 
     @Override
-    public Page<ListFlightDto> findAll(Pageable pageable,String name) {
-        String flightUrl = environment.getProperty("FlightUrl");
-        Page<ListFlightDto>airlines=AirlineRepository.AllAirlineDto(pageable,name);
-        airlines.forEach(dto->dto.setImage(flightUrl+dto.getImage()));
-        return modelMapper.map(airlines,new TypeToken<Page<ListFlightDto>>(){}.getType());
+    public List<ListFlightDto> FindAll() {
+        String flightUrl = "http://localhost:8686/images/flight/"; // This should be the base URL to your images
+
+        // Get all airlines from the repository
+        List<ListFlightDto> airlines = AirlineRepository.ShowAll();
+
+        // Use modelMapper to map each airline to ListFlightDto
+        List<ListFlightDto> flightDtos = modelMapper.map(airlines, new TypeToken<List<ListFlightDto>>(){}.getType());
+
+        // Set flightUrl and concatenate image_url for each ListFlightDto
+        for (ListFlightDto flightDto : flightDtos) {
+            flightDto.setImage_url(flightUrl+flightDto.getImage_url()); // Set the base flight URL
+        }
+
+        return flightDtos;
     }
+
 
     @Override
     public UpdateFlightDTO FindFlight(int id) {

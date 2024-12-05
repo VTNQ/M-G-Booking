@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/Admin/layout :: mainContent('DetailCity',~{this::.content-wrapper})}">
+      th:replace="~{/Admin/layout :: mainContent('Add AirPort',~{this::.content-wrapper})}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,7 +11,8 @@
     <!-- Content -->
 
     <div class="container-xxl flex-grow-1 container-p-y">
-        <form th:action="@{/Admin/UpdateCity}" method="post">
+
+        <form th:action="@{/Admin/City/add}" method="post" >
         <div class="row ">
             <!-- Form controls -->
 
@@ -21,29 +22,27 @@
 
                     <div class="card">
                         <div class="card-header justify-content-center" style="border-bottom: 1px solid #e6e7e9">
-                        <h3 class="mb-0">City</h3>
-                    </div>
-                        <div class="card-body">
+                            <h3 class="mb-0">Airport</h3>
+                        </div>
+                        <div class="card-body mt-4">
 
                             <div class="mt-2 mb-4">
                                 <label for="largeInput" class="form-label">Name</label>
-                                <input
-                                        id="largeInput"
-                                        th:field="${city.name}"
-                                        class="form-control form-control-lg"
-                                        type="text"
-                                        placeholder="Name"/>
+                                <input id="largeInput" th:field="${Airport.name}" class="form-control form-control-lg" type="text" placeholder="Name"/>
+                            </div>
+                            <div class="mt-2 mb-4">
+                                <label for="largeInput" class="form-label">City</label>
+                            <select class="form-control" th:field="${Airport.city_id}">
+                                <option th:each="citi : ${City}" th:value="${citi.id}" th:text="${citi.name}"></option>
+                            </select>
                             </div>
 
+
                         </div>
 
 
-                        <div class="card-footer">
-
-                            <input type="hidden" th:field="${city.country_id}">
-                            <input type="hidden" th:field="${city.id}">
-                        </div>
                     </div>
+
 
 
             </div>
@@ -53,8 +52,8 @@
                     <div class="card-body p-2">
                         <div class="w-100 d-flex align-items-center h-100 gap-2">
                             <button type="submit" class="btn btn-primary flex-column-gap-1 text-wrap p-2 flex-grow-1">Save</button>
-                            <a th:href="@{/Admin/City}" class="btn p-2 text-wrap w-50" style="border: 1px solid #e6e7e9">Back</a>
-                            <input type="hidden" th:field="${city.country_id}">
+                            <a th:href="@{/Admin/AirPort}" class="btn p-2 text-wrap w-50" style="border: 1px solid #e6e7e9">Back</a>
+
                         </div>
                     </div>
                 </div>
@@ -64,6 +63,7 @@
         </div>
         </form>
     </div>
+
 
     <!-- / Content -->
 
@@ -100,6 +100,7 @@
                 </div>
             </div>
         </div>
+        <script th:fragment="customScripts" th:src="@{/SuperAdmin/Airline/Airline.js}"></script>
     </footer>
     <!-- / Footer -->
 

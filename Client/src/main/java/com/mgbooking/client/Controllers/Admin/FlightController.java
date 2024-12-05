@@ -1,10 +1,7 @@
 package com.mgbooking.client.Controllers.Admin;
 
 import com.mgbooking.client.Configuration.GetToken;
-import com.mgbooking.client.DTO.AccountDto;
-import com.mgbooking.client.DTO.DetailFlight;
-import com.mgbooking.client.DTO.FlightDTO;
-import com.mgbooking.client.DTO.FlightListDto;
+import com.mgbooking.client.DTO.*;
 import com.mgbooking.client.Services.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller("AdminFlightController")
 @RequestMapping({"/Admin"})
@@ -46,6 +44,17 @@ public class FlightController {
         model.put("Airline",airlineService.FindAirlineByCountry(token,accountDto.getCountryId()));
         return "Admin/Flight/Edit";
     }
+    @GetMapping("Flight/add")
+    public String addFlight(ModelMap model, HttpServletRequest request){
+        String token=tokenService.getTokenFromCookies(request);
+        AccountDto accountDto=authService.FindByAccount(token);
+        model.put("flight",new FlightDTO());
+        model.put("IdCountry",accountDto.getCountryId());
+        model.put("token",token);
+        model.put("Airline",airlineService.FindAirlineByCountry(token,accountDto.getCountryId()));
+        model.put("AirPort",airportService.FindAllByCountry(token,accountDto.getCountryId()));
+        return "Admin/Flight/add";
+    }
    @PostMapping("Flight/UpdateFlight")
     public String Update(@ModelAttribute("flight")FlightListDto flightListDto,HttpServletRequest request,RedirectAttributes redirectAttributes){
         String token=tokenService.getTokenFromCookies(request);
@@ -69,7 +78,7 @@ public class FlightController {
             return "redirect:/Admin/Flight/Edit/"+flightListDto.getId();
         }
     }
-    @PostMapping("Flight")
+    @PostMapping("Flight/add")
     public String Flight(@ModelAttribute("flight")FlightDTO flightDTO, HttpServletRequest request, RedirectAttributes redirectAttributes){
         String token=tokenService.getTokenFromCookies(request);
         Object createObject=flightService.CreateFlight(token,flightDTO);
@@ -94,14 +103,22 @@ public class FlightController {
         }
     }
  @GetMapping("Flight")
-    public String Flight(ModelMap model, HttpServletRequest httpServletRequest) {
+    public String Flight(ModelMap model, HttpServletRequest httpServletRequest,@RequestParam(defaultValue = "1") int page,
+                         @RequestParam(defaultValue = "10") int size,@RequestParam(defaultValue = "")String name) {
      String token=tokenService.getTokenFromCookies(httpServletRequest);
      AccountDto accountDto=authService.FindByAccount(token);
-     model.put("flight",new FlightDTO());
-     model.put("IdCountry",accountDto.getCountryId());
+
      model.put("token",token);
-     model.put("Airline",airlineService.FindAirlineByCountry(token,accountDto.getCountryId()));
-     model.put("AirPort",airportService.FindAllByCountry(token,accountDto.getCountryId()));
+     List<FlightPaginateDTo>flight=flightService.ShowAll(token,accountDto.getCountryId());
+     List<FlightPaginateDTo>flightPaginateDTos=flight.stream()
+             .filter(fli -> fli.getNameAirline().toLowerCase().contains(name.toLowerCase()))
+             .collect(Collectors.toList());
+     int start = (page - 1) * size;
+     int end = Math.min(start + size, flightPaginateDTos.size());
+     List<FlightPaginateDTo> paginatedFlights = flightPaginateDTos.subList(start, end);
+     model.put("Flight",paginatedFlights);
+     model.put("totalPages", (int) Math.ceil((double) flightPaginateDTos.size() / size));
+     model.put("currentPage", page);
      return "Admin/Flight/Flight";
  }
 }

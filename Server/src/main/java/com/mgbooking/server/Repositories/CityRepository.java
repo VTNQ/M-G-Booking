@@ -14,7 +14,5 @@ import java.util.List;
 public interface CityRepository extends JpaRepository<City, Integer> {
     @Query("select c from City c where c.country.id = :countryId")
     List<City> findCitiesByCountryId(@Param("countryId") int countryId);
-    @Query("select c from City c where c.country.id = :countryId and c.name like %:name%")
-    Page<City>findCitiesByCountryId(@Param("countryId") int countryId, Pageable pageable, @Param("name") String name);
 
 }

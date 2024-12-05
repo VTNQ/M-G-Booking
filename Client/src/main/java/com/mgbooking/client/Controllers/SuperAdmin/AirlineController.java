@@ -1,9 +1,9 @@
 package com.mgbooking.client.Controllers.SuperAdmin;
 
 import com.mgbooking.client.Configuration.GetToken;
-import com.mgbooking.client.DTO.AirlineDTO;
-import com.mgbooking.client.DTO.UpdateFlightDTO;
+import com.mgbooking.client.DTO.*;
 import com.mgbooking.client.Services.AirlineService;
+import com.mgbooking.client.Services.AuthService;
 import com.mgbooking.client.Services.CountryService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +13,21 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping({"/SuperAdmin"})
 public class AirlineController {
+
     @Autowired
     private GetToken getToken;
     @Autowired
     private AirlineService airlineService;
+    @Autowired
+    private AuthService authService;
     @Autowired
     private CountryService countryService;
     @PostMapping("UpdateAirline")
@@ -39,6 +45,7 @@ public class AirlineController {
 
         }
     }
+
     @GetMapping("UpdateAirline/{id}")
     public String UpdateAirline(@PathVariable int id, ModelMap model,HttpServletRequest request) {
         String token=getToken.getTokenFromCookies(request);
@@ -47,15 +54,33 @@ public class AirlineController {
         return "/SuperAdmin/Airline/UpdateAirline";
     }
     @GetMapping("Airline")
-    public String Airline(ModelMap modelMap, HttpServletRequest request){
+    public String Airline(ModelMap modelMap, HttpServletRequest request,@RequestParam(defaultValue = "1") int page,
+                          @RequestParam(defaultValue = "10") int size,@RequestParam(defaultValue = "")String name){
         modelMap.put("Airline",new AirlineDTO());
 
         String token=getToken.getTokenFromCookies(request);
-        modelMap.put("Country",countryService.GetCountry(token));
+        List<ListFlightDto>airlines=airlineService.FindAll(token);
+        List<ListFlightDto>filteredAirlines=airlines.stream().filter(airline->
+                airline.getName().toLowerCase().contains(name.toLowerCase())).collect(Collectors.toList());
+        int start = (page - 1) * size;
+        int end = Math.min(start + size, filteredAirlines.size());
+        List<ListFlightDto>paginatedAirline=filteredAirlines.subList(start, end);
+
+        modelMap.put("Airline",paginatedAirline);
+        modelMap.put("totalPages", (int) Math.ceil((double) filteredAirlines.size() / size));
+        modelMap.put("currentPage", page);
         modelMap.put("token",token);
+
         return "/SuperAdmin/Airline/Airline";
     }
-    @PostMapping("Airline")
+    @GetMapping("Airline/add")
+    public String addAirline(ModelMap modelMap,HttpServletRequest request){
+        String token=getToken.getTokenFromCookies(request);
+        modelMap.put("Airline",new AirlineDTO());
+        modelMap.put("Country",countryService.GetCountry(token));
+        return "/SuperAdmin/Airline/add";
+    }
+    @PostMapping("Airline/add")
 
     public String Airline(@ModelAttribute("Airline") AirlineDTO flightDTO, ModelMap modelMap, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         String token = getToken.getTokenFromCookies(request);

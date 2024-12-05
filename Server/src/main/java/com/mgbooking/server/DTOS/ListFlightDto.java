@@ -1,24 +1,26 @@
 package com.mgbooking.server.DTOS;
 
 public class ListFlightDto {
+
     private int id;
     private String name;
-    private String imageUrl;
-    private String Country;
+    private String image_url;
+    private String nameCountry;
 
-    public ListFlightDto(int id, String name, String imageUrl, String country) {
+    public ListFlightDto(int id, String name, String image_url, String nameCountry) {
         this.id = id;
         this.name = name;
-        this.imageUrl = imageUrl;
-        Country = country;
+        this.image_url = image_url;
+        this.nameCountry = nameCountry;
     }
 
-    public String getCountry() {
-        return Country;
+
+    public String getNameCountry() {
+        return nameCountry;
     }
 
-    public void setCountry(String country) {
-        Country = country;
+    public void setNameCountry(String nameCountry) {
+        this.nameCountry = nameCountry;
     }
 
     public int getId() {
@@ -37,11 +39,11 @@ public class ListFlightDto {
         this.name = name;
     }
 
-    public String getImage() {
-        return imageUrl;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImage(String image) {
-        imageUrl = image;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 }

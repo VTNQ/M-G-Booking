@@ -3,6 +3,7 @@ package com.mgbooking.client.Services;
 import com.mgbooking.client.APIs.AirPortApi;
 import com.mgbooking.client.APIs.ApiClient;
 import com.mgbooking.client.DTO.AirPortDTO;
+import com.mgbooking.client.DTO.Airport;
 import com.mgbooking.client.DTO.ResultApi;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
@@ -61,10 +62,10 @@ public class AirPortServiceImplement implements AirPortService {
     }
 
     @Override
-    public List<AirPortDTO> FindAllByCountry(String token, int id) {
+    public List<Airport> FindAllByCountry(String token, int id) {
         try {
         AirPortApi airPortApi=ApiClient.getRetrofit().create(AirPortApi.class);
-        Response<List<AirPortDTO>>response=airPortApi.FindAllByCountry("Bearer " +token,id).execute();
+        Response<List<Airport>>response=airPortApi.FindAllByCountry("Bearer " +token,id).execute();
         if(response.isSuccessful()){
             return response.body();
         }else{

@@ -46,22 +46,6 @@ public class AirlineServiceImplement implements AirlineService{
     }
 
     @Override
-    public List<ListFlightDto> findAll(String token) {
-        try {
-            AirlinesApi airlinesApi=ApiClient.getRetrofit().create(AirlinesApi.class);
-            Response<List<ListFlightDto>> response=airlinesApi.getFlight("Bearer " +token).execute();
-            if(response.isSuccessful()){
-                return response.body();
-            }else {
-                return null;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
     public UpdateFlightDTO FindFlight(String token, int id) {
         try {
             AirlinesApi airlinesApi=ApiClient.getRetrofit().create(AirlinesApi.class);
@@ -124,6 +108,22 @@ public class AirlineServiceImplement implements AirlineService{
             if(airline.isSuccessful()){
                 return airline.body();
             }else {
+                return null;
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ListFlightDto> FindAll(String token) {
+        try {
+            AirlinesApi airlinesApi=ApiClient.getRetrofit().create(AirlinesApi.class);
+            Response<List<ListFlightDto>>airline=airlinesApi.FindAll("Bearer " +token).execute();
+            if(airline.isSuccessful()){
+                return airline.body();
+            }else{
                 return null;
             }
         }catch (Exception ex){

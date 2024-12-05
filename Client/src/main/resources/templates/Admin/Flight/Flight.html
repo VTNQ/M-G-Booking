@@ -10,87 +10,96 @@
 <div class="content-wrapper">
     <!-- Content -->
 
-    <div class="container-xxl flex-grow-1 container-p-y">
+<!--    <div class="container-xxl flex-grow-1 container-p-y">-->
 
-        <div class="row ">
-            <!-- Form controls -->
-
-
-            <!-- Input Sizing -->
-            <div class="col-md-12">
-                <form th:action="@{/Admin/Flight}"  method="post">
-                    <div class="card">
-
-                        <div class="card-body">
-                            <h5>Flight</h5>
-
-                            <div class="mt-2 mb-4">
-                                <label  class="form-label">Departure airport</label>
-                                <select class="form-control " th:field="${flight.departure_airport}" >
-                                    <option th:each="AirPorts : ${AirPort}" th:value="${AirPorts.id}"
-                                            th:text="${AirPorts.name}"></option>
-                                </select>
-                            </div>
-                            <div class="mt-2 mb-4">
-                                <label  class="form-label">Arrival airport</label>
-                                <select class="form-control " th:field="${flight.arrival_airport}" >
-                                    <option th:each="AirPorts : ${AirPort}" th:value="${AirPorts.id}"
-                                            th:text="${AirPorts.name}"></option>
-                                </select>
-                            </div>
-                            <div class="mt-2 mb-4">
-                                <label  class="form-label">Airline</label>
-                                <select class="form-control" th:field="${flight.airline_id}">
-                                    <option th:each="Airlines : ${Airline}" th:value="${Airlines.id}" th:text="${Airlines.name}"></option>
-                                </select>
-                            </div>
-                            <div class="mt-2 mb -4">
-                                <label class="form-label">Departure Time</label>
-                                <input type="datetime-local" id="Departure_Time" class="form-control" th:field="${flight.departureTime}">
-                            </div>  <div class="form-group mt-2 mb-4">
-                            <label class="form-label">Arrival time</label>
-                            <input type="datetime-local" id="datetimepicker" class="form-control" th:field="${flight.arrivalTime}">
-                        </div>
-                            <h4>Detail Flights</h4>
-                            <div id="detailFlights">
-                                <div class="detail-flight mb-3">
-                                    <div class="row">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-secondary mb-3" id="addDetailFlight">Add Detail Flight</button>
+<!--        <div class="row ">-->
+<!--            &lt;!&ndash; Form controls &ndash;&gt;-->
 
 
-                        </div>
+<!--            &lt;!&ndash; Input Sizing &ndash;&gt;-->
+<!--            <div class="col-md-12">-->
+<!--                <form th:action="@{/Admin/Flight}"  method="post">-->
+<!--                    <div class="card">-->
+
+<!--                        <div class="card-body">-->
+<!--                            <h5>Flight</h5>-->
+
+<!--                            <div class="mt-2 mb-4">-->
+<!--                                <label  class="form-label">Departure airport</label>-->
+<!--                                <select class="form-control " th:field="${flight.departure_airport}" >-->
+<!--                                    <option th:each="AirPorts : ${AirPort}" th:value="${AirPorts.id}"-->
+<!--                                            th:text="${AirPorts.name}"></option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                            <div class="mt-2 mb-4">-->
+<!--                                <label  class="form-label">Arrival airport</label>-->
+<!--                                <select class="form-control " th:field="${flight.arrival_airport}" >-->
+<!--                                    <option th:each="AirPorts : ${AirPort}" th:value="${AirPorts.id}"-->
+<!--                                            th:text="${AirPorts.name}"></option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                            <div class="mt-2 mb-4">-->
+<!--                                <label  class="form-label">Airline</label>-->
+<!--                                <select class="form-control" th:field="${flight.airline_id}">-->
+<!--                                    <option th:each="Airlines : ${Airline}" th:value="${Airlines.id}" th:text="${Airlines.name}"></option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+<!--                            <div class="mt-2 mb -4">-->
+<!--                                <label class="form-label">Departure Time</label>-->
+<!--                                <input type="datetime-local" id="Departure_Time" class="form-control" th:field="${flight.departureTime}">-->
+<!--                            </div>  <div class="form-group mt-2 mb-4">-->
+<!--                            <label class="form-label">Arrival time</label>-->
+<!--                            <input type="datetime-local" id="datetimepicker" class="form-control" th:field="${flight.arrivalTime}">-->
+<!--                        </div>-->
+<!--                            <h4>Detail Flights</h4>-->
+<!--                            <div id="detailFlights">-->
+<!--                                <div class="detail-flight mb-3">-->
+<!--                                    <div class="row">-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <button type="button" class="btn btn-secondary mb-3" id="addDetailFlight">Add Detail Flight</button>-->
 
 
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-outline-primary">Save</button>
+<!--                        </div>-->
 
 
-                        </div>
-                    </div>
-                </form>
+<!--                        <div class="card-footer">-->
+<!--                            <button type="submit" class="btn btn-outline-primary">Save</button>-->
 
-            </div>
 
-            <!-- Default Checkboxes and radios & Default checkboxes and radios -->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
 
-        </div>
+<!--            </div>-->
 
-    </div>
+<!--            &lt;!&ndash; Default Checkboxes and radios & Default checkboxes and radios &ndash;&gt;-->
+
+<!--        </div>-->
+
+<!--    </div>-->
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
             <div class="card">
-                <h5 class="card-header">Danh sach Flight</h5>
-                <div class="card-body">
-                    <div class="input-group">
-                        <input type="text" id="searchFlight" class="form-control"
-                               placeholder="Search for Flight" onkeyup="SearchFlight()" >
-                    </div>
+                <div class="card-header justify-content-between" style="border-bottom: 1px solid #e6e7e9"  >
+                    <h5 >Danh sách Flight</h5>
+                    <a th:href="@{/Admin/Flight/add}" class="text-decoration-none btn btn-primary">
+                        <i class="ti ti-plus" style="color:white;"></i>
+                        <span class="ms-1" style="color: white">Thêm</span>
+                    </a>
                 </div>
-                <div class="table-responsive text-nowrap">
+                <div class="card-body mt-5">
+                    <form th:action="@{/Admin/Flight}" class="d-flex">
+                        <div class="input-group">
+                            <input type="text" name="name" id="searchFlight" class="form-control"
+                                   placeholder="Search for Flight" aria-label="Search" style="border-radius: 25px 0 0 25px;"/>
+                            <button class="btn btn-primary" type="submit" style="border-radius: 0 25px 25px 0;">Search</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive text-nowrap mt-5">
                     <table class="table">
                         <thead>
                         <tr>
@@ -102,29 +111,43 @@
                         </tr>
                         </thead>
                         <tbody class="table-border-bottom-0" id="FlightTableBody">
+                            <th:block th:each="flight,start :${Flight}">
+                                <tr>
+                                    <td th:text="${start.index+1}"></td>
+                                    <td th:text="${flight.nameAirline}"></td>
+                                    <td th:text="${flight.departure_airport}"></td>
+                                    <td th:text="${flight.arrival_airport}"></td>
+                                    <td>
+                                        <a th:href="@{'/Admin/Flight/Edit/'+${flight.id}}" style="background-color: #4299e1;border-color: #4299e1" class="btn btn-info"><i style="color: white" class="ti ti-edit"></i></a>
 
+                                    </td>
+                                </tr>
+                            </th:block>
                         </tbody>
                     </table>
-                    <div id="paginationControls">
-                        <ul class="pagination">
-                            <!-- Previous Button -->
-                            <li class="page-item">
-                                <button id="prevPageItem" class="page-link" >Previous</button>
-                            </li>
-
-                            <!-- Page Number Buttons (Dynamic) -->
-                            <li class="page-item">
-                                <span id="pageNumbers" class="page-link">1</span>
-                            </li>
-
-                            <!-- Next Button -->
-                            <li class="page-item">
-                                <button id="nextPage" class="page-link">Next</button>
-                            </li>
-                        </ul>
-                    </div>
+                    <th:block th:if="${totalPages > 0}">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                                    <a class="page-link" th:href="@{'/Admin/Flight'(page=${currentPage - 1})}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <th:block th:each="page : ${#numbers.sequence(1, totalPages)}">
+                                    <li class="page-item" th:classappend="${currentPage == page} ? 'active'">
+                                        <a class="page-link" th:href="@{'/Admin/Flight'(page=${page})}" th:text="${page}"></a>
+                                    </li>
+                                </th:block>
+                                <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                                    <a class="page-link" th:href="@{'/Admin/Flight'(page=${currentPage + 1})}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </th:block>
                     <div id="token" style="display: none" th:text="${token}"></div>
-                    <div id="IdCountry" style="display: none" th:text="${IdCountry}"></div>
+
                 </div>
             </div>
         </div>
@@ -169,7 +192,7 @@
     <!-- / Footer -->
 
     <div class="content-backdrop fade"></div>
-    <script th:fragment="customScripts" th:src="@{/Admin/FlightPortTable/FlightPortTable.js}"></script>
+
 </div>
 
 

@@ -1,9 +1,6 @@
 package com.mgbooking.client.Services;
 
-import com.mgbooking.client.DTO.FlightDTO;
-import com.mgbooking.client.DTO.FlightListDto;
-import com.mgbooking.client.DTO.ResultFlightDTO;
-import com.mgbooking.client.DTO.SearchFlightDTO;
+import com.mgbooking.client.DTO.*;
 
 
 import java.math.BigDecimal;
@@ -19,4 +16,5 @@ public interface FlightService {
     public BigDecimal FindMinPrice(String departureTime);
     public List<ResultFlightDTO>SearchFlightsByArrivalTime(int departureAirport,int arrivalAirport,
                                                            String departureTime,String ArrivalTime,String TypeFlight);
+    public List<FlightPaginateDTo>ShowAll(String token, int id);
 }

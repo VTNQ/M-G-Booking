@@ -21,10 +21,7 @@ public class CountryServiceImplement implements CountryService {
         return modelMapper.map(countryRepository.findAll(),new TypeToken<List<Country>>(){}.getType());
     }
 
-    @Override
-    public Page<Country> findByPage(Pageable pageable,String name) {
-        return modelMapper.map(countryRepository.findAll(pageable,name),new TypeToken<Page<Country>>(){}.getType());
-    }
+
 
     @Override
     public boolean CreateCountry(Country country) {
@@ -51,6 +48,8 @@ public class CountryServiceImplement implements CountryService {
     public Country findById(int id) {
         return modelMapper.map(countryRepository.findById(id),new TypeToken<Country>(){}.getType());
     }
+
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.mgbooking.server.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "airlines")
+
 public class Airline {
     public Integer getId() {
         return id;
@@ -41,9 +43,9 @@ public class Airline {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "country_id", nullable = false)
-    @JsonIgnore
+
     private Country country;
 
 }

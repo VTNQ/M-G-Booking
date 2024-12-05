@@ -17,8 +17,8 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
     @Query("SELECT f " +
             "FROM Flight f WHERE f.id = :id")
     public Flight findFlightWithDetails(@Param("id") Integer id);
-    @Query("select new com.mgbooking.server.DTOS.FlightPaginateDTo(f.id,f.airline.name,f.departureAirport.name,f.arrivalAirport.name,f.departureTime,f.arrivalTime) from Flight f where f.airline.country.id = :id and f.airline.name like  %:name%")
-    public Page<FlightPaginateDTo>FindAllFlights(Pageable pageable, @Param("id") Integer id,@Param("name")String name);
+    @Query("select new com.mgbooking.server.DTOS.FlightPaginateDTo(f.id,f.airline.name,f.departureAirport.name,f.arrivalAirport.name,f.departureTime,f.arrivalTime) from Flight f where f.airline.country.id = :id ")
+    public List<FlightPaginateDTo>FindAllFlights( @Param("id") Integer id);
     @Query("SELECT MIN(G.price) FROM Flight f Join DetailFlight G on f.id=G.idFlight.id where  DATE(f.departureTime) = :departureTime")
     public BigDecimal FindPrice(@Param("departureTime") LocalDate departureTime);
     @Query("SELECT new com.mgbooking.server.DTOS.ResultFlightDTO(f.id,d.imageUrl,f.arrivalAirport.city.name,f.arrivalTime,f.departureTime," +

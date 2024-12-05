@@ -39,11 +39,7 @@ public class AirPortServiceImplement implements  AirPortService{
         }
     }
 
-    @Override
-    public Page<AirPortList> GetAll(int id, Pageable pageable,String name) {
 
-        return modelMapper.map(airportRepository.findAll(id,pageable,name),new TypeToken<Page<Airport>>(){}.getType());
-    }
 
     @Override
     public AirPortDTO FindById(int id) {
@@ -51,8 +47,8 @@ public class AirPortServiceImplement implements  AirPortService{
     }
 
     @Override
-    public List<AirPortDTO> FindAirPortByCountry(int id) {
-        return  modelMapper.map(airportRepository.findAllByCountryId(id),new TypeToken<List<AirPortDTO>>(){}.getType());
+    public List<Airport> FindAirPortByCountry(int id) {
+        return  modelMapper.map(airportRepository.findAllByCountryId(id),new TypeToken<List<Airport>>(){}.getType());
     }
 
     @Override

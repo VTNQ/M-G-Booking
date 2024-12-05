@@ -15,10 +15,7 @@ import java.util.List;
 
 @Repository
 public interface AirlineRepository extends JpaRepository<Airline,Integer> {
-    @Query("SELECT new com.mgbooking.server.DTOS.ListFlightDto(a.id, a.name,  i.imageUrl, a.country.name) " +
-            "FROM Airline a " +
-            "JOIN Picture i ON i.airlineId = a.id where a.name like %:name%")
-    Page<ListFlightDto> AllAirlineDto(Pageable pageable, @Param("name") String name);
+
     @Query("select new com.mgbooking.server.DTOS.UpdateFlightDTO(a.id,a.name,a.country.id,i.imageUrl) "+
            "From Airline a "+
             "join Picture i on a.id=i.airlineId "+
@@ -28,6 +25,10 @@ public interface AirlineRepository extends JpaRepository<Airline,Integer> {
             "FROM Airline a " +
             "JOIN Picture i ON a.country.id = :id")
     List<ListFlightDto> ShowAirlineDto(@Param("id") int id);
+    @Query("select new com.mgbooking.server.DTOS.ListFlightDto(a.id,a.name,i.imageUrl,a.country.name) "+
+            "from Airline a "
+            + "join Picture i On a.id =i.airlineId")
+    List<ListFlightDto> ShowAll();
     @Query("select a from Airline a Join Flight b on a.id=b.airline.id join DetailFlight c on c.idFlight.id=b.id " +
             " where b.departureAirport.id= :departureAirport"+
             " and b.arrivalAirport.id = :arrivalAirport"+

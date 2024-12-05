@@ -40,10 +40,7 @@ public class CityServiceImplement implements CityService{
         }
     }
 
-    @Override
-    public Page<City> findCity(int id,Pageable pageable,String name) {
-        return modelMapper.map(cityRepository.findCitiesByCountryId(id,pageable,name),new TypeToken<Page<City>>(){}.getType());
-    }
+
 
     @Override
     public CityDTO FindCity(int id) {

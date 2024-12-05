@@ -51,6 +51,15 @@ public class AirlineController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+    @GetMapping(value = "/FindAll")
+    public ResponseEntity<List<ListFlightDto>>FindAll(){
+        try {
+            return new ResponseEntity<List<ListFlightDto>>(flightService.FindAll(),HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<List<ListFlightDto>>(HttpStatus.BAD_REQUEST);
+        }
+    }
     @GetMapping(value = "/FindFlight/{id}")
     public ResponseEntity<UpdateFlightDTO>FindFlight(@PathVariable int id){
         try {
@@ -69,16 +78,7 @@ public class AirlineController {
             return new ResponseEntity<List<ListFlightDto>>(HttpStatus.BAD_REQUEST);
         }
     }
-    @GetMapping(value = "/GetFlight")
-    public ResponseEntity<Page<ListFlightDto>>GetFlight(@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "10")int size,@RequestParam("name")String name){
-        try {
-            Pageable pageable= PageRequest.of(page,size);
-            return new ResponseEntity<Page<ListFlightDto>>(flightService.findAll(pageable,name), HttpStatus.OK);
-        }catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<Page<ListFlightDto>>(HttpStatus.BAD_REQUEST);
-        }
-    }
+
     @PostMapping(value = "/AddFlight")
     public ResponseEntity<Object> AddFlight(@ModelAttribute @Valid AirLineDTO flightDTO, BindingResult bindingResult) {
         List<String>errors=validationService.validate(flightDTO, bindingResult);
