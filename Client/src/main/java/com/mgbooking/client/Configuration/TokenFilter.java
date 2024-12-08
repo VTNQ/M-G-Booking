@@ -20,21 +20,21 @@ public class TokenFilter extends OncePerRequestFilter {
     private String secretKey = "sRbgDVJHhto1l0DxFi09N/5phc9FEEWfN4MQIzWKBEs=";
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-    String token=getTokenFromCookies(request);
-    if(token!=null){
+        String token=getTokenFromCookies(request);
+        if(token!=null){
 
-        try {
-            Claims claims= Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-            List<String>roles=claims.get("roles",List.class);
-            if(roles!=null && !roles.isEmpty()){
-                List<SimpleGrantedAuthority> authorities=roles.stream().map(role->new SimpleGrantedAuthority(role)).toList();
-                JWTAuthentication authentication=new JWTAuthentication(claims,authorities);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+            try {
+                Claims claims= Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+                List<String>roles=claims.get("roles",List.class);
+                if(roles!=null && !roles.isEmpty()){
+                    List<SimpleGrantedAuthority> authorities=roles.stream().map(role->new SimpleGrantedAuthority(role)).toList();
+                    JWTAuthentication authentication=new JWTAuthentication(claims,authorities);
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
             }
-         }catch (Exception e){
-            e.printStackTrace();
         }
-    }
         filterChain.doFilter(request, response);
     }
     private String getTokenFromCookies(HttpServletRequest request) {

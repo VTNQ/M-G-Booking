@@ -389,23 +389,13 @@
     }
 </script>
 <script type="text/javascript">
-    toastr.options = {
-        "closeButton": true,   // Thêm nút đóng
-        "debug": false,
-        "newestOnTop": true,   // Hiển thị thông báo mới nhất ở trên cùng
-        "progressBar": true,   // Hiển thị thanh tiến trình
-        "positionClass": "toast-top-right",  // Vị trí thông báo
-        "preventDuplicates": true,   // Ngừng hiển thị thông báo trùng
-        "onclick": null,   // Xử lý sự kiện khi nhấp vào thông báo
-    };
 
-    // Hiển thị thông báo sau khi cấu hình
-    toastr.success('Thông báo cấu hình thành công!', 'Tiêu đề');
 
 </script>
 
 <div th:insert="~{'/User/Register/RegisterUser' :: customScripts}"></div>
 <div th:if="${title=='Hotel'}" th:insert="~{'/User/Hotel/Hotel':: customScripts}"></div>
 <div  th:if="${title=='SearchFlight'}" th:insert="~{'/User/Flight/Flight' :: customScripts}"></div>
+<div  th:if="${title=='Forget Password'}" th:insert="~{'/User/Forgot/ForgotPassword' :: customScripts}"></div>
 </body>
 </html>

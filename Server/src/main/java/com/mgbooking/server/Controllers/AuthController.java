@@ -6,6 +6,7 @@ import com.mgbooking.server.DTOS.AuthenticationResponse;
 import com.mgbooking.server.DTOS.LoginDTO;
 import com.mgbooking.server.Services.OwnerService;
 
+import com.mgbooking.server.Services.TokenBlackListService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -33,7 +34,8 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private OwnerService accountService;
-
+    @Autowired
+    private TokenBlackListService tokenBlacklistService;
     @Autowired
     private JwtUtil jwtTokenUtil;
     @Autowired
@@ -92,35 +94,25 @@ public class AuthController {
 
     // Optional: API for logout, typically handled by Spring Security's session management
     @PostMapping("/logout")
-    public ResponseEntity<Object>  logout(HttpServletRequest request, HttpServletResponse response) {
-        String token = request.getHeader("Authorization");
-        HttpSession session = request.getSession();
-        Map<String, Object> responseMap = new LinkedHashMap<>();
-        if (token != null && token.startsWith("Bearer ")) {
-            token = token.substring(7);
-
-
-            List<String> tokensList = (List<String>) session.getAttribute("tokensList");
-
-            if (tokensList != null && tokensList.contains(token)) {
-
-                tokensList.remove(token);
-
-
-                session.setAttribute("tokensList", tokensList);
-                responseMap.put("status",200);
-                responseMap.put("message","Update Flight Successful");
-                return ResponseEntity.ok(responseMap);
-            } else {
-                responseMap.put("status",400);
-                responseMap.put("message","Token not found in the session.");
-                return ResponseEntity.badRequest().body(responseMap);
+    public ResponseEntity<Object>  logout(  @RequestHeader(value = "Authorization", required = false) String token,
+                                            HttpServletRequest request,
+                                            HttpServletResponse response) {
+        Map<String, Object> responsebody = new LinkedHashMap<>();
+            if(token==null || token.isEmpty()){
+                        responsebody.put("status", 400);
+                        responsebody.put("message", "Authorization token is missing");
+                        return ResponseEntity.badRequest().body(responsebody);
             }
-        } else {
-            responseMap.put("status",400);
-            responseMap.put("message","Token not found in the session.");
-            return ResponseEntity.badRequest().body("No Bearer token found in the Authorization header.");
-        }
+            if(tokenBlacklistService.isBlackListed(token)){
+                responsebody.put("status", 400);
+                responsebody.put("message", "Token has already been invalidated.");
+                return ResponseEntity.badRequest().body(responsebody);
+            }
+        tokenBlacklistService.blackListTokens(token);
+            responsebody.put("status", 200);
+            responsebody.put("message", "Logout Successful");
+            return ResponseEntity.ok(responsebody);
+
     }
 
     // Inner class for response containing JWT
