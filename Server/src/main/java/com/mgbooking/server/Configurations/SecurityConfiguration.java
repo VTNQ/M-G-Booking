@@ -58,20 +58,23 @@ public class SecurityConfiguration {
                 .csrf(cs -> cs.disable())
                 .cors(cs->cs.configurationSource(corsConfigurationSource()))
                 .authorizeRequests()
-                .requestMatchers("/auth/login","/auth/logout","/images/**", "/favicon.ico", "/css/**", "/js/**","/Country","/City/{id}","/registerUser","/registerOwner","/Flight/SearchFlight","/AirPort/SearchAirPort","/Flight/ShowDetailFlight/{id}",
-                        "/Flight/FindPrice","/Airline/SearchAirline","/AirPort/FindById/{id}","/Flight/SearchFlightByArrivalTime").permitAll()
+                .requestMatchers("/auth/login","/auth/logout","/images/**","/images/flight", "/favicon.ico", "/css/**", "/js/**","/Country","/City/{id}","/registerUser","/registerOwner","/Flight/SearchFlight","/AirPort/SearchAirPort","/Flight/ShowDetailFlight/{id}",
+                        "/Flight/FindPrice","/Airline/SearchAirline","/AirPort/FindById/{id}","/Flight/SearchFlightByArrivalTime","/ForgetPassword","/CheckOTP","/ChangePassword","/ResendOTP").permitAll()
 
                 .requestMatchers(
                         "/Country/CreateCountry",
                         "Country/UpdateCountry",
                         "Country/DeleteCountry/**",
                         "/Country/GetAllCountries/**",
-                        "/Country/FindByCountry/**","/Airline/AddFlight","/Airline/UpdateFlight","/Airline/FindFlight/{id}","/Airline/FindAll").hasRole("SUPERADMIN")
+                        "/Country/FindByCountry/**","/Airline/AddFlight","/Airline/UpdateFlight","/Airline/FindFlight/{id}","/Airline/FindAll","/CreateAdminAccount",
+                        "/GetAccountAdmin").hasRole("SUPERADMIN")
                 .requestMatchers("City/CreateCity","/City/{id}","/City/FindCity/**","/City/DeleteCity/**","/AirPort/CreateAirPort","/AirPort/EditAirPort","/Flight/CreateFlight","/AirPort/FindAllByCountry/{id}","/Flight/FindFlight/{id}","/Flight/FindAll/**",
                         "/Flight/UpdateFlight","/DetailFlight/{id}","/DetailFlight/UpdateDetail").hasRole("ADMIN")
 
-                .requestMatchers("/auth/","/auth/UpdateAccount").hasAnyRole("ADMIN", "SUPERADMIN","USER","OWNER")
+                .requestMatchers("/auth/","/auth/UpdateAccount","/auth/logout").hasAnyRole("ADMIN", "SUPERADMIN","USER","OWNER")
                 .requestMatchers("/Airline/FindAirline/{id}").hasAnyRole("ADMIN","SUPERAMIN")
+                .requestMatchers("/Hotel/addHotel","/Hotel","/Hotel/FindById/{id}").hasRole("OWNER")
+                .requestMatchers("/District/GetDistrict/{id}").hasAnyRole("ADMIN","OWNER")
                 .anyRequest().authenticated()
                 .and()
                .exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler()))

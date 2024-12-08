@@ -31,7 +31,7 @@ public class JWTTokenFilter extends OncePerRequestFilter {
 
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7); // Remove "Bearer " prefix
-            if (tokenBlacklistService.isBlackListed(token)) {
+             if (tokenBlacklistService.isBlackListed(token)) {
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token has been blacklisted");
                 return;
             }

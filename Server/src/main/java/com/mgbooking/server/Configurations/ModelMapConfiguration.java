@@ -1,6 +1,8 @@
 package com.mgbooking.server.Configurations;
 
 import com.mgbooking.server.DTOS.*;
+import com.mgbooking.server.DTOS.Account.AccountAdmin;
+import com.mgbooking.server.DTOS.Account.RegisterAdmin;
 import com.mgbooking.server.Entities.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -20,45 +22,31 @@ public class ModelMapConfiguration {
         modelMapper.typeMap(RegisterUser.class, Account.class).addMappings(mapper->
                 mapper.map(RegisterUser::getFull_name,Account::setFullName)
                 );
-        modelMapper.addMappings(new PropertyMap<City, CityDTO>() {
-            @Override
-            protected void configure() {
-                map().setCountry_id(source.getCountry().getId());
-            }
-        });
-        modelMapper.addMappings(new PropertyMap<Airport, AirPortList>() {
-            @Override
-            protected void configure() {
-                map().setCity(source.getCity());
-            }
-        });
-        modelMapper.addMappings(new PropertyMap<Airport, AirPortDTO>() {
-            @Override
-            protected void configure() {
-                map().setCity_id(source.getCity().getId());
-            }
-        });
-        modelMapper.addMappings(new PropertyMap<Flight, FlightListDto>() {
-            @Override
-            protected void configure() {
-                map(source.getDepartureTime(), destination.getDeparture_time());
-                map(source.getArrivalTime(), destination.getArrival_time());
-                map().setAirline_id(source.getAirline().getId());
-                map().setDeparture_airport(source.getDepartureAirport().getId());
-                map().setArrival_airport(source.getArrivalAirport().getId());
-            }
-        });
-        modelMapper.addMappings(new PropertyMap<DetailFlight, DetailFlightDTO>() {
-            @Override
-            protected void configure() {
-           map().setId(source.getId());
-           map().setIdFlight(source.getIdFlight().getId());
-            }
-        });
+        modelMapper.typeMap(City.class, CityDTO.class).addMappings(mapper->
+                mapper.map(City::getCountry,CityDTO::setCountry_id)
+                );
+        modelMapper.typeMap(Airport.class,AirPortList.class).addMappings(mapper->
+                mapper.map(Airport::getCity,AirPortList::setCity)
 
+                );
 
+        modelMapper.typeMap(Airport.class, AirPortDTO.class).addMappings(mapper->
+                mapper.map(Airport::getCity,AirPortDTO::setCity_id)
+                );
+        modelMapper.typeMap(Flight.class, FlightDTO.class).addMappings(mapper->
+                {
+                    mapper.map(Flight::getDepartureTime,FlightDTO::setDepartureTime);
+                    mapper.map(Flight::getArrivalTime,FlightDTO::setArrivalTime);
+                   mapper.map(Flight::getAirline,FlightDTO::setAirline_id);
+                   mapper.map(Flight::getDepartureAirport,FlightDTO::setDeparture_airport);
+                   mapper.map(Flight::getArrivalAirport,FlightDTO::setArrival_airport);
+                }
 
-
+                );
+        modelMapper.typeMap(DetailFlight.class,DetailFlightDTO.class).addMappings(mapper->{
+            mapper.map(DetailFlight::getId,DetailFlightDTO::setId);
+            mapper.map(DetailFlight::getIdFlight,DetailFlightDTO::setIdFlight);
+        });
 
         return modelMapper;
     }

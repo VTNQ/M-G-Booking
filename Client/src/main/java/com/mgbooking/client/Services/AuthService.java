@@ -8,4 +8,5 @@ import jakarta.servlet.http.HttpServletResponse;
 public interface AuthService {
     public String login(LoginDTO loginDTO, HttpServletResponse response, HttpServletRequest request) throws Exception;
     public AccountDto FindByAccount(String token);
+    public Object Logout(String token, HttpServletResponse response);
 }

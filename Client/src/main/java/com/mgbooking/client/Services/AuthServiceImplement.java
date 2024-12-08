@@ -88,4 +88,24 @@ public class AuthServiceImplement  implements  AuthService{
             return null;
         }
     }
+    @Override
+    public Object Logout(String token, HttpServletResponse response) {
+        try {
+            LoginApi loginApi=ApiClient.getRetrofit().create(LoginApi.class);
+            Object object=loginApi.Logout(token).execute().body();
+            if(object!=null){
+                Cookie accessToken = new Cookie("accessToken", null);
+                accessToken.setHttpOnly(true);
+                accessToken.setPath("/");
+                accessToken.setMaxAge(0);
+                response.addCookie(accessToken);
+                return object;
+            }else {
+                return null;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
