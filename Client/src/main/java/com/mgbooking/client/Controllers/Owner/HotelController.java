@@ -4,6 +4,7 @@ import com.mgbooking.client.Configuration.GetToken;
 import com.mgbooking.client.DTO.AccountDto;
 import com.mgbooking.client.DTO.Hotel.HotelDTO;
 import com.mgbooking.client.DTO.Hotel.HotelListDto;
+import com.mgbooking.client.DTO.Hotel.HotelUpdateDTO;
 import com.mgbooking.client.Services.AuthService;
 import com.mgbooking.client.Services.CityService;
 import com.mgbooking.client.Services.HotelService;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -27,6 +29,7 @@ public class HotelController {
     private AuthService authService;
     @Autowired
     private HotelService hotelService;
+
     @Autowired
     private GetToken getToken;
 
@@ -38,10 +41,50 @@ public class HotelController {
         hotelDTO.setOwnerId(accountDto.getId());
         model.put("City", cityService.findAllCities(token, accountDto.getCountryId()));
         model.put("hotel", hotelDTO);
+
         model.put("token", token);
         return "Owner/Hotel/add";
     }
+    @PostMapping("Hotel/update")
+    public String updateHotel(@ModelAttribute("hotel")HotelUpdateDTO hotelUpdateDTO,HttpServletRequest request,RedirectAttributes redirectAttributes,  @RequestParam(value = "imageForm", required = false) MultipartFile imageForm) {
+        String token = getToken.getTokenFromCookies(request);
+        Object createObject = hotelService.UpdateHotel(token, hotelUpdateDTO, imageForm);
+        Map<String, Object> resultMap = (Map<String, Object>) createObject;
+        Object statusObj = resultMap.get("status");
+        int status = 0;
+        if (statusObj instanceof Double) {
+            status = ((Double) statusObj).intValue();
+        } else if (statusObj instanceof Integer) {
+            status = (Integer) statusObj;
+        }
+        String message = resultMap.get("message").toString();
+        if (status == 200) {
+            redirectAttributes.addFlashAttribute("message", message);
+            redirectAttributes.addFlashAttribute("messageType", "success");
+            return "redirect:/Owner/Hotel/"+hotelUpdateDTO.getId();
+        } else {
+            redirectAttributes.addFlashAttribute("message", message);
+            redirectAttributes.addFlashAttribute("messageType", "error");
+            return "redirect:/Owner/Hotel/"+hotelUpdateDTO.getId();
+        }
 
+
+    }
+    @GetMapping("Hotel/{id}")
+    public String editHotel(ModelMap model, @PathVariable("id") int id, HttpServletRequest request) {
+        try {
+            String token = getToken.getTokenFromCookies(request);
+            AccountDto accountDto = authService.FindByAccount(token);
+            model.put("hotel",hotelService.FindHotelById(token,id));
+            model.put("City", cityService.findAllCities(token, accountDto.getCountryId()));
+            model.put("ImageList",hotelService.FindAllImages(token, id));
+            model.put("token", token);
+            return "Owner/Hotel/edit";
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     @GetMapping("Hotel")
     public String Hotel(ModelMap model, HttpServletRequest request,@RequestParam(defaultValue = "1") int page,
                         @RequestParam(defaultValue = "10") int size,@RequestParam(defaultValue = "")String name) {

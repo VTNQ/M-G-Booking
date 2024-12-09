@@ -115,8 +115,6 @@ public class AirlineServiceImplement implements AirlineService {
             switch (imagecase){
                 case "null":
 
-
-                    airline.setCountry(country);
                     airline.setCountry(country);
                     AirlineRepository.save(airline);
                     break;

@@ -5,6 +5,8 @@ import com.mgbooking.client.APIs.ApiClient;
 import com.mgbooking.client.APIs.HotelApi;
 import com.mgbooking.client.DTO.Hotel.HotelDTO;
 import com.mgbooking.client.DTO.Hotel.HotelListDto;
+import com.mgbooking.client.DTO.Hotel.HotelUpdateDTO;
+import com.mgbooking.client.DTO.Hotel.ImageListDto;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -72,6 +74,73 @@ public class HotelServiceImplement implements HotelService {
         try {
             HotelApi hotelApi = ApiClient.getRetrofit().create(HotelApi.class);
             Response<List<HotelListDto>> response=hotelApi.FindAllHotels("Bearer " + token).execute();
+            if(response.isSuccessful()) {
+                return response.body();
+            }else{
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public HotelUpdateDTO FindHotelById(String token, int id) {
+        try {
+                HotelApi hotelApi=ApiClient.getRetrofit().create(HotelApi.class);
+            Response<HotelUpdateDTO>response=hotelApi.FindHotelById("Bearer " + token,id).execute();
+            if(response.isSuccessful()) {
+                return response.body();
+            }else{
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Object UpdateHotel(String token, HotelUpdateDTO hotel, MultipartFile file) {
+        try {
+            RequestBody idRequestBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(hotel.getId()));
+            RequestBody nameRequestBody = RequestBody.create(MediaType.parse("text/plain"), hotel.getName());
+            RequestBody addressRequestBody = RequestBody.create(MediaType.parse("text/plain"), hotel.getAddress());
+            RequestBody descriptionRequestBody = RequestBody.create(MediaType.parse("text/plain"), hotel.getDecription());
+            RequestBody cityIdRequestBody=RequestBody.create(MediaType.parse("text/plain"),String.valueOf(hotel.getCityId()));
+            RequestBody districtIdRequestBody=RequestBody.create(MediaType.parse("text/plain"),String.valueOf(hotel.getDistrict_id()));
+            RequestBody OwnerIdRequestBody=RequestBody.create(MediaType.parse("text/plain"),String.valueOf(hotel.getOwnerId()));
+            RequestBody requestFile = RequestBody.create(file.getBytes(), MediaType.parse("image/*"));
+            MultipartBody.Part image = MultipartBody.Part.createFormData("imageForm", file.getOriginalFilename(), requestFile);
+            HotelApi hotelApi = ApiClient.getRetrofit().create(HotelApi.class);
+            Object call=hotelApi.UpdateHotel(
+                    "Bearer " + token,
+                    idRequestBody,
+                    nameRequestBody,
+                    descriptionRequestBody,
+                    addressRequestBody,
+                    cityIdRequestBody,
+                    districtIdRequestBody,
+                    OwnerIdRequestBody,
+                    image
+            ).execute().body();
+            if(call != null) {
+                return call;
+            }else{
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ImageListDto> FindAllImages(String token, int id) {
+        try {
+            HotelApi hotelApi = ApiClient.getRetrofit().create(HotelApi.class);
+            Response<List<ImageListDto>>response=hotelApi.FindImages(id, "Bearer " + token).execute();
             if(response.isSuccessful()) {
                 return response.body();
             }else{

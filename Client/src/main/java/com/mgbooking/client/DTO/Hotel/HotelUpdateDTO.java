@@ -1,11 +1,12 @@
-package com.mgbooking.server.DTOS.Hotel;
+package com.mgbooking.client.DTO.Hotel;
+
+
 
 import java.util.List;
 
 public class HotelUpdateDTO {
     private int id;
     private String name;
-    private String address;
 
     public String getImageUrl() {
         return imageUrl;
@@ -15,10 +16,11 @@ public class HotelUpdateDTO {
         this.imageUrl = imageUrl;
     }
 
+    private String address;
     private Integer cityId;
     private String decription;
     private String imageUrl;
-    public HotelUpdateDTO(int id, String name, String address, Integer cityId, String decription, Integer ownerId,int district_id,String imageUrl) {
+    public HotelUpdateDTO(int id, String name, String address, Integer cityId, String decription, Integer ownerId,int district_id) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -26,7 +28,6 @@ public class HotelUpdateDTO {
         this.decription = decription;
         this.ownerId = ownerId;
         this.district_id = district_id;
-        this.imageUrl = imageUrl;
     }
 
     private Integer ownerId;

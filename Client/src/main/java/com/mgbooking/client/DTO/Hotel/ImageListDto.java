@@ -1,8 +1,7 @@
-package com.mgbooking.server.DTOS.Hotel;
+package com.mgbooking.client.DTO.Hotel;
 
 public class ImageListDto {
     private int id;
-    private String image;
 
     public int getHotelId() {
         return hotelId;
@@ -12,15 +11,15 @@ public class ImageListDto {
         this.hotelId = hotelId;
     }
 
+    private String image;
     private int hotelId;
     public int getId() {
         return id;
     }
 
-    public ImageListDto(int id, String image,int hotelId) {
+    public ImageListDto(int id, String image) {
         this.id = id;
         this.image = image;
-        this.hotelId = hotelId;
     }
 
     public void setId(int id) {

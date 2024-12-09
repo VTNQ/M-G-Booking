@@ -180,7 +180,8 @@
                                             <option th:each="cities : ${City}" th:value="${cities.id}" th:text="${cities.name}"></option>
                                         </select>
                                     </div>
-                                </div><div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+                                </div>
+                                <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
                                     <div class="mb-4">
                                         <label  class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">District</label>
                                         <select  id="DistrictSelect"   class="form-control js-select2" th:field="${hotel.district_id}">
@@ -282,5 +283,5 @@
 
 </div>
 </body>
-<script th:fragment="customScripts" th:src="@{/Owner/Hotel/Hotel.js}"></script>
+<script th:fragment="customScripts" th:src="@{/Owner/Hotel.js}"></script>
 </html>
