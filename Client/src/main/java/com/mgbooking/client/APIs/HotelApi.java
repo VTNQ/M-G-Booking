@@ -33,4 +33,6 @@ public interface HotelApi {
             @Part("cityId")RequestBody cityId,@Part("district_id")RequestBody district_id,@Part("ownerId")RequestBody ownerId,@Part MultipartBody.Part image);
     @GET("/Hotel/FindImage/{id}")
     Call<List<ImageListDto>>FindImages(@Path("id")int id,@Header("Authorization") String auth);
+    @POST("/Hotel/UpdateMultipleImage/{id}")
+    Call<Object>UpdateMultipleImage(@Header("Authorization")String auth,@Param("id")int id,@Part List<MultipartBody.Part>images);
 }

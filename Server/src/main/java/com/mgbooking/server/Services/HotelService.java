@@ -16,4 +16,5 @@ public interface HotelService {
     public boolean updateHotel(HotelUpdateDTO hotel, MultipartFile file);
     public List<ImageListDto>FindImages(int id);
     public boolean DeleteHotel(int id);
+    public boolean UpdateMultipleImages(int id,List<MultipartFile> files);
 }

@@ -152,6 +152,30 @@ public class HotelServiceImplement implements HotelService {
         }
     }
 
+    @Override
+    public Object UpdateMultipleImages(String token, int id, List<MultipartFile> files) {
+        try {
+            HotelApi hotelApi=ApiClient.getRetrofit().create(HotelApi.class);
+            List<MultipartBody.Part>imagesParts = new ArrayList<>();
+            if(files!=null && !files.isEmpty()){
+                for(MultipartFile file :files){
+                    MultipartBody.Part part = createImagePart("MultiImage", file);
+                    imagesParts.add(part);
+                }
+            }
+
+            Object call=hotelApi.UpdateMultipleImage("Bearer " + token,id,imagesParts).execute().body();
+            if(call != null) {
+                return call;
+            }else{
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private MultipartBody.Part createImagePart(String partName, MultipartFile file) {
         try {
             RequestBody fileBody = RequestBody.create(MediaType.parse("image/*"), file.getBytes());

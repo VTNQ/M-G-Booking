@@ -15,4 +15,5 @@ public List<HotelListDto>FindAllHotels(String token);
 public HotelUpdateDTO FindHotelById(String token,int id);
 public Object UpdateHotel(String token, HotelUpdateDTO hotel, MultipartFile file);
 public List<ImageListDto>FindAllImages(String token,int id);
+public Object UpdateMultipleImages(String token,int id,List<MultipartFile> files);
 }

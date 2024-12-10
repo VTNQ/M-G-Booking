@@ -73,7 +73,8 @@ public class SecurityConfiguration {
 
                 .requestMatchers("/auth/","/auth/UpdateAccount","/auth/logout").hasAnyRole("ADMIN", "SUPERADMIN","USER","OWNER")
                 .requestMatchers("/Airline/FindAirline/{id}").hasAnyRole("ADMIN","SUPERAMIN")
-                .requestMatchers("/Hotel/addHotel","/Hotel","/Hotel/FindById/{id}","/Hotel/UpdateHotel","/Hotel/FindImage/{id}","/Hotel/DeletePictureImage/{id}").hasRole("OWNER")
+                .requestMatchers("/Hotel/addHotel","/Hotel","/Hotel/FindById/{id}","/Hotel/UpdateHotel","/Hotel/FindImage/{id}","/Hotel/DeletePictureImage/{id}"
+                ,"/Hotel/UpdateMultipleImage/{id}").hasRole("OWNER")
                 .requestMatchers("/District/GetDistrict/{id}").hasAnyRole("ADMIN","OWNER")
                 .anyRequest().authenticated()
                 .and()

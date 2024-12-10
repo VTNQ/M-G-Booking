@@ -33,6 +33,24 @@ public class HotelController {
         return new ResponseEntity<List<HotelListDto>>(HttpStatus.BAD_REQUEST);
     }
     }
+    @PostMapping("UpdateMultipleImage/{id}")
+    public ResponseEntity<Object>UpdateMultipleImage(@PathVariable("id")int id,@RequestParam(value = "MultiImage",required = false)List<MultipartFile> MultiImage) {
+        try {
+            Map<String,Object>response=new LinkedHashMap<>();
+            if(hotelService.UpdateMultipleImages(id,MultiImage)){
+                response.put("status",200);
+                response.put("message","Update Multiple Image Success");
+                return ResponseEntity.ok(response);
+            }else{
+                response.put("status",400);
+                response.put("message","Update Multiple Image Failed");
+                return ResponseEntity.badRequest().body(response);
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     @DeleteMapping(value = "DeletePictureImage/{id}")
     public ResponseEntity<Object>DeletePictureImage(@PathVariable("id") int id) {
         Map<String,Object>response=new LinkedHashMap<>();

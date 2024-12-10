@@ -211,6 +211,7 @@
               </div>
               <hr class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent " />
               <button type="submit" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Save</button>
+              <a th:href="@{/Owner/Hotel}" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85"   style="border: 1px solid #e6e7e9;background: white;color: black !important;">Back</a>
 
 
 
@@ -231,21 +232,42 @@
             <div class="flex-auto p-6 pt-0 mt-5">
               <div class="w-100 d-flex align-items-center h-100">
                 <!-- Flexbox container to align images in a single row -->
-                <div class="d-flex flex-row gap-3 flex-wrap">
-                  <th:block th:each="image : ${ImageList}">
-                    <div class="image-item">
-                      <img th:src="@{'http://localhost:8686/images/Hotel/'+${image.image}}" alt="Product Image" class="product-image">
-                      <button type="button" class="delete-btn" th:data-id="${image.id}" th:data-hotel-id="${image.hotelId}">
-                        <i class="fa fa-trash-alt" style="color: black"></i>
-                      </button>
+
+              <div class="d-flex flex-grow gap-3 flex-wrap" id="image-container">
+                <th:block th:each="image : ${ImageList}">
+                  <div class="image-item">
+                    <img th:src="@{'http://localhost:8686/images/hotel/'+${image.image}}" alt="Product Image" class="product-image">
+                    <button type="button" class="delete-btn" th:data-id="${image.id}" th:data-hotel-id="${image.hotelId}">
+                      <i class="fa fa-trash-alt" style="color: black"></i>
+                    </button>
+                  </div>
+                  <div th:if="${imageStat.last}" class="add-image-container">
+                    <div class="add-image-container">
+                      <div class="add-image" onclick="addNewImage()">
+                        <i class="fa fa-image image-icon"></i>
+                        <i class="fa fa-plus add-icon"></i>
+                      </div>
+                  </div>
+                </th:block>
+                <!-- Loop through ImageList to display images -->
+
+                <div th:if="${ImageList.size() == 0}" class="add-image-container">
+                  <!-- Nút "Add Image" -->
+                  <div class="add-image-container">
+                    <div class="add-image" onclick="addNewImage()">
+                      <i class="fa fa-image image-icon"></i>
+                      <i class="fa fa-plus add-icon"></i>
                     </div>
-                  </th:block>
-                  <!-- Loop through ImageList to display images -->
-
-
+                  </div>
                 </div>
               </div>
+
+
+              </div>
             </div>
+            <button th:dataHotel-id="${hotel.id}" id="saveMultiple" type="button" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">
+              save
+            </button>
 
           </div>
         </div>
@@ -290,5 +312,5 @@
 
 </div>
 </body>
-<script th:fragment="customScripts" th:src="@{/Owner/Hotel.js}"></script>
+<script th:fragment="customScripts" th:src="@{/Owner/HotelUpdate.js}"></script>
 </html>

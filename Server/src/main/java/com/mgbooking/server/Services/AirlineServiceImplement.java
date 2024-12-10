@@ -108,7 +108,7 @@ public class AirlineServiceImplement implements AirlineService {
     @Override
     public boolean UpdateFlight(UpdateFlightDTO flightDTO,MultipartFile file) {
         try {
-            String imagecase = flightDTO.getImage() != null ? flightDTO.getImage() : "null";
+            String imagecase = file!= null ? file.getOriginalFilename() : "null";
             Country country = countryRepository.findById(flightDTO.getIdCountry())
                     .orElseThrow(() -> new RuntimeException("Country not found"));
             Airline airline=modelMapper.map(flightDTO, Airline.class);

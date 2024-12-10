@@ -39,17 +39,14 @@
 
                             <div class="mt-2 mb-4">
                                 <label for="largeInput" class="form-label">Image</label>
-                                <input type="file" class="form-control" name="imageForm" id="fileInput" accept="image/*">
+                                <input type="file" class="form-control" name="imageForm" th:field="${Airline.image}" id="fileInput" accept="image/*">
                                 <div class="mt-3">
                                     <img id="previewImage" th:src="'http://localhost:8686/images/flight/'+${Airline.image}" alt="Preview" style="display: block; max-width: 200px; height: auto;" />
                                 </div>
                             </div>
                         </div>
 
-                        <div class="card-footer">
 
-                            <button type="submit" class="btn btn-outline-primary">Save</button>
-                        </div>
                     </div>
 
 

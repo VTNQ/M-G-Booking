@@ -10,6 +10,7 @@ import com.mgbooking.client.Services.CityService;
 import com.mgbooking.client.Services.HotelService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,7 @@ public class HotelController {
         return "Owner/Hotel/add";
     }
     @PostMapping("Hotel/update")
+
     public String updateHotel(@ModelAttribute("hotel")HotelUpdateDTO hotelUpdateDTO,HttpServletRequest request,RedirectAttributes redirectAttributes,  @RequestParam(value = "imageForm", required = false) MultipartFile imageForm) {
         String token = getToken.getTokenFromCookies(request);
         Object createObject = hotelService.UpdateHotel(token, hotelUpdateDTO, imageForm);
@@ -61,6 +63,7 @@ public class HotelController {
         if (status == 200) {
             redirectAttributes.addFlashAttribute("message", message);
             redirectAttributes.addFlashAttribute("messageType", "success");
+        
             return "redirect:/Owner/Hotel/"+hotelUpdateDTO.getId();
         } else {
             redirectAttributes.addFlashAttribute("message", message);
@@ -69,6 +72,42 @@ public class HotelController {
         }
 
 
+    }
+    @PostMapping("Hotel/UpdateMultipleImage/{id}")
+    public String UpdateMultipleImage(@PathVariable("id")int id,@RequestParam(value = "MultiImage",required =false)List<MultipartFile>MultiImage,HttpServletRequest request,
+    RedirectAttributes redirectAttributes){
+        String token = getToken.getTokenFromCookies(request);
+        Object createObject=hotelService.UpdateMultipleImages(token, id, MultiImage);
+        Map<String, Object> resultMap = (Map<String, Object>) createObject;
+        Object statusObj = resultMap.get("status");
+        int status = 0;
+        if (statusObj instanceof Double) {
+            status = ((Double) statusObj).intValue();
+        } else if (statusObj instanceof Integer) {
+            status = (Integer) statusObj;
+        }
+        String message = resultMap.get("message").toString();
+        if (status == 200) {
+            redirectAttributes.addFlashAttribute("message", message);
+            redirectAttributes.addFlashAttribute("messageType", "success");
+            return "redirect:/Owner/Hotel/"+id;
+        }else{
+            redirectAttributes.addFlashAttribute("message", message);
+            redirectAttributes.addFlashAttribute("messageType", "error");
+            return "redirect:/Owner/Hotel/"+id;
+        }
+
+    }
+    @GetMapping("Hotel/Detail/{id}")
+    public String DetailHotel(@PathVariable("id")int id, ModelMap model, HttpServletRequest request) {
+        String token = getToken.getTokenFromCookies(request);
+        try {
+            model.put("Image",hotelService.FindAllImages(token, id));
+            return "Owner/Hotel/detail";
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
     @GetMapping("Hotel/{id}")
     public String editHotel(ModelMap model, @PathVariable("id") int id, HttpServletRequest request) {
@@ -122,11 +161,11 @@ public class HotelController {
         if (status == 200) {
             redirectAttributes.addFlashAttribute("message", message);
             redirectAttributes.addFlashAttribute("messageType", "success");
-            return "redirect:/Owner/Hotel/add";
+            return "redirect:/Owner/Hotel";
         } else {
             redirectAttributes.addFlashAttribute("message", message);
             redirectAttributes.addFlashAttribute("messageType", "error");
-            return "redirect:/Owner/Hotel/add";
+            return "redirect:/Owner/Hotel";
         }
     }
 }
