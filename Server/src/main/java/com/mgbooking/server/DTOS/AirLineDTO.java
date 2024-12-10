@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 
 public class AirLineDTO {
-    private Integer id;
+
     @NotNull(message = "Name is Required")
     private String name;
     @Min(value = 1,message = "Country is required")
@@ -13,8 +13,8 @@ public class AirLineDTO {
     @NotNull(message = "Image is required")
     private MultipartFile image;
 
-    public AirLineDTO(int id, String name, int country_id, MultipartFile image) {
-        this.id = id;
+    public AirLineDTO( String name, int country_id, MultipartFile image) {
+
         this.name = name;
         this.country_id = country_id;
         this.image = image;

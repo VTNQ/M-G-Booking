@@ -147,7 +147,6 @@
                         <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
                             <div class="flex items-center">
                                 <p class="mb-0 dark:text-white/80">Edit Profile</p>
-                                <button type="submit" class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Save</button>
 
 
                             </div>
@@ -180,7 +179,8 @@
                                             <option th:each="cities : ${City}" th:value="${cities.id}" th:text="${cities.name}"></option>
                                         </select>
                                     </div>
-                                </div><div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
+                                </div>
+                                <div class="w-full max-w-full px-3 shrink-0 md:w-12/12 md:flex-0">
                                     <div class="mb-4">
                                         <label  class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">District</label>
                                         <select  id="DistrictSelect"   class="form-control js-select2" th:field="${hotel.district_id}">
@@ -234,7 +234,7 @@
                         </div>
 
                         <div class="flex-auto p-6 pt-0 mt-5" >
-                            <div class="w-100 d-flex align-items-center h-100 gap-2">
+                            <div class="w-100 d-flex align-items-center h-100 gap-2" >
                                 <button type="submit" class="btn btn-primary flex-column-gap-1 text-wrap p-2 flex-grow-1" style="background-color: #0b5ed7">Save</button>
                                 <a th:href="@{/SuperAdmin/Airline}" class="btn p-2 text-wrap w-50" style="border: 1px solid #e6e7e9">Back</a>
                             </div>
@@ -282,5 +282,5 @@
 
 </div>
 </body>
-<script th:fragment="customScripts" th:src="@{/Owner/Hotel/Hotel.js}"></script>
+<script th:fragment="customScripts" th:src="@{/Owner/Hotel.js}"></script>
 </html>

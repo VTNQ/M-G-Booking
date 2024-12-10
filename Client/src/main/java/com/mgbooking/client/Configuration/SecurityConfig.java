@@ -26,9 +26,9 @@ public class SecurityConfig {
                 .requestMatchers("/SuperAdmin/Home","/SuperAdmin/Country","/SuperAdmin/EditCountry/**","/SuperAdmin/UpdateCountry","/SuperAdmin/DeleteCountry/**","/SuperAdmin/Airline","/SuperAdmin/UpdateAirline/**","/SuperAdmin/Country/add","/SuperAdmin/Airline/add"
                 ,"/SuperAdmin/AccountAdmin/add","/SuperAdmin/AccountAdmin","/SuperAdmin/Logout").hasAnyRole("SUPERADMIN")
                 .requestMatchers("/UpdateProfile").hasAnyRole("USER")
-                .requestMatchers("/Owner","/Owner/Profile","/Owner/UpdateProfile","/Owner/Hotel/add","Owner/Hotel").hasRole("OWNER")
+                .requestMatchers("/Owner","/Owner/Profile","/Owner/UpdateProfile","/Owner/Hotel/add","Owner/Hotel","Owner/Hotel/{id}","/Owner/Hotel/update","/Owner/Hotel/Detail/{id}","/Owner/Hotel/UpdateMultipleImage/{id}").hasRole("OWNER")
                 .requestMatchers("/Admin/Home","/Admin/City","/Admin/City/{id}","/Admin/UpdateCity","/Admin/DeleteCity/**","/Admin/AirPort","/Admin/AirPort/Edit/{id}","/Admin/AirPort/UpdateAirPort","/Admin/Flight","/Admin/Flight/Edit/{id}","/Admin/Flight/UpdateFlight","/Admin/Flight/UpdateDetailFlight"
-                ,"/Admin/City/add","/Admin/AirPort/add","/Admin/Flight/add").hasRole("ADMIN")// Allow anyone to access /Home
+                ,"/Admin/City/add","/Admin/AirPort/add","/Admin/Flight/add","/Admin/District/{id}").hasRole("ADMIN")// Allow anyone to access /Home
                 .anyRequest().authenticated() // Require authentication for other requests
                 .and()
 
