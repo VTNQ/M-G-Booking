@@ -9,6 +9,7 @@ import com.mgbooking.client.Services.AuthService;
 import com.mgbooking.client.Services.CityService;
 import com.mgbooking.client.Services.CountryService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,6 +37,7 @@ public class CityController {
         model.put("city", cityFindDTO);
         return "Admin/City/Detail";
     }
+
     @GetMapping("DeleteCity/{id}")
     public String DeleteCity(ModelMap model, @PathVariable int id, HttpServletRequest request,RedirectAttributes redirectAttributes) {
         String token=tokenService.getTokenFromCookies(request);
