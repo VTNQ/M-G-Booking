@@ -3,6 +3,7 @@ package com.mgbooking.server.Configurations;
 import com.mgbooking.server.DTOS.*;
 import com.mgbooking.server.DTOS.Account.AccountAdmin;
 import com.mgbooking.server.DTOS.Account.RegisterAdmin;
+import com.mgbooking.server.DTOS.District.DistrictDTO;
 import com.mgbooking.server.Entities.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -47,7 +48,9 @@ public class ModelMapConfiguration {
             mapper.map(DetailFlight::getId,DetailFlightDTO::setId);
             mapper.map(DetailFlight::getIdFlight,DetailFlightDTO::setIdFlight);
         });
-
+        modelMapper.typeMap(District.class,DistrictDTO.class).addMappings(mapper->{
+            mapper.map(district->district.getCity().getId(),DistrictDTO::setDistrictId);
+        });
         return modelMapper;
     }
 

@@ -15,14 +15,14 @@
         <div class="row">
             <div class="card">
                 <div class="card-header justify-content-between" style="border-bottom: 1px solid #e6e7e9"   >
-                    <h5 >Danh sách City</h5>
-                    <a th:href="@{/Admin/City/add}" class="text-decoration-none btn btn-primary">
+                    <h5 >Danh sách District</h5>
+                    <a th:href="@{/Admin/District/add}" class="text-decoration-none btn btn-primary">
                         <i class="ti ti-plus" style="color:white;"></i>
                         <span class="ms-1" style="color: white">Thêm</span>
                     </a>
                 </div>
                 <div class="card-body mt-5">
-                    <form th:action="@{/Admin/City}" class="d-flex">
+                    <form  th:action="@{'/Admin/District/' + ${id}}" class="d-flex">
                         <div class="input-group">
                             <input type="text" name="name" id="searchFlight" class="form-control"
                                    placeholder="Search for Flight" aria-label="Search" style="border-radius: 25px 0 0 25px;"/>
@@ -35,7 +35,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody class="table-border-bottom-0" id="CityTableBody">
@@ -43,12 +43,39 @@
                                 <tr>
                                     <td th:text="${start.index+1}"></td>
                                     <td th:text="${Disctricts.name}"></td>
+                                    <td>
+                                        <a th:href="@{'/Admin/District/edit/'+${Disctricts.id}}" style="background-color: #4299e1;border-color: #4299e1" class="btn btn-info"><i style="color: white" class="ti ti-edit"></i></a>
+                                        <a  class="btn btn-danger">
+                                            <i style="color: white" class="ti ti-trash-x"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             </th:block>
                             </tbody>
                         </table>
 
+                        <th:block th:if="${totalPages > 0}">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                                        <a class="page-link" th:href="@{'/Admin/District/' + ${id} + '?page=' + (${currentPage - 1})}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    <th:block th:each="page : ${#numbers.sequence(1, totalPages)}">
+                                        <li class="page-item" th:classappend="${currentPage == page} ? 'active'">
+                                            <a class="page-link" th:href="@{'/Admin/District/' + ${id} + '?page=' + ${page}}" th:text="${page}"></a>
 
+                                        </li>
+                                    </th:block>
+                                    <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                                        <a class="page-link" th:href="@{'/Admin/District/' + ${id} + '?page=' + (${currentPage + 1})}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </th:block>
                         <div id="token" style="display: none" th:text="${token}"></div>
                     </div>
                 </div>
