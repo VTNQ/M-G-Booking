@@ -49,26 +49,32 @@ public class AirPortController {
 
     @PutMapping(value = "/EditAirPort")
     public ResponseEntity<Object>EditAirPort(@RequestBody @Valid AirPortDTO airPortDTO, BindingResult bindingResult){
-        List<String>errors=validationService.validate(airPortDTO,bindingResult);
-        if (errors != null && !errors.isEmpty()) {
-            // Trả về lỗi validation dưới dạng ApiResponse
+        try {
+            List<String>errors=validationService.validate(airPortDTO,bindingResult);
+            if (errors != null && !errors.isEmpty()) {
+                // Trả về lỗi validation dưới dạng ApiResponse
+                Map<String, Object> response = new LinkedHashMap<>();
+                response.put("status", 400);
+                response.put("message", errors);
+
+
+                return ResponseEntity.badRequest().body(response);
+            }
             Map<String, Object> response = new LinkedHashMap<>();
-            response.put("status", 400);
-            response.put("message", errors);
-
-
-            return ResponseEntity.badRequest().body(response);
+            if(airPortService.AddAirPort(airPortDTO)){
+                response.put("status", 200);
+                response.put("message", "Update AirPort Successfully");
+                return  ResponseEntity.ok(response);
+            }else{
+                response.put("status", 400);
+                response.put("message", "Update AirPort Failed");
+                return ResponseEntity.badRequest().body(response);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
         }
-        Map<String, Object> response = new LinkedHashMap<>();
-        if(airPortService.AddAirPort(airPortDTO)){
-            response.put("status", 200);
-            response.put("message", "Update AirPort Successfully");
-            return  ResponseEntity.ok(response);
-        }else{
-            response.put("status", 400);
-            response.put("message", "Update AirPort Failed");
-            return ResponseEntity.badRequest().body(response);
-        }
+
     }
     @GetMapping(value = "/SearchAirPort")
     public List<CountryAiportDTO> SearchAirPort(@RequestParam String search){

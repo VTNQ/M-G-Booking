@@ -69,13 +69,13 @@ public class SecurityConfiguration {
                         "/Country/FindByCountry/**","/Airline/AddFlight","/Airline/UpdateFlight","/Airline/FindFlight/{id}","/Airline/FindAll","/CreateAdminAccount",
                         "/GetAccountAdmin").hasRole("SUPERADMIN")
                 .requestMatchers("City/CreateCity","/City/{id}","/City/FindCity/**","/City/DeleteCity/**","/AirPort/CreateAirPort","/AirPort/EditAirPort","/Flight/CreateFlight","/AirPort/FindAllByCountry/{id}","/Flight/FindFlight/{id}","/Flight/FindAll/**",
-                        "/Flight/UpdateFlight","/DetailFlight/{id}","/DetailFlight/UpdateDetail").hasRole("ADMIN")
+                        "/Flight/UpdateFlight","/DetailFlight/{id}","/DetailFlight/UpdateDetail","/District/add","/District/update").hasRole("ADMIN")
 
                 .requestMatchers("/auth/","/auth/UpdateAccount","/auth/logout").hasAnyRole("ADMIN", "SUPERADMIN","USER","OWNER")
                 .requestMatchers("/Airline/FindAirline/{id}").hasAnyRole("ADMIN","SUPERAMIN")
                 .requestMatchers("/Hotel/addHotel","/Hotel","/Hotel/FindById/{id}","/Hotel/UpdateHotel","/Hotel/FindImage/{id}","/Hotel/DeletePictureImage/{id}"
                 ,"/Hotel/UpdateMultipleImage/{id}").hasRole("OWNER")
-                .requestMatchers("/District/GetDistrict/{id}").hasAnyRole("ADMIN","OWNER")
+                .requestMatchers("/District/GetDistrict/{id}","/District/FindByDistrict/{id}").hasAnyRole("ADMIN","OWNER")
                 .anyRequest().authenticated()
                 .and()
                .exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler()))
