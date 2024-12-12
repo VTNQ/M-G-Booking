@@ -1,30 +1,23 @@
-package com.mgbooking.server.Entities;
-
-import jakarta.persistence.*;
+package com.mgbooking.client.DTO.Service;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "services")
+
 public class Service {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+
     private Integer id;
 
-    @Column(name = "name", nullable = false, length = 100)
+
     private String name;
 
-    @Lob
-    @Column(name = "decription", nullable = false)
+
     private String decription;
 
-    @Column(name = "price", nullable = false, precision = 10)
+
     private BigDecimal price;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "hotel_id", nullable = false)
-    private Hotel hotel;
+
+
 
     public Integer getId() {
         return id;
@@ -58,12 +51,6 @@ public class Service {
         this.price = price;
     }
 
-    public Hotel getHotel() {
-        return hotel;
-    }
 
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
 
 }

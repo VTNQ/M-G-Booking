@@ -47,7 +47,7 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>7.0.1.Final</version> <!-- You can change the version as needed -->
+            <version>8.0.0.Final</version> <!-- You can change the version as needed -->
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>

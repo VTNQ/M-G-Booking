@@ -4,6 +4,7 @@ import com.mgbooking.server.DTOS.*;
 import com.mgbooking.server.DTOS.Account.AccountAdmin;
 import com.mgbooking.server.DTOS.Account.RegisterAdmin;
 import com.mgbooking.server.DTOS.District.DistrictDTO;
+import com.mgbooking.server.DTOS.Service.ServiceDTO;
 import com.mgbooking.server.Entities.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
@@ -50,6 +51,9 @@ public class ModelMapConfiguration {
         });
         modelMapper.typeMap(District.class,DistrictDTO.class).addMappings(mapper->{
             mapper.map(district->district.getCity().getId(),DistrictDTO::setDistrictId);
+        });
+        modelMapper.typeMap(Service.class, ServiceDTO.class).addMappings(mapper->{
+            mapper.map(service->service.getHotel().getId(),ServiceDTO::setHotel_id);
         });
         return modelMapper;
     }
