@@ -29,7 +29,7 @@ public class Hotel {
     @Column(name = "owner_id", nullable = false)
     private Integer ownerId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "district_id", nullable = false)
     private District district;
 

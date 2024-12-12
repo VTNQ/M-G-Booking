@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/SuperAdmin/layout :: mainContent('Airline',~{this::.content-wrapper})}">
+      th:replace="~{/SuperAdmin/layout :: mainContent('Update Airline',~{this::.content-wrapper})}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -95,6 +95,7 @@
                 </div>
             </div>
         </div>
+        <script th:fragment="customScripts" th:src="@{/SuperAdmin/Airline/Airline.js}"></script>
     </footer>
     <!-- / Footer -->
 
