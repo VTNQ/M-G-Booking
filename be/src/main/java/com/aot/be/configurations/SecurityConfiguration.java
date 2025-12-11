@@ -1,5 +1,6 @@
 package com.aot.be.configurations;
 
+import com.aot.be.services.AdminService;
 import com.aot.be.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -37,7 +38,7 @@ public class SecurityConfiguration {
     private final JwtAuthenticationEntryPoint authenticationEntryPoint;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final UserService userService;
-
+    private final AdminService adminService;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -49,20 +50,17 @@ public class SecurityConfiguration {
                         .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
                         .anyRequest().permitAll()
                 )
-                .authenticationProvider(daoAuthenticationProvider());
+                .authenticationProvider(commonAuthProvider());
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userService);
-        provider.setPasswordEncoder(passwordEncoder());
-        return provider;
-    }
 
+    @Bean
+    public CommonAuthProvider commonAuthProvider() {
+        return new CommonAuthProvider(userService, adminService, passwordEncoder());
+    }
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();

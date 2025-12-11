@@ -1,5 +1,6 @@
 package com.aot.be.configurations;
 
+import com.aot.be.model.entities.AdminAccount;
 import com.aot.be.model.entities.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,7 +36,20 @@ public class UserPrincipal implements UserDetails {
         this.fullName = fullName;
         this.authorities = authorities;
     }
-
+    public static UserPrincipal createAdmin(AdminAccount admin,String roleName){
+        String resolvedRole = Objects.requireNonNullElse(roleName,"ADMIN");
+        Collection<GrantedAuthority> authorities = Collections.singletonList(
+                new SimpleGrantedAuthority("ROLE_" + resolvedRole.toUpperCase()));
+        return new UserPrincipal(
+                admin.getId(),
+                admin.getUsername(),
+                admin.getPassword(),
+                resolvedRole,
+                true,
+                admin.getUsername(),
+                authorities
+        );
+    }
     public static UserPrincipal create(User user, String roleName) {
         String resolvedRole = Objects.requireNonNullElse(roleName, "USER");
         Collection<GrantedAuthority> authorities = Collections.singletonList(

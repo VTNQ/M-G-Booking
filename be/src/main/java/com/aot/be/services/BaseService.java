@@ -15,17 +15,15 @@ public interface BaseService<T, ID> {
     /**
      * Tạo mới một entity
      * @param entity Entity cần tạo
-     * @return Entity đã được tạo
      */
-    T create(T entity);
+    void create(T entity);
 
     /**
      * Cập nhật một entity
      * @param id ID của entity cần cập nhật
      * @param entity Entity chứa dữ liệu mới
-     * @return Entity đã được cập nhật
      */
-    T update(ID id, T entity);
+    void update(ID id, T entity);
 
     /**
      * Xóa một entity theo ID
@@ -46,31 +44,11 @@ public interface BaseService<T, ID> {
      */
     Optional<T> findById(ID id);
 
-    /**
-     * Lấy tất cả entities
-     * @return List các entities
-     */
-    List<T> findAll();
 
-    /**
-     * Lấy tất cả entities với phân trang
-     * @param pageable Thông tin phân trang
-     * @return Page chứa các entities
-     */
-    Page<T> findAll(Pageable pageable);
 
-    /**
-     * Kiểm tra entity có tồn tại không
-     * @param id ID của entity
-     * @return true nếu tồn tại, false nếu không
-     */
-    boolean existsById(ID id);
+    Page<T> getAll(Integer page,Integer size,String sort,String filter,
+                   String searchField,String searchValue,Boolean all);
 
-    /**
-     * Đếm tổng số entities
-     * @return Tổng số entities
-     */
-    long count();
 
     /**
      * Tạo nhiều entities cùng lúc
