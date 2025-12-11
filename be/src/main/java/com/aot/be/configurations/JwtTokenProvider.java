@@ -2,9 +2,14 @@ package com.aot.be.configurations;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import java.security.Key;
 import java.util.Date;
 
@@ -51,14 +56,41 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public Long getUserIdFromJWT(String token) {
+    public Long getUserIdFromJWT() {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(extractToken())
+                .getBody();
+
+        return Long.parseLong(claims.getSubject());
+    }
+
+    private String extractToken() {
+        RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
+        if (attributes == null) {
+            return null;
+        }
+
+        HttpServletRequest request = ((ServletRequestAttributes) attributes).getRequest();
+        if (request == null) {
+            return null;
+        }
+
+        final String authHeader = request.getHeader("Authorization");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return null;
+        }
+
+        return authHeader.substring(7);
+    }
+    public String getRoleFromJWT(String token) {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-
-        return Long.parseLong(claims.getSubject());
+        return claims.get("role", String.class);
     }
 
     public String getEmailFromJWT(String token) {

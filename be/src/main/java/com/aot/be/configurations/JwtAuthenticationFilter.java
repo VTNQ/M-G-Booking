@@ -1,5 +1,6 @@
 package com.aot.be.configurations;
 
+import com.aot.be.services.AdminService;
 import com.aot.be.services.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -23,6 +24,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider tokenProvider;
     private final UserService userService;
+    private final AdminService adminService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -31,15 +33,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             String jwt = resolveToken(request);
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
+                String role =tokenProvider.getRoleFromJWT(jwt);
                 String email = tokenProvider.getEmailFromJWT(jwt);
-                UserDetails userDetails = userService.loadUserByUsername(email);
+                UserDetails userDetails;
+                if("ADMIN".equalsIgnoreCase(role) || "SUPERADMIN".equalsIgnoreCase(role)){
+                    userDetails = adminService.loadUserByUsername(email);
+                }else{
+                    userDetails = userService.loadUserByUsername(email);
+                }
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails,
                                 null,
                                 userDetails.getAuthorities()
                         );
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                authentication.setDetails(
+                        new WebAuthenticationDetailsSource().buildDetails(request)
+                                         );
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception ex) {
